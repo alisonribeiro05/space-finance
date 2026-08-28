@@ -3337,3 +3337,67 @@ body {
   .finance-card { padding:18px 14px !important; }
   .finance-card strong { font-size:22px !important; }
 }
+
+
+/* ==========================================================
+   CORREÇÃO DEFINITIVA DO PAINEL MOBILE
+   ========================================================== */
+@media screen and (max-width: 768px) {
+  html, body, #root { width:100% !important; min-width:0 !important; max-width:100% !important; overflow-x:hidden !important; }
+  .app-layout { width:100% !important; min-width:0 !important; max-width:100% !important; overflow-x:hidden !important; }
+
+  .sidebar { position:fixed !important; left:0 !important; top:0 !important; bottom:0 !important; width:70px !important; min-width:70px !important; max-width:70px !important; z-index:1000 !important; }
+  .sidebar-logo { height:105px !important; padding:8px 4px !important; }
+  .sidebar-logo img { width:52px !important; height:52px !important; max-width:52px !important; }
+  .sidebar-menu { padding:12px 8px !important; gap:8px !important; }
+  .sidebar-item, .sidebar-logout { width:50px !important; min-width:50px !important; max-width:50px !important; height:50px !important; padding:0 !important; justify-content:center !important; }
+  .sidebar-item strong, .sidebar-logout strong, .sidebar-brand { display:none !important; }
+  .sidebar-toggle { right:-13px !important; top:24px !important; }
+
+  /* O painel correto do App é .dashboard. */
+  .dashboard { display:block !important; width:calc(100% - 70px) !important; max-width:calc(100% - 70px) !important; min-width:0 !important; margin-left:70px !important; padding:12px !important; box-sizing:border-box !important; overflow-x:hidden !important; }
+  .dashboard .main-content, .main-content { width:100% !important; max-width:100% !important; min-width:0 !important; margin:0 !important; padding:0 !important; box-sizing:border-box !important; overflow-x:hidden !important; }
+
+  .dashboard-brand { width:100% !important; height:105px !important; min-height:105px !important; max-width:100% !important; padding:0 !important; margin:0 0 8px !important; display:flex !important; align-items:center !important; justify-content:center !important; overflow:hidden !important; box-sizing:border-box !important; }
+  .dashboard-logo-center { width:180px !important; max-width:85% !important; height:auto !important; max-height:100px !important; object-fit:contain !important; margin:0 auto !important; }
+
+  .dashboard-content { width:100% !important; max-width:100% !important; min-width:0 !important; margin:0 !important; padding:8px 0 35px !important; box-sizing:border-box !important; }
+  .dashboard-profile { width:100% !important; max-width:100% !important; margin:0 0 12px !important; padding:10px 12px !important; box-sizing:border-box !important; }
+  .dashboard-profile-name { width:100% !important; max-width:100% !important; margin:0 !important; text-align:center !important; font-size:21px !important; line-height:1.2 !important; white-space:normal !important; overflow-wrap:anywhere !important; word-break:break-word !important; box-sizing:border-box !important; }
+
+  /* Título sem flex para impedir o conteúdo de sair da tela. */
+  .dashboard-title { position:relative !important; display:block !important; width:100% !important; max-width:100% !important; min-width:0 !important; margin:0 0 18px !important; padding:0 !important; box-sizing:border-box !important; }
+  .dashboard-title > div { width:100% !important; max-width:100% !important; min-width:0 !important; box-sizing:border-box !important; }
+  .dashboard-title h2 { display:none !important; }
+  .dashboard-title p { width:100% !important; max-width:100% !important; margin:0 !important; padding:0 0 52px !important; text-align:left !important; font-size:15px !important; line-height:1.35 !important; color:rgba(255,255,255,.65) !important; overflow-wrap:anywhere !important; box-sizing:border-box !important; }
+
+  /* Botão Novo lançamento no canto direito */
+  .dashboard-title .add-button, .add-button { position:absolute !important; right:0 !important; left:auto !important; bottom:0 !important; top:auto !important; width:auto !important; max-width:calc(100% - 5px) !important; height:42px !important; margin:0 !important; padding:0 14px !important; display:inline-flex !important; align-items:center !important; justify-content:center !important; font-size:14px !important; line-height:1 !important; white-space:nowrap !important; box-sizing:border-box !important; }
+
+  .dashboard-cards { width:100% !important; max-width:100% !important; min-width:0 !important; display:grid !important; grid-template-columns:minmax(0,1fr) !important; gap:12px !important; margin:0 0 18px !important; box-sizing:border-box !important; }
+  .dashboard-card, .finance-card { width:100% !important; min-width:0 !important; max-width:100% !important; padding:18px 14px !important; box-sizing:border-box !important; }
+  .finance-card strong { font-size:23px !important; white-space:nowrap !important; }
+
+  .dashboard-grid { width:100% !important; max-width:100% !important; min-width:0 !important; display:grid !important; grid-template-columns:minmax(0,1fr) !important; gap:12px !important; box-sizing:border-box !important; }
+  .chart-card, .summary-card, .transactions-card { width:100% !important; max-width:100% !important; min-width:0 !important; padding:16px !important; box-sizing:border-box !important; overflow:hidden !important; }
+  .chart { width:100% !important; max-width:100% !important; min-width:0 !important; gap:3px !important; overflow:hidden !important; }
+  .chart-column { min-width:0 !important; }
+  .bar { width:8px !important; max-width:8px !important; }
+  .chart-legend { flex-wrap:wrap !important; gap:10px !important; }
+  .summary-item { width:100% !important; min-width:0 !important; gap:10px !important; }
+  .summary-item span, .summary-item strong { min-width:0 !important; overflow-wrap:anywhere !important; }
+  .transaction-item, .entry-item { width:100% !important; max-width:100% !important; min-width:0 !important; box-sizing:border-box !important; }
+  .transaction-info, .entry-info { min-width:0 !important; max-width:100% !important; }
+  .transaction-info strong, .entry-info strong { overflow-wrap:anywhere !important; word-break:break-word !important; }
+}
+
+@media screen and (max-width:400px) {
+  .sidebar { width:64px !important; min-width:64px !important; max-width:64px !important; }
+  .dashboard { width:calc(100% - 64px) !important; max-width:calc(100% - 64px) !important; margin-left:64px !important; padding:10px !important; }
+  .dashboard-brand { height:90px !important; min-height:90px !important; }
+  .dashboard-logo-center { width:155px !important; max-width:85% !important; }
+  .dashboard-profile-name { font-size:19px !important; }
+  .dashboard-title p { font-size:14px !important; }
+  .dashboard-title .add-button, .add-button { height:40px !important; font-size:13px !important; padding:0 12px !important; }
+  .finance-card strong { font-size:21px !important; }
+}
