@@ -19,7 +19,6 @@ function App() {
   const [loading, setLoading] = useState(false)
   const [loggedIn, setLoggedIn] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [showNewLaunch, setShowNewLaunch] = useState(false)
   const [suporte, setSuporte] = useState(false)
   const [mesResultado, setMesResultado] = useState(new Date().getMonth());
   const [configuracoes, setConfiguracoes] = useState(false)
@@ -2130,6 +2129,10 @@ const hora = lancamento.created_at
                 </button>
                </div>
                 </div>
+                ) : pagina === "novo-lancamento" ? (
+                  <>
+                    {modal_block}
+                  </>
                 ) : (
         <>
               
@@ -2438,127 +2441,6 @@ onClick={async () => {
                 </div>
                 </section>
 
-                {pagina === "novo-lancamento" && (
-                <div className="modal-overlay">
-                  <div className="launch-modal">
-                    <div className="modal-header">
-                      <h2>Novo lançamento</h2>
-
-                      <button
-                        className="modal-close"
-                        onClick={() => setPagina("inicial")}
-                      >
-                        ×
-                      </button>
-                    </div>
-
-                    <div className="launch-form">
-                      <label>Tipo</label>
-
-                      <div className="launch-type">
-                        <button
-                          type="button"
-                          className={launchType === 'entrada' ? 'selected' : ''}
-                          onClick={() => setLaunchType('entrada')}
-                        >
-                          ↑ Entrada
-                        </button>
-
-                        <button
-                          type="button"
-                          className={launchType === 'despesa' ? 'selected expense' : ''}
-                          onClick={() => setLaunchType('despesa')}
-                        >
-                          ↓ Despesa
-                        </button>
-                      </div>
-
-                      <label>Descrição</label>
-                      <input
-                        type="text"
-                        placeholder="Ex.: Venda de iPhone"
-                        value={launchDescription}
-                        onChange={(e) => setLaunchDescription(e.target.value)}
-                      />
-
-                      <label>Valor</label>
-                      <input
-                        type="number"
-                        placeholder="0,00"
-                        step="0.01"
-                        value={launchValue}
-                        onChange={(e) => setLaunchValue(e.target.value)}
-                      />
-
-                      <label>Categoria</label>
-                      <select
-                        value={launchCategory}
-                        onChange={(e) => setLaunchCategory(e.target.value)}
-                      >
-                        <option value="">Selecione uma categoria</option>
-
-                        {launchType === 'entrada' ? (
-                          <>
-                            <option value="Vendas">🛒 Vendas</option>
-                            <option value="Serviços">🔧 Serviços</option>
-                            <option value="Salário">💰 Salário</option>
-                            <option value="Outros">📦 Outros</option>
-                          </>
-                        ) : (
-                          <>
-                            <option value="Alimentação">🍔 Alimentação</option>
-                            <option value="Aluguel">🏠 Aluguel</option>
-                            <option value="Energia">💡 Energia</option>
-                            <option value="Água">💧 Água</option>
-                            <option value="Internet">🌐 Internet</option>
-                            <option value="Funcionário">👨‍💼 Funcionário</option>
-                            <option value="Fornecedores">📦 Fornecedores</option>
-                            <option value="Impostos">🧾 Impostos</option>
-                            <option value="Transporte">🚗 Transporte</option>
-                            <option value="Outros">📋 Outros</option>
-                          </>
-                        )}
-                      </select>
-
-                      <label>Data</label>
-                      <input
-                        type="date"
-                        value={launchDate}
-                        onChange={(e) => setLaunchDate(e.target.value)}
-                      />
-
-                      <label>Forma de pagamento</label>
-                      <select
-                        value={launchPayment}
-                        onChange={(e) => setLaunchPayment(e.target.value)}
-                      >
-                        <option value="Dinheiro">💵 Dinheiro</option>
-                        <option value="Cartão">💳 Cartão</option>
-                        <option value="PIX">📱 PIX</option>
-                        <option value="boleto">🧾 Boleto</option>
-                      </select>
-
-                      <div className="modal-actions">
-                        <button
-                          type="button"
-                          className="cancel-button"
-                          onClick={() => setPagina("inicial")}
-                        >
-                          Cancelar
-                        </button>
-
-                        <button
-                          type="button"
-                          className="save-button"
-                          onClick={handleSaveLaunch}
-                        >
-                          Salvar lançamento
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                )}
               </>
                 )}
            </main>
