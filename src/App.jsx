@@ -2152,14 +2152,21 @@ const hora = lancamento.created_at
                     <p>Bem-vindo ao seu painel financeiro.</p>
                   </div>
 
-                  onClick={() => setShowNewLaunch(true)}
+                  <button
+                    type="button"
+                    className="add-button"
+                    onClick={() => setshowLancamentos(true)}
+                  >
+                    + Novo lançamento
+                  </button>
+
                   <button
                   type="button"
                   className="logout-button"
-                  onClick={() => setLoggedIn(false)}
-               >
-                   🚪 Sair
-              </button>
+                    onClick={() => setLoggedIn(false)}
+                >
+  🚪 Sair
+</button>
                 </div>
 
                 <div className="dashboard-cards">
