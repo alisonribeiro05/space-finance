@@ -2153,11 +2153,12 @@ const hora = lancamento.created_at
                   </div>
 
                   <button
-                    className="add-button"
-                   onClick={() => { alert("CLIQUEI"); setShowNewLaunch(true); }}
-                  >
-                    + Novo lançamento
-                  </button>
+  type="button"
+  className="add-button"
+  onClick={() => alert("CLIQUEI")}
+>
+  + Novo lançamento
+</button>
                   <button
   type="button"
   className="logout-button"
