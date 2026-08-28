@@ -2155,7 +2155,7 @@ const hora = lancamento.created_at
                   <button
                     type="button"
                     className="add-button"
-                    onClick={() => setshowLancamentos(true)}
+                    onClick={() => setShowNewLaunch(true)}
                   >
                     + Novo lançamento
                   </button>
@@ -2436,7 +2436,7 @@ onClick={async () => {
                 </div>
                 </section>
 
-                {showNewLaunch && ( 
+                {showNewLaunch && (  
                 <div className="modal-overlay">
                   <div className="launch-modal">
                     <div className="modal-header">
@@ -2444,7 +2444,7 @@ onClick={async () => {
 
                       <button
                         className="modal-close"
-                        onClick={() => setPagina("inicio")}  
+                        onClick={() => setShowNewLaunch(false)}
                       >
                         ×
                       </button>
@@ -2540,7 +2540,7 @@ onClick={async () => {
                         <button
                           type="button"
                           className="cancel-button"
-                          onClick={() => setPagina("inicio")}
+                          onClick={() => setShowNewLaunch(false)}
                         >
                           Cancelar
                         </button>
