@@ -3178,5 +3178,94 @@ body {
 .support-button:hover {
   transform: translateY(-2px);
   opacity: 0.9;
+}/* =================================
+   AJUSTES PARA CELULAR
+================================= */
+
+@media (max-width: 768px) {
+
+  /* Conteúdo principal */
+  .dashboard-content {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 20px 15px;
+    box-sizing: border-box;
+  }
+
+  /* Nome da empresa/usuário */
+  .dashboard-profile-name {
+    font-size: 25px;
+    line-height: 1.15;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: normal;
+    margin-bottom: 8px;
+  }
+
+  /* Bem-vindo */
+  .dashboard-title {
+    width: 100%;
+  }
+
+  .dashboard-title p {
+    font-size: 17px;
+    line-height: 1.3;
+  }
+
+  /* Logo do Space Finance */
+  .dashboard-title img,
+  .dashboard-logo,
+  .annual-logo {
+    max-width: 180px;
+    width: 180px;
+    height: auto;
+  }
+
+  /* Área dos cards */
+  .dashboard-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    width: 100%;
+  }
+
+  /* Cards financeiros */
+  .dashboard-card,
+  .finance-card {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  /* Botão novo lançamento */
+  .add-button {
+    width: 100%;
+    max-width: 280px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+
+  /* Gráfico */
+  .chart-card,
+  .dashboard-chart {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+}@media (max-width: 768px) {
+
+  .sidebar {
+    width: 70px;
+    min-width: 70px;
+  }
+
+  .main-content {
+    margin-left: 70px;
+    width: calc(100% - 70px);
+  }
+
 }
 
