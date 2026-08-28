@@ -2131,7 +2131,9 @@ const hora = lancamento.created_at
                </div>
                 </div>
                 ) : (
-               <>
+        <>
+              
+              
                <div className="dashboard-brand">
                 <img
                   src={spaceFinanceIcon}
@@ -2155,7 +2157,7 @@ const hora = lancamento.created_at
                   <button
                     type="button"
                     className="add-button"
-                    onClick={() => setShowNewLaunch(true)}
+                     onClick={() => setPagina("novo-lancamento")}
                   >
                     + Novo lançamento
                   </button>
@@ -2436,7 +2438,7 @@ onClick={async () => {
                 </div>
                 </section>
 
-                {showNewLaunch && (  
+                {pagina === "novo-lancamento" && (
                 <div className="modal-overlay">
                   <div className="launch-modal">
                     <div className="modal-header">
@@ -2444,7 +2446,7 @@ onClick={async () => {
 
                       <button
                         className="modal-close"
-                        onClick={() => setShowNewLaunch(false)}
+                        onClick={() => setPagina("inicial")}
                       >
                         ×
                       </button>
@@ -2540,7 +2542,7 @@ onClick={async () => {
                         <button
                           type="button"
                           className="cancel-button"
-                          onClick={() => setShowNewLaunch(false)}
+                          onClick={() => setPagina("inicial")}
                         >
                           Cancelar
                         </button>
