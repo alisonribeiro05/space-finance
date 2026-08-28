@@ -66,12 +66,28 @@ function App() {
     setMesImpressao(0);
   }, [anoSelecionado]);
 
+  const obterDataLancamento = (valor) => {
+    if (!valor) return null;
+
+    const texto = String(valor);
+
+    // Campo date puro (YYYY-MM-DD)
+    if (/^\\d{4}-\\d{2}-\\d{2}$/.test(texto)) {
+      return new Date(`${texto}T12:00:00`);
+    }
+
+    // Campo timestamp/date completo
+    const data = new Date(texto);
+    return Number.isNaN(data.getTime()) ? null : data;
+  };
+
   const dadosGrafico = meses.map((mes, index) => {
     const entradas = lancamentos
       .filter((lancamento) => {
-        const data = new Date(lancamento.data + 'T12:00:00');
+        const data = obterDataLancamento(lancamento.data);
 
         return (
+          data &&
           data.getFullYear() === anoSelecionado &&
           data.getMonth() === index &&
           lancamento.tipo === 'entrada'
@@ -84,9 +100,10 @@ function App() {
       );
     const despesas = lancamentos
       .filter((lancamento) => {
-        const data = new Date(lancamento.data + 'T12:00:00');
+        const data = obterDataLancamento(lancamento.data);
 
         return (
+          data &&
           data.getFullYear() === anoSelecionado &&
           data.getMonth() === index &&
           ['saida', 'despesa'].includes(String(lancamento.tipo || '').toLowerCase())
@@ -105,7 +122,7 @@ function App() {
       despesas,
 
       lancamentos: lancamentos.filter((lancamento) => {
-  const dataLancamento = new Date(lancamento.data);
+  const dataLancamento = obterDataLancamento(lancamento.data);
 
   return (
     dataLancamento.getFullYear() === anoSelecionado &&
@@ -141,9 +158,22 @@ function App() {
     try {
       setLoadingLancamentos(true);
 
+      const {
+        data: { user },
+        error: userError
+      } = await supabase.auth.getUser();
+
+      if (userError) throw userError;
+
+      if (!user) {
+        setLancamentos([]);
+        return;
+      }
+
       const { data, error } = await supabase
         .from('lancamentos')
         .select('*')
+        .eq('user_id', user.id)
         .order('data', { ascending: false });
 
       if (error) {
@@ -231,7 +261,7 @@ const dataComHora = new Date(
       setLaunchDescription('');
       setLaunchValue('');
       setLaunchCategory('');
-      setLaunchPayment('dinheiro');
+      setLaunchPayment('Dinheiro');
 
     } catch (error) {
       console.error('Erro ao salvar lançamento:', error);
@@ -831,7 +861,7 @@ const hora = lancamento.created_at
   <button
   type="button"
   className="delete-transaction-button"
-  onClick={() => handleDeleteLancamento(lancamento.id)}
+  onClick={() => handleDeleteLaunch(lancamento.id)}
   title="Excluir entrada"
 >
   🗑️
@@ -2131,7 +2161,125 @@ const hora = lancamento.created_at
                 </div>
                 ) : pagina === "novo-lancamento" ? (
                   <>
-                    {modal_block}
+<div className="modal-overlay">
+  <div className="launch-modal">
+    <div className="modal-header">
+      <h2>Novo lançamento</h2>
+
+      <button
+        className="modal-close"
+        onClick={() => setPagina("inicio")}
+      >
+        ×
+      </button>
+    </div>
+
+    <div className="launch-form">
+      <label>Tipo</label>
+
+      <div className="launch-type">
+        <button
+          type="button"
+          className={launchType === 'entrada' ? 'selected' : ''}
+          onClick={() => setLaunchType('entrada')}
+        >
+          ↑ Entrada
+        </button>
+
+        <button
+          type="button"
+          className={launchType === 'despesa' ? 'selected expense' : ''}
+          onClick={() => setLaunchType('despesa')}
+        >
+          ↓ Despesa
+        </button>
+      </div>
+
+      <label>Descrição</label>
+      <input
+        type="text"
+        placeholder="Ex.: Venda de iPhone"
+        value={launchDescription}
+        onChange={(e) => setLaunchDescription(e.target.value)}
+      />
+
+      <label>Valor</label>
+      <input
+        type="number"
+        placeholder="0,00"
+        step="0.01"
+        value={launchValue}
+        onChange={(e) => setLaunchValue(e.target.value)}
+      />
+
+      <label>Categoria</label>
+      <select
+        value={launchCategory}
+        onChange={(e) => setLaunchCategory(e.target.value)}
+      >
+        <option value="">Selecione uma categoria</option>
+
+        {launchType === 'entrada' ? (
+          <>
+            <option value="Vendas">🛒 Vendas</option>
+            <option value="Serviços">🔧 Serviços</option>
+            <option value="Salário">💰 Salário</option>
+            <option value="Outros">📦 Outros</option>
+          </>
+        ) : (
+          <>
+            <option value="Alimentação">🍔 Alimentação</option>
+            <option value="Aluguel">🏠 Aluguel</option>
+            <option value="Energia">💡 Energia</option>
+            <option value="Água">💧 Água</option>
+            <option value="Internet">🌐 Internet</option>
+            <option value="Funcionário">👨‍💼 Funcionário</option>
+            <option value="Fornecedores">📦 Fornecedores</option>
+            <option value="Impostos">🧾 Impostos</option>
+            <option value="Transporte">🚗 Transporte</option>
+            <option value="Outros">📋 Outros</option>
+          </>
+        )}
+      </select>
+
+      <label>Data</label>
+      <input
+        type="date"
+        value={launchDate}
+        onChange={(e) => setLaunchDate(e.target.value)}
+      />
+
+      <label>Forma de pagamento</label>
+      <select
+        value={launchPayment}
+        onChange={(e) => setLaunchPayment(e.target.value)}
+      >
+        <option value="Dinheiro">💵 Dinheiro</option>
+        <option value="Cartão">💳 Cartão</option>
+        <option value="PIX">📱 PIX</option>
+        <option value="boleto">🧾 Boleto</option>
+      </select>
+
+      <div className="modal-actions">
+        <button
+          type="button"
+          className="cancel-button"
+          onClick={() => setPagina("inicio")}
+        >
+          Cancelar
+        </button>
+
+        <button
+          type="button"
+          className="save-button"
+          onClick={handleSaveLaunch}
+        >
+          Salvar lançamento
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
                   </>
                 ) : (
         <>
@@ -2440,6 +2588,7 @@ onClick={async () => {
                   </div>
                 </div>
                 </section>
+
 
               </>
                 )}
