@@ -3889,4 +3889,50 @@ body {
   .entries-month-select {
     flex-shrink: 0 !important;
   }
+}/* =====================================================
+   ZOOM GLOBAL DAS PÁGINAS
+   ===================================================== */
+
+.zoom-controls {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 10px;
+  border-radius: 10px;
+
+  background: #10251a;
+  border: 1px solid #39ff14;
+}
+
+.zoom-controls button {
+  width: 40px;
+  height: 36px;
+
+  border: 1px solid #39ff14;
+  border-radius: 7px;
+
+  background: transparent;
+  color: white;
+
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.zoom-controls button:hover {
+  background: #39ff14;
+  color: #000;
+}
+
+.zoom-controls span {
+  min-width: 55px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
 }
