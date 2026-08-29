@@ -3725,18 +3725,7 @@ body {
 
 @media screen and (max-width: 768px) {
 
-  .dashboard {
-    overflow-x: auto !important;
-    overflow-y: visible !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
-
-  .dashboard-content {
-    width: 900px !important;
-    min-width: 900px !important;
-    max-width: none !important;
-    margin: 0 !important;
-  }
+  
 
   /* Gráfico + Resumo ficam dentro da área rolável */
   .dashboard-grid {
