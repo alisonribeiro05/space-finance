@@ -3986,7 +3986,7 @@ body {
   .dashboard-brand {
     height: 96px !important;
     min-height: 96px !important;
-    position: relative !important;
+    position: center !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -3999,7 +3999,7 @@ body {
   }
 
   .dashboard-brand .logout-button {
-    position: absolute !important;
+    position: center !important;
     top: 12px !important;
     right: 0 !important;
     transform: none !important;
