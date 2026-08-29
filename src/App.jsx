@@ -40,7 +40,7 @@ function App() {
     const atualizarZoom = (valor) => {
       const zoom = Math.min(2.5, Math.max(0.7, valor));
       zoomRef.current = zoom;
-      document.documentElement.style.setProperty('--zoom-interface', zoom);
+      document.body.style.zoom = String(zoom);
     };
 
     const iniciarGesto = (event) => {
@@ -60,7 +60,7 @@ function App() {
     return () => {
       window.removeEventListener('gesturestart', iniciarGesto, opcoes);
       window.removeEventListener('gesturechange', moverGesto, opcoes);
-      document.documentElement.style.removeProperty('--zoom-interface');
+      document.body.style.removeProperty('zoom');
     };
   }, []);
 

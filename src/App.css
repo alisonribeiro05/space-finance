@@ -3948,16 +3948,20 @@ body {
 /* Ajustes finais para celulares: removem as larguras fixas antigas e mantêm
    todas as páginas proporcionais à tela. */
 @media screen and (max-width: 768px) {
-  :root {
-    --zoom-interface: 1;
+  html,
+  body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
   }
 
-  #root {
-    width: calc(100% / var(--zoom-interface)) !important;
-    max-width: none !important;
-    min-height: calc(100svh / var(--zoom-interface)) !important;
-    transform: scale(var(--zoom-interface));
-    transform-origin: top left;
+  #root,
+  .app-layout {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 100svh !important;
+    overflow-x: hidden !important;
+    transform: none !important;
   }
 
   .app-layout .main-content {
@@ -3965,6 +3969,12 @@ body {
     min-width: 0 !important;
     margin-left: 64px !important;
     padding: 16px 12px 32px !important;
+    overflow-x: hidden !important;
+  }
+
+  .dashboard-content,
+  .dashboard-grid,
+  .dashboard-cards {
     overflow-x: hidden !important;
   }
 
@@ -3977,6 +3987,9 @@ body {
     height: 96px !important;
     min-height: 96px !important;
     position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .dashboard-logo-center {
@@ -3998,6 +4011,7 @@ body {
 
   .dashboard-content {
     padding: 8px 0 24px !important;
+    text-align: center !important;
   }
 
   .dashboard-profile-name {
