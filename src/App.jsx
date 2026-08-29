@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from './supabase'
 import {
   Eye,
@@ -30,39 +30,6 @@ function App() {
   const [mesSelecionado, setMesSelecionado] = useState(0);
   const [mesImpressao, setMesImpressao] = useState(0);
   const [lancamentos, setLancamentos] = useState([]);
-  const [zoomPagina, setZoomPagina] = useState(1);
-  const pinchRef = useRef({ distancia: 0, zoom: 1 });
-
-  const distanciaEntreToques = (toques) => {
-    const dx = toques[0].clientX - toques[1].clientX;
-    const dy = toques[0].clientY - toques[1].clientY;
-    return Math.hypot(dx, dy);
-  };
-
-  const iniciarPinch = (event) => {
-    if (event.touches.length !== 2) return;
-
-    pinchRef.current = {
-      distancia: distanciaEntreToques(event.touches),
-      zoom: zoomPagina,
-    };
-  };
-
-  const moverPinch = (event) => {
-    if (event.touches.length !== 2 || !pinchRef.current.distancia) return;
-
-    event.preventDefault();
-    const escala = distanciaEntreToques(event.touches) / pinchRef.current.distancia;
-    const novoZoom = pinchRef.current.zoom * escala;
-
-    setZoomPagina(Math.min(2.4, Math.max(0.75, novoZoom)));
-  };
-
-  const finalizarPinch = (event) => {
-    if (event.touches.length < 2) {
-      pinchRef.current.distancia = 0;
-    }
-  };
 
   const totalEntradas = lancamentos
     
@@ -548,17 +515,7 @@ const dataComHora = new Date(
 
                <main
   className={`main-content ${sidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}
-  onTouchStart={iniciarPinch}
-  onTouchMove={moverPinch}
-  onTouchEnd={finalizarPinch}
 >
-                <div
-                  className="zoomable-content"
-                  style={{
-                    transform: `scale(${zoomPagina})`,
-                    width: `${100 / zoomPagina}%`,
-                  }}
-                >
 
                 {pagina === "entradas" ? (
                <>
@@ -2639,7 +2596,6 @@ onClick={async () => {
 
               </>
                 )}
-                </div>
 </main>
       </div>
     );

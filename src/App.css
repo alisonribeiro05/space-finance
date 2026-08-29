@@ -3940,11 +3940,7 @@ body {
   .main-content {
     overflow-x: auto !important;
     overflow-y: auto !important;
-    touch-action: none !important;
+    touch-action: pan-x pan-y pinch-zoom !important;
     -webkit-overflow-scrolling: touch;
-  }
-
-  .conteudo-com-zoom {
-    touch-action: none !important;
   }
 }
