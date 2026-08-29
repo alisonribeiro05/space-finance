@@ -3945,37 +3945,41 @@ body {
   }
 }
 
-/* Ajustes finais para celulares: removem as larguras fixas antigas e mantêm
-   todas as páginas proporcionais à tela. */
+/* =========================================================
+   CORREÇÃO FINAL RESPONSIVA - PAINEL / ENTRADAS / DESPESAS
+   ========================================================= */
+
 @media screen and (max-width: 768px) {
   html,
   body {
     width: 100% !important;
     max-width: 100% !important;
+    min-width: 0 !important;
     overflow-x: hidden !important;
+    overflow-y: auto !important;
+    touch-action: pan-x pan-y pinch-zoom !important;
   }
 
   #root,
   .app-layout {
     width: 100% !important;
     max-width: 100% !important;
+    min-width: 0 !important;
     min-height: 100svh !important;
     overflow-x: hidden !important;
-    transform: none !important;
   }
 
+  /* Área principal: somente o conteúdo interno poderá rolar quando necessário */
   .app-layout .main-content {
     width: calc(100% - 64px) !important;
     min-width: 0 !important;
+    max-width: none !important;
     margin-left: 64px !important;
-    padding: 16px 12px 32px !important;
-    overflow-x: hidden !important;
-  }
-
-  .dashboard-content,
-  .dashboard-grid,
-  .dashboard-cards {
-    overflow-x: hidden !important;
+    padding: 12px !important;
+    box-sizing: border-box !important;
+    overflow-x: auto !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
   }
 
   .app-layout .main-content.sidebar-open {
@@ -3983,59 +3987,160 @@ body {
     margin-left: 220px !important;
   }
 
+  /* =========================
+     LOGO + SAIR
+     ========================= */
   .dashboard-brand {
+    width: 100% !important;
     height: 96px !important;
     min-height: 96px !important;
     position: relative !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
   }
 
   .dashboard-logo-center {
     width: 165px !important;
-    max-width: 58% !important;
+    max-width: 55% !important;
     max-height: 88px !important;
+    height: auto !important;
+    object-fit: contain !important;
+    margin: 0 auto !important;
   }
 
   .dashboard-brand .logout-button {
     position: absolute !important;
-    top: 12px !important;
-    right: 0 !important;
+    top: 10px !important;
+    right: 4px !important;
     transform: none !important;
-    min-width: auto !important;
+    min-width: 68px !important;
     height: 36px !important;
     padding: 0 9px !important;
     font-size: 12px !important;
+    z-index: 100 !important;
   }
 
+  .dashboard-brand .logout-button:hover {
+    transform: none !important;
+  }
+
+  /* =========================
+     CONTEÚDO
+     ========================= */
   .dashboard-content {
-    padding: 8px 0 24px !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    min-width: 0 !important;
+    margin: 0 auto !important;
+    padding: 8px 0 30px !important;
+    box-sizing: border-box !important;
     text-align: center !important;
+    overflow-x: visible !important;
+  }
+
+  .dashboard-profile,
+  .dashboard-profile-name {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
   }
 
   .dashboard-profile-name {
     margin: 0 0 8px !important;
     font-size: 21px !important;
+    line-height: 1.2 !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+    text-align: center !important;
   }
 
   .dashboard-title {
-    margin: 0 0 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
     gap: 10px !important;
+    margin: 0 auto 18px !important;
+    padding: 0 !important;
+    text-align: center !important;
+  }
+
+  .dashboard-title > div,
+  .dashboard-title h2,
+  .dashboard-title p {
+    width: 100% !important;
+    max-width: 100% !important;
+    text-align: center !important;
+  }
+
+  .dashboard-title h2 {
+    margin: 0 !important;
+    font-size: 20px !important;
+    line-height: 1.2 !important;
   }
 
   .dashboard-title p {
+    margin: 0 auto !important;
     font-size: 14px !important;
+    line-height: 1.4 !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
   }
 
+  /* Novo lançamento continua disponível e alinhado */
+  .dashboard-title .add-button,
+  .add-button {
+    position: static !important;
+    align-self: center !important;
+    width: auto !important;
+    max-width: 95% !important;
+    height: 42px !important;
+    margin: 4px auto 0 !important;
+    padding: 0 15px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 13px !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
+  }
+
+  /* =========================
+     CARDS FINANCEIROS
+     ========================= */
   .dashboard-cards {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 9px !important;
+    margin: 0 auto 18px !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
   }
 
+  .dashboard-card,
   .finance-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
     min-height: 104px !important;
+    height: auto !important;
     padding: 12px 8px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    overflow: hidden !important;
   }
 
   .finance-card span,
@@ -4046,51 +4151,307 @@ body {
   .finance-card strong {
     margin: 6px 0 !important;
     font-size: 17px !important;
-    white-space: normal !important;
+    line-height: 1.15 !important;
+    white-space: nowrap !important;
   }
 
+  /* =========================
+     GRÁFICO x RESUMO
+     ========================= */
   .dashboard-grid {
     width: 100% !important;
+    max-width: 100% !important;
     min-width: 0 !important;
+    display: grid !important;
     grid-template-columns: 1fr !important;
     gap: 12px !important;
+    margin: 0 auto 18px !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
   }
 
   .chart-card,
   .summary-card,
-  .transactions-card,
-  .entries-page,
-  .annual-page,
-  .config-page,
-  .support-page {
+  .transactions-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    padding: 14px !important;
+    box-sizing: border-box !important;
+  }
+
+  .chart-card {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  /* Só o gráfico tem largura interna para rolagem horizontal. */
+  .chart {
+    width: 560px !important;
+    min-width: 560px !important;
+    max-width: none !important;
+    overflow: visible !important;
+  }
+
+  .chart-column {
+    min-width: 0 !important;
+  }
+
+  .summary-card {
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+  }
+
+  .summary-item {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .annual-button {
+    width: 100% !important;
+    min-width: 0 !important;
+    white-space: nowrap !important;
+  }
+
+  .transactions-card {
+    overflow-x: auto !important;
+  }
+
+  .transaction-item {
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
-    padding: 16px 0 24px !important;
-    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+    flex-wrap: wrap !important;
+  }
+
+  /* =========================
+     ENTRADAS E DESPESAS
+     ========================= */
+  .entries-page {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 16px 0 35px !important;
+    box-sizing: border-box !important;
+    overflow-x: visible !important;
   }
 
   .entries-header,
   .entries-section-header,
-  .entries-list,
-  .entries-export-section,
-  .entries-report-preview,
-  .entry-item,
-  .entry-info {
+  .entries-month-card,
+  .entries-export-section {
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
-  .entries-header,
-  .entries-section-header {
+  .entries-header {
     min-height: 0 !important;
-    flex-wrap: wrap !important;
+    margin-bottom: 18px !important;
+    padding: 0 !important;
+  }
+
+  .entries-brand {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    text-align: center !important;
+  }
+
+  .entries-logo {
+    width: 125px !important;
+    max-width: 55% !important;
+    height: auto !important;
+  }
+
+  .entries-icon {
+    display: none !important;
+  }
+
+  .entries-brand h1 {
+    font-size: 24px !important;
+    text-align: center !important;
+  }
+
+  .entries-brand p {
+    font-size: 13px !important;
+    text-align: center !important;
+  }
+
+  .entries-back-button {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    padding: 8px 11px !important;
+    font-size: 12px !important;
+  }
+
+  .entries-total-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    box-sizing: border-box !important;
+  }
+
+  .entries-total-card strong {
+    font-size: 25px !important;
+  }
+
+  .entries-section-header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
     gap: 12px !important;
+  }
+
+  .entries-month-select {
+    width: 100% !important;
+    min-width: 0 !important;
+    flex-shrink: 1 !important;
+    box-sizing: border-box !important;
+  }
+
+  .entries-list,
+  .entry-item,
+  .entry-info,
+  .entries-export-section,
+  .entries-report-preview {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .entry-item {
     flex-wrap: wrap !important;
     gap: 8px !important;
+  }
+
+  .entry-info {
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+  }
+
+  .entries-export-header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+  }
+
+  .entries-report-preview {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .entries-export-buttons {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+
+  .entries-export-buttons button {
+    width: 100% !important;
+  }
+
+  /* Modal de novo lançamento */
+  .modal-overlay {
+    padding: 12px !important;
+    box-sizing: border-box !important;
+  }
+
+  .launch-modal {
+    width: 100% !important;
+    max-width: 500px !important;
+    max-height: calc(100vh - 24px) !important;
+    overflow-y: auto !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* Celulares muito pequenos */
+@media screen and (max-width: 400px) {
+  .sidebar,
+  .sidebar.closed {
+    width: 64px !important;
+    min-width: 64px !important;
+    max-width: 64px !important;
+  }
+
+  .sidebar:not(.closed) {
+    width: 210px !important;
+    min-width: 210px !important;
+    max-width: 210px !important;
+  }
+
+  .app-layout .main-content {
+    width: calc(100% - 64px) !important;
+    margin-left: 64px !important;
+    padding: 10px 8px !important;
+  }
+
+  .app-layout .main-content.sidebar-open {
+    width: calc(100% - 210px) !important;
+    margin-left: 210px !important;
+  }
+
+  .dashboard-brand {
+    height: 90px !important;
+    min-height: 90px !important;
+  }
+
+  .dashboard-logo-center {
+    width: 140px !important;
+    max-width: 52% !important;
+    max-height: 80px !important;
+  }
+
+  .dashboard-brand .logout-button {
+    right: 2px !important;
+    min-width: 64px !important;
+    height: 34px !important;
+    padding: 0 7px !important;
+    font-size: 11px !important;
+  }
+
+  .dashboard-profile-name {
+    font-size: 19px !important;
+  }
+
+  .dashboard-title h2 {
+    font-size: 19px !important;
+  }
+
+  .dashboard-title p {
+    font-size: 13px !important;
+  }
+
+  .dashboard-cards {
+    grid-template-columns: 1fr !important;
+  }
+
+  .finance-card {
+    min-height: 96px !important;
+  }
+
+  .finance-card strong {
+    font-size: 19px !important;
+  }
+
+  .chart {
+    width: 520px !important;
+    min-width: 520px !important;
   }
 }
