@@ -738,45 +738,6 @@ footer {
   line-height: 1.5;
 }
 
-@media (max-width: 900px) {
-.dashboard-cards {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.dashboard-grid {
-  grid-template-columns: 1fr;
-}
-
-.sidebar {
-  width: 75px;
-}
-
-.sidebar-brand {
-  display: none;
-}
-
-.sidebar-item {
-  justify-content: center;
-  padding: 0;
-}
-
-.sidebar-logout {
-  justify-content: center;
-  padding: 0;
-}
-
-.dashboard {
-  margin-left: 75px;
-  width: calc(100% - 75px);
-  padding: 20px;
-}
-}
-
-@media (max-width: 600px) {
-.dashboard-header {
-  padding: 20px;
-}
-
 .dashboard-header h1 {
   font-size: 22px;
 }
@@ -824,7 +785,7 @@ footer {
   width: 50%;
   font-size: 16px;
 }
-}
+
 
 .app-layout {
   min-height: 100vh;
@@ -3181,7 +3142,7 @@ body {
 }
 
 /* =========================================================
-   RESPONSIVIDADE MOBILE — BLOCO ÚNICO E LIMPO
+   RESPONSIVIDADE MOBILE — ÚNICA CONFIGURAÇÃO
    ========================================================= */
 
 @media screen and (max-width: 768px) {
@@ -3190,22 +3151,24 @@ body {
   body,
   #root {
     width: 100%;
-    min-width: 0;
-    max-width: 100%;
+    min-width: 320px;
+    max-width: none;
     margin: 0;
     overflow-x: auto;
   }
 
   .app-layout {
     width: 100%;
-    min-width: 0;
+    min-height: 100vh;
     display: flex;
     overflow-x: auto;
   }
 
-  /* =========================
+  /* =======================================================
      BARRA LATERAL
-     ========================= */
+     Fechada = ícones
+     Aberta = ícones + descrições
+     ======================================================= */
 
   .sidebar {
     position: fixed !important;
@@ -3216,6 +3179,7 @@ body {
     min-width: 70px !important;
     max-width: 70px !important;
     z-index: 1000 !important;
+    overflow: visible !important;
   }
 
   .sidebar.closed {
@@ -3224,7 +3188,6 @@ body {
     max-width: 70px !important;
   }
 
-  /* Quando a barra estiver aberta */
   .sidebar:not(.closed) {
     width: 220px !important;
     min-width: 220px !important;
@@ -3233,50 +3196,43 @@ body {
 
   .sidebar-logo {
     height: 105px !important;
-    padding: 8px 4px !important;
+    padding: 8px 5px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .sidebar-logo img {
     width: 52px !important;
     height: 52px !important;
-    max-width: 52px !important;
     object-fit: contain !important;
+  }
+
+  .sidebar:not(.closed) .sidebar-logo img {
+    width: 145px !important;
+    height: 85px !important;
   }
 
   .sidebar-brand {
     display: none !important;
   }
 
+  .sidebar:not(.closed) .sidebar-brand {
+    display: flex !important;
+  }
+
   .sidebar-menu {
     padding: 12px 8px !important;
-    gap: 8px !important;
+    gap: 6px !important;
     align-items: center !important;
   }
 
   .sidebar-item,
   .sidebar-logout {
-    width: 50px !important;
-    min-width: 50px !important;
-    max-width: 50px !important;
     height: 50px !important;
-    padding: 0 !important;
-    justify-content: center !important;
+    box-sizing: border-box !important;
   }
 
-  /* Barra fechada: somente os ícones */
-  .sidebar.closed .sidebar-item strong,
-  .sidebar.closed .sidebar-logout strong {
-    display: none !important;
-  }
-
-  /* Barra aberta: ícones + descrições */
-  .sidebar:not(.closed) .sidebar-item strong,
-  .sidebar:not(.closed) .sidebar-logout strong {
-    display: inline !important;
-    white-space: nowrap !important;
-  }
-
-  /* Botões quando a barra estiver fechada */
   .sidebar.closed .sidebar-item,
   .sidebar.closed .sidebar-logout {
     width: 50px !important;
@@ -3284,142 +3240,157 @@ body {
     max-width: 50px !important;
     justify-content: center !important;
     padding: 0 !important;
+    gap: 0 !important;
   }
 
-  /* Botões quando a barra estiver aberta */
   .sidebar:not(.closed) .sidebar-item,
   .sidebar:not(.closed) .sidebar-logout {
     width: 100% !important;
+    min-width: 0 !important;
     max-width: 100% !important;
     justify-content: flex-start !important;
     padding: 0 15px !important;
     gap: 12px !important;
-    box-sizing: border-box !important;
   }
 
-  .sidebar:not(.closed) .sidebar-item span,
-  .sidebar:not(.closed) .sidebar-logout span {
-    flex-shrink: 0 !important;
+  .sidebar.closed .sidebar-item strong,
+  .sidebar.closed .sidebar-logout strong {
+    display: none !important;
+  }
+
+  .sidebar:not(.closed) .sidebar-item strong,
+  .sidebar:not(.closed) .sidebar-logout strong {
+    display: inline !important;
+    white-space: nowrap !important;
   }
 
   .sidebar-toggle {
-    right: -13px !important;
+    right: -14px !important;
     top: 24px !important;
     z-index: 1100 !important;
   }
 
-  /* =========================
-     ÁREA PRINCIPAL
-     ========================= */
+  /* =======================================================
+     ÁREA DO PAINEL
+     A área visível começa depois da barra lateral.
+     O conteúdo interno fica maior que a tela para permitir
+     rolagem horizontal.
+     ======================================================= */
 
   .dashboard {
-    width: calc(100% - 70px) !important;
-    max-width: calc(100% - 70px) !important;
-    min-width: 0 !important;
+    position: relative !important;
+    flex: none !important;
+    width: calc(100vw - 70px) !important;
+    min-width: calc(100vw - 70px) !important;
+    max-width: none !important;
+    min-height: 100vh !important;
     margin-left: 70px !important;
     padding: 10px !important;
     box-sizing: border-box !important;
-    overflow: visible !important;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch;
   }
 
-  .app-layout:not(.sidebar-closed) .dashboard {
-    width: calc(100% - 220px) !important;
-    max-width: calc(100% - 220px) !important;
+  .app-layout:not(.sidebar-closed) .dashboard,
+  .sidebar:not(.closed) ~ .dashboard {
+    width: calc(100vw - 220px) !important;
+    min-width: calc(100vw - 220px) !important;
     margin-left: 220px !important;
   }
 
-  .main-content,
+  /* Conteúdo com largura mínima para ativar a rolagem */
+  .dashboard > .main-content,
   .dashboard .main-content {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
+    width: 680px !important;
+    min-width: 680px !important;
+    max-width: none !important;
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 15px !important;
     box-sizing: border-box !important;
     overflow: visible !important;
   }
 
-  /* =========================
-     LOGO + BOTÃO SAIR
-     ========================= */
+  .dashboard-content {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 5px 0 40px !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+  }
+
+  /* =======================================================
+     LOGO + SAIR
+     ======================================================= */
 
   .dashboard-brand {
     position: relative !important;
     width: 100% !important;
-    height: 100px !important;
-    min-height: 100px !important;
-    margin: 0 !important;
-    padding: 0 !important;
+    height: 105px !important;
+    min-height: 105px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    padding: 0 !important;
+    margin: 0 0 5px !important;
     box-sizing: border-box !important;
-    overflow: visible !important;
   }
 
   .dashboard-logo-center {
-    width: 175px !important;
-    max-width: 60% !important;
-    max-height: 95px !important;
+    width: 180px !important;
+    max-width: 180px !important;
     height: auto !important;
+    max-height: 95px !important;
     object-fit: contain !important;
     display: block !important;
     margin: 0 auto !important;
   }
 
-  /* Sair fica no lado direito da logo */
   .logout-button {
     position: absolute !important;
     top: 50% !important;
-    right: 0 !important;
+    right: 10px !important;
     transform: translateY(-50%) !important;
-    margin: 0 !important;
+    width: 95px !important;
+    min-width: 95px !important;
     height: 42px !important;
-    min-width: 82px !important;
-    padding: 0 12px !important;
+    margin: 0 !important;
+    padding: 0 10px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     font-size: 14px !important;
-    z-index: 20 !important;
+    z-index: 50 !important;
   }
 
   .logout-button:hover {
     transform: translateY(-50%) !important;
   }
 
-  /* =========================
-     CONTEÚDO / NOME / BEM-VINDO
-     ========================= */
-
-  .dashboard-content {
-    position: relative !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    margin: 0 auto !important;
-    padding: 5px 0 30px !important;
-    text-align: center !important;
-    box-sizing: border-box !important;
-  }
+  /* =======================================================
+     NOME + BEM-VINDO
+     ======================================================= */
 
   .dashboard-profile {
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 auto 10px !important;
     padding: 0 !important;
-    box-sizing: border-box !important;
     background: transparent !important;
     border: 0 !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
   }
 
   .dashboard-profile-name {
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 auto !important;
-    padding: 0 !important;
+    padding: 0 10px !important;
     text-align: center !important;
-    font-size: 22px !important;
+    font-size: 24px !important;
     line-height: 1.2 !important;
     white-space: normal !important;
     overflow-wrap: anywhere !important;
@@ -3428,12 +3399,12 @@ body {
   }
 
   .dashboard-title {
-    position: relative !important;
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
+    min-height: 105px !important;
     margin: 0 auto 18px !important;
-    padding: 0 !important;
+    padding: 0 10px !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
@@ -3443,43 +3414,40 @@ body {
     box-sizing: border-box !important;
   }
 
-  .dashboard-title > div {
-    width: 100% !important;
-    max-width: 100% !important;
-    text-align: center !important;
-  }
-
-  .dashboard-title h2 {
-    width: 100% !important;
-    margin: 0 !important;
-    font-size: 22px !important;
-    line-height: 1.2 !important;
-    text-align: center !important;
-    overflow-wrap: anywhere !important;
-  }
-
+  .dashboard-title h2,
   .dashboard-title p {
     width: 100% !important;
     max-width: 100% !important;
-    margin: 0 auto !important;
-    padding: 0 !important;
-    font-size: 15px !important;
-    line-height: 1.35 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
     text-align: center !important;
     white-space: normal !important;
-    overflow-wrap: anywhere !important;
+    overflow-wrap: break-word !important;
   }
 
-  /* Novo lançamento centralizado */
+  .dashboard-title h2 {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    font-size: 23px !important;
+    line-height: 1.2 !important;
+  }
+
+  .dashboard-title p {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    font-size: 16px !important;
+    line-height: 1.35 !important;
+  }
+
   .dashboard-title .add-button,
   .add-button {
     position: static !important;
     align-self: center !important;
     width: auto !important;
     max-width: 95% !important;
-    height: 42px !important;
+    height: 44px !important;
     margin: 4px auto 0 !important;
-    padding: 0 15px !important;
+    padding: 0 16px !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -3488,30 +3456,27 @@ body {
     box-sizing: border-box !important;
   }
 
-  /* =========================
-     CARDS FINANCEIROS
-     ========================= */
+  /* =======================================================
+     CARDS
+     ======================================================= */
 
   .dashboard-cards {
     width: 100% !important;
-    max-width: 100% !important;
     min-width: 0 !important;
+    max-width: 100% !important;
     display: grid !important;
-    grid-template-columns: 1fr !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 12px !important;
     margin: 0 auto 18px !important;
     box-sizing: border-box !important;
   }
 
-  .dashboard-card,
   .finance-card {
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
-    min-height: 120px !important;
-    height: auto !important;
-    padding: 16px 12px !important;
-    margin: 0 !important;
+    min-height: 115px !important;
+    padding: 15px 12px !important;
     box-sizing: border-box !important;
     text-align: center !important;
   }
@@ -3522,28 +3487,27 @@ body {
     white-space: nowrap !important;
   }
 
-  /* =========================
+  /* =======================================================
      GRÁFICO / RESUMO / LANÇAMENTOS
-     ========================= */
+     ======================================================= */
 
   .dashboard-grid {
     width: 100% !important;
-    max-width: 100% !important;
     min-width: 0 !important;
+    max-width: 100% !important;
     display: grid !important;
-    grid-template-columns: 1fr !important;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) !important;
     gap: 12px !important;
-    margin: 0 auto !important;
+    margin: 0 auto 18px !important;
     box-sizing: border-box !important;
   }
 
   .chart-card,
   .summary-card,
-  .transactions-card,
-  .dashboard-chart {
+  .transactions-card {
     width: 100% !important;
-    max-width: 100% !important;
     min-width: 0 !important;
+    max-width: 100% !important;
     padding: 15px !important;
     box-sizing: border-box !important;
   }
@@ -3554,10 +3518,7 @@ body {
   }
 
   .card-header h3,
-  .summary-card h3 {
-    text-align: center !important;
-  }
-
+  .summary-card h3,
   .card-header p {
     text-align: center !important;
   }
@@ -3567,57 +3528,73 @@ body {
   }
 
   .chart {
+    min-width: 560px !important;
     width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    gap: 3px !important;
     overflow-x: auto !important;
+    gap: 10px !important;
     box-sizing: border-box !important;
   }
 
   .chart-column {
-    min-width: 0 !important;
-  }
-
-  .bar {
-    width: 8px !important;
-    max-width: 8px !important;
+    min-width: 55px !important;
   }
 
   .chart-legend {
     justify-content: center !important;
     flex-wrap: wrap !important;
-    gap: 10px !important;
   }
 
   .summary-item {
-    width: 100% !important;
     min-width: 0 !important;
   }
 
-  .transaction-item,
-  .entry-item {
-    width: 100% !important;
-    max-width: 100% !important;
+  .transaction-item {
     min-width: 0 !important;
     box-sizing: border-box !important;
   }
 
-  /* =========================
-     MODAL
-     ========================= */
+  /* =======================================================
+     OUTRAS PÁGINAS
+     ======================================================= */
 
-  .launch-modal {
-    width: calc(100% - 24px) !important;
-    max-width: 500px !important;
-    max-height: 90vh !important;
-    overflow-y: auto !important;
+  .annual-page,
+  .entries-page,
+  .config-page,
+  .support-page {
+    width: 100% !important;
+    max-width: none !important;
     box-sizing: border-box !important;
+  }
+
+  .entries-page {
+    padding: 20px 15px 40px !important;
+  }
+
+  .entries-month-card,
+  .entries-total-card,
+  .entries-section-header,
+  .entries-export-section {
+    box-sizing: border-box !important;
+  }
+
+  /* Tabelas já possuem rolagem horizontal */
+  .mes-tabela {
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mes-tabela-header,
+  .mes-tabela-linha {
+    min-width: 700px !important;
   }
 }
 
 
-/* Celulares pequenos */
+/* =========================================================
+   CELULARES PEQUENOS
+   ========================================================= */
+
 @media screen and (max-width: 400px) {
 
   .sidebar,
@@ -3634,16 +3611,22 @@ body {
   }
 
   .dashboard {
-    width: calc(100% - 64px) !important;
-    max-width: calc(100% - 64px) !important;
+    width: calc(100vw - 64px) !important;
+    min-width: calc(100vw - 64px) !important;
     margin-left: 64px !important;
-    padding: 8px !important;
   }
 
-  .app-layout:not(.sidebar-closed) .dashboard {
-    width: calc(100% - 210px) !important;
-    max-width: calc(100% - 210px) !important;
+  .app-layout:not(.sidebar-closed) .dashboard,
+  .sidebar:not(.closed) ~ .dashboard {
+    width: calc(100vw - 210px) !important;
+    min-width: calc(100vw - 210px) !important;
     margin-left: 210px !important;
+  }
+
+  .dashboard > .main-content,
+  .dashboard .main-content {
+    width: 620px !important;
+    min-width: 620px !important;
   }
 
   .dashboard-brand {
@@ -3653,70 +3636,42 @@ body {
 
   .dashboard-logo-center {
     width: 150px !important;
-    max-width: 58% !important;
-    max-height: 85px !important;
+    max-width: 150px !important;
   }
 
   .logout-button {
-    min-width: 76px !important;
+    width: 82px !important;
+    min-width: 82px !important;
     height: 38px !important;
-    padding: 0 9px !important;
     font-size: 13px !important;
   }
 
   .dashboard-profile-name {
-    font-size: 20px !important;
+    font-size: 21px !important;
+  }
+
+  .dashboard-title {
+    min-height: 100px !important;
   }
 
   .dashboard-title h2 {
-    font-size: 20px !important;
+    font-size: 21px !important;
   }
 
   .dashboard-title p {
     font-size: 14px !important;
   }
 
-  .add-button {
-    height: 40px !important;
-    font-size: 13px !important;
-    padding: 0 12px !important;
+  .dashboard-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 
   .finance-card {
-    min-height: 110px !important;
-    padding: 14px 10px !important;
+    min-height: 105px !important;
+    padding: 13px 9px !important;
   }
 
   .finance-card strong {
-    font-size: 21px !important;
+    font-size: 20px !important;
   }
-}@media screen and (max-width: 768px) {
-
-  /* Permite rolagem horizontal no painel */
-  .dashboard {
-    overflow-x: auto !important;
-    overflow-y: visible !important;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .dashboard-content {
-    overflow-x: auto !important;
-    overflow-y: visible !important;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  /* Mantém os contêineres com uma largura mínima */
-  .dashboard-cards,
-  .dashboard-grid,
-  .chart-card,
-  .summary-card,
-  .transactions-card {
-    min-width: 320px !important;
-  }
-
-  /* Gráfico pode ultrapassar a largura e ser arrastado */
-  .chart-card {
-    overflow-x: auto !important;
-  }
-
 }
