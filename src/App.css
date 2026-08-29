@@ -3820,4 +3820,73 @@ body {
     min-width: 100% !important;
     white-space: nowrap !important;
   }
+}/* =====================================================
+   ROLAGEM HORIZONTAL - ENTRADAS E DESPESAS
+   ===================================================== */
+
+@media screen and (max-width: 768px) {
+
+  /* Área principal */
+  .main-content {
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  /* Páginas de Entradas e Despesas */
+  .entries-page {
+    width: 900px !important;
+    min-width: 900px !important;
+    max-width: none !important;
+
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Cabeçalho */
+  .entries-header {
+    width: 100% !important;
+    min-width: 900px !important;
+  }
+
+  /* Área dos meses */
+  .entries-section-header {
+    width: 100% !important;
+    min-width: 900px !important;
+  }
+
+  /* Lista de lançamentos */
+  .entries-list {
+    width: 100% !important;
+    min-width: 700px !important;
+    overflow: visible !important;
+  }
+
+  /* Itens das entradas/despesas */
+  .entry-item {
+    min-width: 650px !important;
+  }
+
+  /* Área de relatório */
+  .entries-export-section {
+    min-width: 700px !important;
+  }
+
+  .entries-report-preview {
+    min-width: 700px !important;
+  }
+
+  /* Evita que textos sejam cortados */
+  .entry-info {
+    min-width: 300px !important;
+  }
+
+  /* Seletores */
+  .entries-selectors {
+    flex-shrink: 0 !important;
+  }
+
+  .entries-month-select {
+    flex-shrink: 0 !important;
+  }
 }
