@@ -19,21 +19,55 @@ function App() {
   const [loading, setLoading] = useState(false)
   const [loggedIn, setLoggedIn] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [zoomPagina, setZoomPagina] = useState(1);
   const [suporte, setSuporte] = useState(false)
   const [mesResultado, setMesResultado] = useState(new Date().getMonth());
   const [configuracoes, setConfiguracoes] = useState(false)
   const [nomePerfil, setNomePerfil] = useState('');
   const [tipoPerfil, setTipoPerfil] = useState('pessoa');
   const [telefonePerfil, setTelefonePerfil] = useState('');
-
+ 
   const [pagina, setPagina] = useState("inicio");
   const [mesSelecionado, setMesSelecionado] = useState(0);
   const [mesImpressao, setMesImpressao] = useState(0);
   const [lancamentos, setLancamentos] = useState([]);
+  const [zoomPagina, setZoomPagina] = useState(1)
+  const aplicarZoom = (novoZoom) => {
+  const zoom = Math.min(2, Math.max(0.5, novoZoom))
+  setZoomPagina(zoom)
+}
+const inicioPinch = (e) => {
+  if (e.touches.length === 2) {
+    const dx = e.touches[0].clientX - e.touches[1].clientX
+    const dy = e.touches[0].clientY - e.touches[1].clientY
+
+    e.currentTarget.dataset.distanciaInicial =
+      Math.sqrt(dx * dx + dy * dy)
+  }
+}
+
+const moverPinch = (e) => {
+  if (e.touches.length !== 2) return
+
+  const dx = e.touches[0].clientX - e.touches[1].clientX
+  const dy = e.touches[0].clientY - e.touches[1].clientY
+
+  const distanciaAtual = Math.sqrt(dx * dx + dy * dy)
+
+  const distanciaInicial = Number(
+    e.currentTarget.dataset.distanciaInicial
+  )
+
+  if (!distanciaInicial) return
+
+  const diferenca = distanciaAtual / distanciaInicial
+
+  aplicarZoom(diferenca)
+}
+
 
   const totalEntradas = lancamentos
-    .filter((lancamento) => lancamento.tipo === 'entrada')
+    
+  .filter((lancamento) => lancamento.tipo === 'entrada')
     .reduce((total, lancamento) => total + Number(lancamento.valor || 0), 0);
 
   const totalDespesas = lancamentos
@@ -512,7 +546,19 @@ const dataComHora = new Date(
 
                </aside>
 
-               <main className="main-content">
+               <main
+  className="main-content"
+  onTouchStart={inicioPinch}
+  onTouchMove={moverPinch}
+>
+  <div
+  className="conteudo-com-zoom"
+  style={{
+    transform: `scale(${zoomPagina})`,
+    transformOrigin: "top left",
+    width: `${100 / zoomPagina}%`,
+  }}
+></div>
                 
 
                 {pagina === "entradas" ? (

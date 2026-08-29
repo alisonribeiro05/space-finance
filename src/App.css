@@ -3917,4 +3917,22 @@ body {
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch !important;
   }
+}.conteudo-com-zoom {
+  min-height: 100%;
+  transition: transform 0.08s ease;
+  transform-origin: top left;
+}
+
+@media screen and (max-width: 768px) {
+
+  .main-content {
+    overflow-x: auto !important;
+    overflow-y: auto !important;
+    touch-action: none !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .conteudo-com-zoom {
+    touch-action: none !important;
+  }
 }
