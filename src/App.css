@@ -3890,49 +3890,35 @@ body {
     flex-shrink: 0 !important;
   }
 }/* =====================================================
-   ZOOM GLOBAL DAS PÁGINAS
+   ZOOM COM DOIS DEDOS + ROLAGEM
    ===================================================== */
 
-.zoom-controls {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  z-index: 9999;
+@media screen and (max-width: 768px) {
 
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  html {
+    touch-action: pinch-zoom !important;
+    overflow-x: auto !important;
+    overflow-y: auto !important;
+  }
 
-  padding: 8px 10px;
-  border-radius: 10px;
+  body {
+    touch-action: pan-x pan-y pinch-zoom !important;
+    overflow-x: auto !important;
+    overflow-y: auto !important;
+  }
 
-  background: #10251a;
-  border: 1px solid #39ff14;
-}
+  #root {
+    touch-action: pan-x pan-y pinch-zoom !important;
+  }
 
-.zoom-controls button {
-  width: 40px;
-  height: 36px;
+  .app-layout {
+    touch-action: pan-x pan-y pinch-zoom !important;
+  }
 
-  border: 1px solid #39ff14;
-  border-radius: 7px;
-
-  background: transparent;
-  color: white;
-
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.zoom-controls button:hover {
-  background: #39ff14;
-  color: #000;
-}
-
-.zoom-controls span {
-  min-width: 55px;
-  text-align: center;
-  color: white;
-  font-weight: bold;
+  .main-content {
+    touch-action: pan-x pan-y pinch-zoom !important;
+    overflow-x: auto !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
 }

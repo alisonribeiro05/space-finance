@@ -512,34 +512,8 @@ const dataComHora = new Date(
 
                </aside>
 
-               
-                <main className="main-content">
-
-  <div className="zoom-controls">
-    <button
-      onClick={() =>
-        setZoomPagina((zoom) => Math.max(0.7, zoom - 0.1))
-      }
-    >
-      −
-    </button>
-
-    <span>{Math.round(zoomPagina * 100)}%</span>
-
-    <button
-      onClick={() =>
-        setZoomPagina((zoom) => Math.min(1.5, zoom + 0.1))
-      }
-    >
-      +
-    </button>
-
-    <button onClick={() => setZoomPagina(1)}>
-      100%
-    </button>
-  </div>
-
-  
+               <main className="main-content">
+                
 
                 {pagina === "entradas" ? (
                <>
