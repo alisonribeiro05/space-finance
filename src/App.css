@@ -3719,4 +3719,116 @@ body {
     overflow-x: auto !important;
   }
 
+}/* =========================================================
+   ROLAGEM HORIZONTAL — GRÁFICO / RESUMO / RESULTADO ANUAL
+   ========================================================= */
+
+@media screen and (max-width: 768px) {
+
+  .dashboard {
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .dashboard-content {
+    width: 900px !important;
+    min-width: 900px !important;
+    max-width: none !important;
+    margin: 0 !important;
+  }
+
+  /* Gráfico + Resumo ficam dentro da área rolável */
+  .dashboard-grid {
+    width: 900px !important;
+    min-width: 900px !important;
+    max-width: none !important;
+
+    display: grid !important;
+    grid-template-columns: 2fr 1fr !important;
+    gap: 20px !important;
+
+    overflow: visible !important;
+  }
+
+  .chart-card,
+  .summary-card {
+    min-width: 0 !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  /* Gráfico não será cortado */
+  .chart {
+    min-width: 0 !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  /* Resumo financeiro inteiro */
+  .summary-card {
+    min-width: 280px !important;
+  }
+
+  /* Resultado anual não será escondido */
+  .annual-button {
+    min-width: 100% !important;
+    white-space: nowrap !important;
+  }
+}/* =========================================================
+   ROLAGEM HORIZONTAL — GRÁFICO / RESUMO / RESULTADO ANUAL
+   ========================================================= */
+
+@media screen and (max-width: 768px) {
+
+  .dashboard {
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .dashboard-content {
+    width: 900px !important;
+    min-width: 900px !important;
+    max-width: none !important;
+    margin: 0 !important;
+  }
+
+  /* Gráfico + Resumo ficam dentro da área rolável */
+  .dashboard-grid {
+    width: 900px !important;
+    min-width: 900px !important;
+    max-width: none !important;
+
+    display: grid !important;
+    grid-template-columns: 2fr 1fr !important;
+    gap: 20px !important;
+
+    overflow: visible !important;
+  }
+
+  .chart-card,
+  .summary-card {
+    min-width: 0 !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  /* Gráfico não será cortado */
+  .chart {
+    min-width: 0 !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  /* Resumo financeiro inteiro */
+  .summary-card {
+    min-width: 280px !important;
+  }
+
+  /* Resultado anual não será escondido */
+  .annual-button {
+    min-width: 100% !important;
+    white-space: nowrap !important;
+  }
 }
