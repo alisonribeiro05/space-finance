@@ -10,6 +10,7 @@ import {
 
 import spaceFinanceIcon from './assets/space-finance-icon.png'
 import './App.css'
+import './DashboardMobile.css'
 
 function App() {
   const [showPassword, setShowPassword] = useState(false) 
@@ -38,9 +39,9 @@ function App() {
     let zoomInicial = 1;
 
     const atualizarZoom = (valor) => {
-      const zoom = Math.min(2.5, Math.max(0.7, valor));
+      const zoom = Math.min(2.2, Math.max(0.65, valor));
       zoomRef.current = zoom;
-      document.body.style.zoom = String(zoom);
+      document.documentElement.style.setProperty('--app-zoom', String(zoom));
     };
 
     const iniciarGesto = (event) => {
@@ -57,10 +58,43 @@ function App() {
     window.addEventListener('gesturestart', iniciarGesto, opcoes);
     window.addEventListener('gesturechange', moverGesto, opcoes);
 
+    const distanciaEntreToques = (toques) => {
+      const dx = toques[0].clientX - toques[1].clientX;
+      const dy = toques[0].clientY - toques[1].clientY;
+      return Math.hypot(dx, dy);
+    };
+    let distanciaInicial = 0;
+
+    const iniciarToque = (event) => {
+      if (event.touches.length === 2) {
+        distanciaInicial = distanciaEntreToques(event.touches);
+        zoomInicial = zoomRef.current;
+      }
+    };
+
+    const moverToque = (event) => {
+      if (event.touches.length !== 2 || !distanciaInicial) return;
+      event.preventDefault();
+      atualizarZoom(
+        zoomInicial * (distanciaEntreToques(event.touches) / distanciaInicial)
+      );
+    };
+
+    const finalizarToque = (event) => {
+      if (event.touches.length < 2) distanciaInicial = 0;
+    };
+
+    window.addEventListener('touchstart', iniciarToque, opcoes);
+    window.addEventListener('touchmove', moverToque, opcoes);
+    window.addEventListener('touchend', finalizarToque, opcoes);
+
     return () => {
       window.removeEventListener('gesturestart', iniciarGesto, opcoes);
       window.removeEventListener('gesturechange', moverGesto, opcoes);
-      document.body.style.removeProperty('zoom');
+      window.removeEventListener('touchstart', iniciarToque, opcoes);
+      window.removeEventListener('touchmove', moverToque, opcoes);
+      window.removeEventListener('touchend', finalizarToque, opcoes);
+      document.documentElement.style.removeProperty('--app-zoom');
     };
   }, []);
 
