@@ -157,16 +157,17 @@ const moverPinch = (e) => {
       despesas,
 
       lancamentos: lancamentos.filter((lancamento) => {
-  const dataLancamento = obterDataLancamento(lancamento.data);
+        const dataLancamento = obterDataLancamento(lancamento.data);
 
-  return (
-    dataLancamento.getFullYear() === anoSelecionado &&
-    dataLancamento.getMonth() === index &&
-    ["entrada", "saida", "despesa"].includes(
-      String(lancamento.tipo || "").toLowerCase()
-    )
-  );
-}),
+        return (
+          dataLancamento &&
+          dataLancamento.getFullYear() === anoSelecionado &&
+          dataLancamento.getMonth() === index &&
+          ["entrada", "saida", "despesa"].includes(
+            String(lancamento.tipo || "").toLowerCase()
+          )
+        );
+      }),
       atual:
         anoSelecionado === hoje.getFullYear() &&
         index === hoje.getMonth()
@@ -364,6 +365,35 @@ const dataComHora = new Date(
     }
   }, [])
 
+  // Mantém a tela sincronizada com a sessão persistida pelo Supabase, inclusive
+  // após atualizar a página ou voltar de uma confirmação de e-mail.
+  useEffect(() => {
+    let ativo = true
+
+    const restaurarSessao = async () => {
+      const { data, error } = await supabase.auth.getSession()
+
+      if (!error && ativo) {
+        setLoggedIn(Boolean(data.session))
+      }
+    }
+
+    restaurarSessao()
+
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        if (ativo) {
+          setLoggedIn(Boolean(session))
+        }
+      }
+    )
+
+    return () => {
+      ativo = false
+      authListener.subscription.unsubscribe()
+    }
+  }, [])
+
   // LOGIN
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -389,6 +419,12 @@ const dataComHora = new Date(
     }
 
     console.log('Usuário conectado:', data.user)
+
+    if (rememberMe) {
+      localStorage.setItem('space_finance_email', email)
+    } else {
+      localStorage.removeItem('space_finance_email')
+    }
 
     alert('Login realizado com sucesso!')
 
@@ -547,7 +583,7 @@ const dataComHora = new Date(
                </aside>
 
                <main
-  className="main-content"
+  className={`main-content ${sidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}
   onTouchStart={inicioPinch}
   onTouchMove={moverPinch}
 >
@@ -2364,7 +2400,7 @@ const hora = lancamento.created_at
                   <button
                   type="button"
                   className="logout-button"
-                    onClick={() => setLoggedIn(false)}
+                    onClick={() => supabase.auth.signOut()}
                 >
   🚪 Sair
 </button>

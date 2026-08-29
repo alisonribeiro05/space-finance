@@ -1027,10 +1027,22 @@ footer {
 
 .main-content {
   flex: 1;
+  min-height: 100vh;
   min-width: 0;
   overflow-x: hidden;
   padding: 25px;
   position: relative;
+  margin-left: 75px;
+  width: calc(100% - 75px);
+  background:
+    radial-gradient(circle at 15% 10%, rgba(77, 255, 114, 0.08), transparent 28%),
+    #07110d;
+  transition: margin-left 0.3s ease, width 0.3s ease;
+}
+
+.main-content.sidebar-open {
+  margin-left: 250px;
+  width: calc(100% - 250px);
 }
 
 .welcome-icon {
