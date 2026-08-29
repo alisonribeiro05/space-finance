@@ -3690,4 +3690,33 @@ body {
   .finance-card strong {
     font-size: 21px !important;
   }
+}@media screen and (max-width: 768px) {
+
+  /* Permite rolagem horizontal no painel */
+  .dashboard {
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .dashboard-content {
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Mantém os contêineres com uma largura mínima */
+  .dashboard-cards,
+  .dashboard-grid,
+  .chart-card,
+  .summary-card,
+  .transactions-card {
+    min-width: 320px !important;
+  }
+
+  /* Gráfico pode ultrapassar a largura e ser arrastado */
+  .chart-card {
+    overflow-x: auto !important;
+  }
+
 }
