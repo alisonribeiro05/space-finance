@@ -3225,7 +3225,7 @@ body {
   }
 
   /* Quando a barra estiver aberta */
-  .app-layout:not(.sidebar-closed) .sidebar:not(.closed) {
+  .sidebar:not(.closed) {
     width: 220px !important;
     min-width: 220px !important;
     max-width: 220px !important;
@@ -3263,9 +3263,43 @@ body {
     justify-content: center !important;
   }
 
-  .sidebar-item strong,
-  .sidebar-logout strong {
+  /* Barra fechada: somente os ícones */
+  .sidebar.closed .sidebar-item strong,
+  .sidebar.closed .sidebar-logout strong {
     display: none !important;
+  }
+
+  /* Barra aberta: ícones + descrições */
+  .sidebar:not(.closed) .sidebar-item strong,
+  .sidebar:not(.closed) .sidebar-logout strong {
+    display: inline !important;
+    white-space: nowrap !important;
+  }
+
+  /* Botões quando a barra estiver fechada */
+  .sidebar.closed .sidebar-item,
+  .sidebar.closed .sidebar-logout {
+    width: 50px !important;
+    min-width: 50px !important;
+    max-width: 50px !important;
+    justify-content: center !important;
+    padding: 0 !important;
+  }
+
+  /* Botões quando a barra estiver aberta */
+  .sidebar:not(.closed) .sidebar-item,
+  .sidebar:not(.closed) .sidebar-logout {
+    width: 100% !important;
+    max-width: 100% !important;
+    justify-content: flex-start !important;
+    padding: 0 15px !important;
+    gap: 12px !important;
+    box-sizing: border-box !important;
+  }
+
+  .sidebar:not(.closed) .sidebar-item span,
+  .sidebar:not(.closed) .sidebar-logout span {
+    flex-shrink: 0 !important;
   }
 
   .sidebar-toggle {
@@ -3593,7 +3627,7 @@ body {
     max-width: 64px !important;
   }
 
-  .app-layout:not(.sidebar-closed) .sidebar:not(.closed) {
+  .sidebar:not(.closed) {
     width: 210px !important;
     min-width: 210px !important;
     max-width: 210px !important;
