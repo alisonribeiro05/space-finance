@@ -30,40 +30,6 @@ function App() {
   const [mesSelecionado, setMesSelecionado] = useState(0);
   const [mesImpressao, setMesImpressao] = useState(0);
   const [lancamentos, setLancamentos] = useState([]);
-  const [zoomPagina, setZoomPagina] = useState(1)
-  const aplicarZoom = (novoZoom) => {
-  const zoom = Math.min(2, Math.max(0.5, novoZoom))
-  setZoomPagina(zoom)
-}
-const inicioPinch = (e) => {
-  if (e.touches.length === 2) {
-    const dx = e.touches[0].clientX - e.touches[1].clientX
-    const dy = e.touches[0].clientY - e.touches[1].clientY
-
-    e.currentTarget.dataset.distanciaInicial =
-      Math.sqrt(dx * dx + dy * dy)
-  }
-}
-
-const moverPinch = (e) => {
-  if (e.touches.length !== 2) return
-
-  const dx = e.touches[0].clientX - e.touches[1].clientX
-  const dy = e.touches[0].clientY - e.touches[1].clientY
-
-  const distanciaAtual = Math.sqrt(dx * dx + dy * dy)
-
-  const distanciaInicial = Number(
-    e.currentTarget.dataset.distanciaInicial
-  )
-
-  if (!distanciaInicial) return
-
-  const diferenca = distanciaAtual / distanciaInicial
-
-  aplicarZoom(diferenca)
-}
-
 
   const totalEntradas = lancamentos
     
@@ -157,17 +123,16 @@ const moverPinch = (e) => {
       despesas,
 
       lancamentos: lancamentos.filter((lancamento) => {
-        const dataLancamento = obterDataLancamento(lancamento.data);
+  const dataLancamento = obterDataLancamento(lancamento.data);
 
-        return (
-          dataLancamento &&
-          dataLancamento.getFullYear() === anoSelecionado &&
-          dataLancamento.getMonth() === index &&
-          ["entrada", "saida", "despesa"].includes(
-            String(lancamento.tipo || "").toLowerCase()
-          )
-        );
-      }),
+  return (
+    dataLancamento.getFullYear() === anoSelecionado &&
+    dataLancamento.getMonth() === index &&
+    ["entrada", "saida", "despesa"].includes(
+      String(lancamento.tipo || "").toLowerCase()
+    )
+  );
+}),
       atual:
         anoSelecionado === hoje.getFullYear() &&
         index === hoje.getMonth()
@@ -365,35 +330,6 @@ const dataComHora = new Date(
     }
   }, [])
 
-  // Mantém a tela sincronizada com a sessão persistida pelo Supabase, inclusive
-  // após atualizar a página ou voltar de uma confirmação de e-mail.
-  useEffect(() => {
-    let ativo = true
-
-    const restaurarSessao = async () => {
-      const { data, error } = await supabase.auth.getSession()
-
-      if (!error && ativo) {
-        setLoggedIn(Boolean(data.session))
-      }
-    }
-
-    restaurarSessao()
-
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        if (ativo) {
-          setLoggedIn(Boolean(session))
-        }
-      }
-    )
-
-    return () => {
-      ativo = false
-      authListener.subscription.unsubscribe()
-    }
-  }, [])
-
   // LOGIN
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -419,12 +355,6 @@ const dataComHora = new Date(
     }
 
     console.log('Usuário conectado:', data.user)
-
-    if (rememberMe) {
-      localStorage.setItem('space_finance_email', email)
-    } else {
-      localStorage.removeItem('space_finance_email')
-    }
 
     alert('Login realizado com sucesso!')
 
@@ -583,18 +513,8 @@ const dataComHora = new Date(
                </aside>
 
                <main
-  className={`main-content ${sidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}
-  onTouchStart={inicioPinch}
-  onTouchMove={moverPinch}
+  className="main-content"
 >
-  <div
-  className="conteudo-com-zoom"
-  style={{
-    transform: `scale(${zoomPagina})`,
-    transformOrigin: "top left",
-    width: `${100 / zoomPagina}%`,
-  }}
-></div>
                 
 
                 {pagina === "entradas" ? (
@@ -2400,7 +2320,7 @@ const hora = lancamento.created_at
                   <button
                   type="button"
                   className="logout-button"
-                    onClick={() => supabase.auth.signOut()}
+                    onClick={() => setLoggedIn(false)}
                 >
   🚪 Sair
 </button>
@@ -2676,7 +2596,7 @@ onClick={async () => {
 
               </>
                 )}
-           </main>
+</main>
       </div>
     );
   }
