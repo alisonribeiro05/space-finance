@@ -10,7 +10,7 @@ import {
 
 import spaceFinanceIcon from './assets/space-finance-icon.png'
 import './App.css'
-import './DashboardMobile.css'
+
 
 function App() {
   const [showPassword, setShowPassword] = useState(false) 
