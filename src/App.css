@@ -3944,3 +3944,139 @@ body {
     -webkit-overflow-scrolling: touch;
   }
 }
+
+/* Ajustes finais para celulares: removem as larguras fixas antigas e mantêm
+   todas as páginas proporcionais à tela. */
+@media screen and (max-width: 768px) {
+  :root {
+    --zoom-interface: 1;
+  }
+
+  #root {
+    width: calc(100% / var(--zoom-interface)) !important;
+    max-width: none !important;
+    min-height: calc(100svh / var(--zoom-interface)) !important;
+    transform: scale(var(--zoom-interface));
+    transform-origin: top left;
+  }
+
+  .app-layout .main-content {
+    width: calc(100% - 64px) !important;
+    min-width: 0 !important;
+    margin-left: 64px !important;
+    padding: 16px 12px 32px !important;
+    overflow-x: hidden !important;
+  }
+
+  .app-layout .main-content.sidebar-open {
+    width: calc(100% - 220px) !important;
+    margin-left: 220px !important;
+  }
+
+  .dashboard-brand {
+    height: 96px !important;
+    min-height: 96px !important;
+    position: relative !important;
+  }
+
+  .dashboard-logo-center {
+    width: 165px !important;
+    max-width: 58% !important;
+    max-height: 88px !important;
+  }
+
+  .dashboard-brand .logout-button {
+    position: absolute !important;
+    top: 12px !important;
+    right: 0 !important;
+    transform: none !important;
+    min-width: auto !important;
+    height: 36px !important;
+    padding: 0 9px !important;
+    font-size: 12px !important;
+  }
+
+  .dashboard-content {
+    padding: 8px 0 24px !important;
+  }
+
+  .dashboard-profile-name {
+    margin: 0 0 8px !important;
+    font-size: 21px !important;
+  }
+
+  .dashboard-title {
+    margin: 0 0 16px !important;
+    gap: 10px !important;
+  }
+
+  .dashboard-title p {
+    font-size: 14px !important;
+  }
+
+  .dashboard-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 9px !important;
+  }
+
+  .finance-card {
+    min-height: 104px !important;
+    padding: 12px 8px !important;
+  }
+
+  .finance-card span,
+  .finance-card small {
+    font-size: 11px !important;
+  }
+
+  .finance-card strong {
+    margin: 6px 0 !important;
+    font-size: 17px !important;
+    white-space: normal !important;
+  }
+
+  .dashboard-grid {
+    width: 100% !important;
+    min-width: 0 !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .chart-card,
+  .summary-card,
+  .transactions-card,
+  .entries-page,
+  .annual-page,
+  .config-page,
+  .support-page {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    padding: 16px 0 24px !important;
+    overflow-x: hidden !important;
+  }
+
+  .entries-header,
+  .entries-section-header,
+  .entries-list,
+  .entries-export-section,
+  .entries-report-preview,
+  .entry-item,
+  .entry-info {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .entries-header,
+  .entries-section-header {
+    min-height: 0 !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+  }
+
+  .entry-item {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+}

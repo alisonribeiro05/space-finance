@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { supabase } from './supabase'
 import {
   Eye,
@@ -30,6 +30,39 @@ function App() {
   const [mesSelecionado, setMesSelecionado] = useState(0);
   const [mesImpressao, setMesImpressao] = useState(0);
   const [lancamentos, setLancamentos] = useState([]);
+  const zoomRef = useRef(1);
+
+  // O Safari do iPhone não respeita touch-action para pinça. Estes eventos
+  // próprios do Safari garantem zoom de aproximação e afastamento em toda a app.
+  useEffect(() => {
+    let zoomInicial = 1;
+
+    const atualizarZoom = (valor) => {
+      const zoom = Math.min(2.5, Math.max(0.7, valor));
+      zoomRef.current = zoom;
+      document.documentElement.style.setProperty('--zoom-interface', zoom);
+    };
+
+    const iniciarGesto = (event) => {
+      event.preventDefault();
+      zoomInicial = zoomRef.current;
+    };
+
+    const moverGesto = (event) => {
+      event.preventDefault();
+      atualizarZoom(zoomInicial * (event.scale || 1));
+    };
+
+    const opcoes = { passive: false };
+    window.addEventListener('gesturestart', iniciarGesto, opcoes);
+    window.addEventListener('gesturechange', moverGesto, opcoes);
+
+    return () => {
+      window.removeEventListener('gesturestart', iniciarGesto, opcoes);
+      window.removeEventListener('gesturechange', moverGesto, opcoes);
+      document.documentElement.style.removeProperty('--zoom-interface');
+    };
+  }, []);
 
   const totalEntradas = lancamentos
     
@@ -2295,6 +2328,13 @@ const hora = lancamento.created_at
                   alt="Space Finance"
                   className="dashboard-logo-center"
                 />
+                <button
+                  type="button"
+                  className="logout-button"
+                  onClick={() => setLoggedIn(false)}
+                >
+                  🚪 Sair
+                </button>
                </div>
 
                <section className="dashboard-content">
@@ -2317,13 +2357,6 @@ const hora = lancamento.created_at
                     + Novo lançamento
                   </button>
 
-                  <button
-                  type="button"
-                  className="logout-button"
-                    onClick={() => setLoggedIn(false)}
-                >
-  🚪 Sair
-</button>
                 </div>
 
                 <div className="dashboard-cards">
