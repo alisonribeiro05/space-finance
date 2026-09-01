@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from './supabase'
 import {
   Eye,
@@ -11,7 +11,6 @@ import {
 import spaceFinanceIcon from './assets/space-finance-icon.png'
 import './App.css'
 
-
 function App() {
   const [showPassword, setShowPassword] = useState(false) 
   const [rememberMe, setRememberMe] = useState(false)
@@ -19,6 +18,14 @@ function App() {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [loggedIn, setLoggedIn] = useState(false)
+
+  // Cadastro de novos usuários
+  const [showRegister, setShowRegister] = useState(false)
+  const [registerEmail, setRegisterEmail] = useState('')
+  const [registerPassword, setRegisterPassword] = useState('')
+  const [registerConfirmPassword, setRegisterConfirmPassword] = useState('')
+  const [showRegisterPassword, setShowRegisterPassword] = useState(false)
+  const [showRegisterConfirmPassword, setShowRegisterConfirmPassword] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [suporte, setSuporte] = useState(false)
   const [mesResultado, setMesResultado] = useState(new Date().getMonth());
@@ -26,81 +33,14 @@ function App() {
   const [nomePerfil, setNomePerfil] = useState('');
   const [tipoPerfil, setTipoPerfil] = useState('pessoa');
   const [telefonePerfil, setTelefonePerfil] = useState('');
- 
+
   const [pagina, setPagina] = useState("inicio");
   const [mesSelecionado, setMesSelecionado] = useState(0);
   const [mesImpressao, setMesImpressao] = useState(0);
   const [lancamentos, setLancamentos] = useState([]);
-  const zoomRef = useRef(1);
-
-  // O Safari do iPhone não respeita touch-action para pinça. Estes eventos
-  // próprios do Safari garantem zoom de aproximação e afastamento em toda a app.
-  useEffect(() => {
-    let zoomInicial = 1;
-
-    const atualizarZoom = (valor) => {
-      const zoom = Math.min(2.2, Math.max(0.65, valor));
-      zoomRef.current = zoom;
-      document.documentElement.style.setProperty('--app-zoom', String(zoom));
-    };
-
-    const iniciarGesto = (event) => {
-      event.preventDefault();
-      zoomInicial = zoomRef.current;
-    };
-
-    const moverGesto = (event) => {
-      event.preventDefault();
-      atualizarZoom(zoomInicial * (event.scale || 1));
-    };
-
-    const opcoes = { passive: false };
-    window.addEventListener('gesturestart', iniciarGesto, opcoes);
-    window.addEventListener('gesturechange', moverGesto, opcoes);
-
-    const distanciaEntreToques = (toques) => {
-      const dx = toques[0].clientX - toques[1].clientX;
-      const dy = toques[0].clientY - toques[1].clientY;
-      return Math.hypot(dx, dy);
-    };
-    let distanciaInicial = 0;
-
-    const iniciarToque = (event) => {
-      if (event.touches.length === 2) {
-        distanciaInicial = distanciaEntreToques(event.touches);
-        zoomInicial = zoomRef.current;
-      }
-    };
-
-    const moverToque = (event) => {
-      if (event.touches.length !== 2 || !distanciaInicial) return;
-      event.preventDefault();
-      atualizarZoom(
-        zoomInicial * (distanciaEntreToques(event.touches) / distanciaInicial)
-      );
-    };
-
-    const finalizarToque = (event) => {
-      if (event.touches.length < 2) distanciaInicial = 0;
-    };
-
-    window.addEventListener('touchstart', iniciarToque, opcoes);
-    window.addEventListener('touchmove', moverToque, opcoes);
-    window.addEventListener('touchend', finalizarToque, opcoes);
-
-    return () => {
-      window.removeEventListener('gesturestart', iniciarGesto, opcoes);
-      window.removeEventListener('gesturechange', moverGesto, opcoes);
-      window.removeEventListener('touchstart', iniciarToque, opcoes);
-      window.removeEventListener('touchmove', moverToque, opcoes);
-      window.removeEventListener('touchend', finalizarToque, opcoes);
-      document.documentElement.style.removeProperty('--app-zoom');
-    };
-  }, []);
 
   const totalEntradas = lancamentos
-    
-  .filter((lancamento) => lancamento.tipo === 'entrada')
+    .filter((lancamento) => lancamento.tipo === 'entrada')
     .reduce((total, lancamento) => total + Number(lancamento.valor || 0), 0);
 
   const totalDespesas = lancamentos
@@ -134,28 +74,12 @@ function App() {
     setMesImpressao(0);
   }, [anoSelecionado]);
 
-  const obterDataLancamento = (valor) => {
-    if (!valor) return null;
-
-    const texto = String(valor);
-
-    // Campo date puro (YYYY-MM-DD)
-    if (/^\\d{4}-\\d{2}-\\d{2}$/.test(texto)) {
-      return new Date(`${texto}T12:00:00`);
-    }
-
-    // Campo timestamp/date completo
-    const data = new Date(texto);
-    return Number.isNaN(data.getTime()) ? null : data;
-  };
-
   const dadosGrafico = meses.map((mes, index) => {
     const entradas = lancamentos
       .filter((lancamento) => {
-        const data = obterDataLancamento(lancamento.data);
+        const data = new Date(lancamento.data + 'T12:00:00');
 
         return (
-          data &&
           data.getFullYear() === anoSelecionado &&
           data.getMonth() === index &&
           lancamento.tipo === 'entrada'
@@ -168,10 +92,9 @@ function App() {
       );
     const despesas = lancamentos
       .filter((lancamento) => {
-        const data = obterDataLancamento(lancamento.data);
+        const data = new Date(lancamento.data + 'T12:00:00');
 
         return (
-          data &&
           data.getFullYear() === anoSelecionado &&
           data.getMonth() === index &&
           ['saida', 'despesa'].includes(String(lancamento.tipo || '').toLowerCase())
@@ -190,10 +113,9 @@ function App() {
       despesas,
 
       lancamentos: lancamentos.filter((lancamento) => {
-  const dataLancamento = obterDataLancamento(lancamento.data);
+  const dataLancamento = new Date(lancamento.data);
 
   return (
-    dataLancamento &&
     dataLancamento.getFullYear() === anoSelecionado &&
     dataLancamento.getMonth() === index &&
     ["entrada", "saida", "despesa"].includes(
@@ -227,22 +149,9 @@ function App() {
     try {
       setLoadingLancamentos(true);
 
-      const {
-        data: { user },
-        error: userError
-      } = await supabase.auth.getUser();
-
-      if (userError) throw userError;
-
-      if (!user) {
-        setLancamentos([]);
-        return;
-      }
-
       const { data, error } = await supabase
         .from('lancamentos')
         .select('*')
-        .eq('user_id', user.id)
         .order('data', { ascending: false });
 
       if (error) {
@@ -330,7 +239,7 @@ const dataComHora = new Date(
       setLaunchDescription('');
       setLaunchValue('');
       setLaunchCategory('');
-      setLaunchPayment('Dinheiro');
+      setLaunchPayment('dinheiro');
 
     } catch (error) {
       console.error('Erro ao salvar lançamento:', error);
@@ -388,10 +297,43 @@ const dataComHora = new Date(
 };
 
 
+  // Mantém a sessão do Supabase sincronizada com o aplicativo.
+  // Isso faz o painel reconhecer a sessão depois da confirmação do e-mail.
+  useEffect(() => {
+    let ativo = true
+
+    const carregarSessao = async () => {
+      const { data, error } = await supabase.auth.getSession()
+
+      if (error) {
+        console.error('Erro ao recuperar sessão:', error)
+        return
+      }
+
+      if (ativo) {
+        setLoggedIn(!!data.session)
+      }
+    }
+
+    carregarSessao()
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (ativo) {
+        setLoggedIn(!!session)
+      }
+    })
+
+    return () => {
+      ativo = false
+      subscription.unsubscribe()
+    }
+  }, [])
+
   // Recupera o e-mail salvo
   useEffect(() => {
     const savedEmail = localStorage.getItem('space_finance_email')
-
     if (savedEmail) {
       setEmail(savedEmail)
       setRememberMe(true)
@@ -402,65 +344,130 @@ const dataComHora = new Date(
   const handleLogin = async (event) => {
     event.preventDefault()
 
-    if (!email || !password) {
+    const loginEmail = email.trim().toLowerCase()
+
+    if (!loginEmail || !password) {
       alert('Preencha seu e-mail e sua senha.')
       return
     }
 
     setLoading(true)
 
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    })
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: loginEmail,
+        password,
+      })
 
-    setLoading(false)
+      if (error) {
+        console.error('Erro no login:', error)
+        const mensagem = String(error.message || '').toLowerCase()
 
-    if (error) {
-      console.error(error)
-      alert('E-mail ou senha incorretos.')
+        if (mensagem.includes('email not confirmed')) {
+          alert(
+            'Seu e-mail ainda não foi confirmado. Abra o link enviado para seu e-mail e tente novamente.'
+          )
+        } else {
+          alert('E-mail ou senha incorretos.')
+        }
+        return
+      }
+
+      if (!data.session) {
+        alert(
+          'Não foi possível iniciar a sessão. Confirme seu e-mail e tente novamente.'
+        )
+        return
+      }
+
+      if (rememberMe) {
+        localStorage.setItem('space_finance_email', loginEmail)
+      } else {
+        localStorage.removeItem('space_finance_email')
+      }
+
+      setLoggedIn(true)
+    } catch (error) {
+      console.error('Erro inesperado no login:', error)
+      alert('Não foi possível realizar o login.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // CADASTRO DE NOVO USUÁRIO
+  const handleCreateAccount = async (event) => {
+    event.preventDefault()
+
+    const newEmail = registerEmail.trim().toLowerCase()
+    const newPassword = registerPassword
+    const confirmPassword = registerConfirmPassword
+
+    if (!newEmail || !newPassword || !confirmPassword) {
+      alert('Preencha todos os campos.')
       return
     }
 
-    console.log('Usuário conectado:', data.user)
-
-    alert('Login realizado com sucesso!')
-
-    setLoggedIn(true)
-  }
-
-
-  // CRIAR CONTA
-  const handleCreateAccount = async () => {
-    const newEmail = prompt('Digite seu e-mail:')
-    if (!newEmail) return
-
-    const newPassword = prompt('Digite uma senha:')
-    if (!newPassword) return
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)) {
+      alert('Digite um e-mail válido.')
+      return
+    }
 
     if (newPassword.length < 6) {
       alert('A senha precisa ter pelo menos 6 caracteres.')
       return
     }
 
+    if (newPassword !== confirmPassword) {
+      alert('As senhas não conferem.')
+      return
+    }
+
     setLoading(true)
 
     try {
-      const { error } = await supabase.auth.signUp({
+      // O link de confirmação volta para o endereço onde o app está publicado.
+      const redirectUrl = window.location.origin
+
+      const { data, error } = await supabase.auth.signUp({
         email: newEmail,
         password: newPassword,
+        options: {
+          emailRedirectTo: redirectUrl,
+        },
       })
 
       if (error) {
-        alert(error.message)
+        console.error('Erro ao criar conta:', error)
+        const mensagem = String(error.message || '').toLowerCase()
+
+        if (
+          mensagem.includes('already registered') ||
+          mensagem.includes('already exists')
+        ) {
+          alert(
+            'Este e-mail já possui uma conta. Tente entrar ou use outro e-mail.'
+          )
+        } else {
+          alert('Não foi possível criar a conta: ' + error.message)
+        }
         return
       }
 
-      alert(
-        'Conta criada com sucesso! Verifique seu e-mail caso o Supabase solicite confirmação.'
-      )
+      setRegisterEmail('')
+      setRegisterPassword('')
+      setRegisterConfirmPassword('')
+      setShowRegister(false)
+
+      if (!data.session) {
+        alert(
+          'Conta criada com sucesso! Enviamos um link de confirmação para seu e-mail. Abra o link e depois volte para o Space Finance.'
+        )
+      } else {
+        alert('Conta criada e login realizado com sucesso!')
+      }
     } catch (error) {
-      console.error(error)
+      console.error('Erro inesperado no cadastro:', error)
       alert('Não foi possível criar a conta.')
     } finally {
       setLoading(false)
@@ -580,9 +587,7 @@ const dataComHora = new Date(
 
                </aside>
 
-               <main
-  className={`main-content ${sidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}
->
+               <main className="main-content">
 
                 {pagina === "entradas" ? (
                <>
@@ -932,7 +937,7 @@ const hora = lancamento.created_at
   <button
   type="button"
   className="delete-transaction-button"
-  onClick={() => handleDeleteLaunch(lancamento.id)}
+  onClick={() => handleDeleteLancamento(lancamento.id)}
   title="Excluir entrada"
 >
   🗑️
@@ -2232,125 +2237,7 @@ const hora = lancamento.created_at
                 </div>
                 ) : pagina === "novo-lancamento" ? (
                   <>
-<div className="modal-overlay">
-  <div className="launch-modal">
-    <div className="modal-header">
-      <h2>Novo lançamento</h2>
-
-      <button
-        className="modal-close"
-        onClick={() => setPagina("inicio")}
-      >
-        ×
-      </button>
-    </div>
-
-    <div className="launch-form">
-      <label>Tipo</label>
-
-      <div className="launch-type">
-        <button
-          type="button"
-          className={launchType === 'entrada' ? 'selected' : ''}
-          onClick={() => setLaunchType('entrada')}
-        >
-          ↑ Entrada
-        </button>
-
-        <button
-          type="button"
-          className={launchType === 'despesa' ? 'selected expense' : ''}
-          onClick={() => setLaunchType('despesa')}
-        >
-          ↓ Despesa
-        </button>
-      </div>
-
-      <label>Descrição</label>
-      <input
-        type="text"
-        placeholder="Ex.: Venda de iPhone"
-        value={launchDescription}
-        onChange={(e) => setLaunchDescription(e.target.value)}
-      />
-
-      <label>Valor</label>
-      <input
-        type="number"
-        placeholder="0,00"
-        step="0.01"
-        value={launchValue}
-        onChange={(e) => setLaunchValue(e.target.value)}
-      />
-
-      <label>Categoria</label>
-      <select
-        value={launchCategory}
-        onChange={(e) => setLaunchCategory(e.target.value)}
-      >
-        <option value="">Selecione uma categoria</option>
-
-        {launchType === 'entrada' ? (
-          <>
-            <option value="Vendas">🛒 Vendas</option>
-            <option value="Serviços">🔧 Serviços</option>
-            <option value="Salário">💰 Salário</option>
-            <option value="Outros">📦 Outros</option>
-          </>
-        ) : (
-          <>
-            <option value="Alimentação">🍔 Alimentação</option>
-            <option value="Aluguel">🏠 Aluguel</option>
-            <option value="Energia">💡 Energia</option>
-            <option value="Água">💧 Água</option>
-            <option value="Internet">🌐 Internet</option>
-            <option value="Funcionário">👨‍💼 Funcionário</option>
-            <option value="Fornecedores">📦 Fornecedores</option>
-            <option value="Impostos">🧾 Impostos</option>
-            <option value="Transporte">🚗 Transporte</option>
-            <option value="Outros">📋 Outros</option>
-          </>
-        )}
-      </select>
-
-      <label>Data</label>
-      <input
-        type="date"
-        value={launchDate}
-        onChange={(e) => setLaunchDate(e.target.value)}
-      />
-
-      <label>Forma de pagamento</label>
-      <select
-        value={launchPayment}
-        onChange={(e) => setLaunchPayment(e.target.value)}
-      >
-        <option value="Dinheiro">💵 Dinheiro</option>
-        <option value="Cartão">💳 Cartão</option>
-        <option value="PIX">📱 PIX</option>
-        <option value="boleto">🧾 Boleto</option>
-      </select>
-
-      <div className="modal-actions">
-        <button
-          type="button"
-          className="cancel-button"
-          onClick={() => setPagina("inicio")}
-        >
-          Cancelar
-        </button>
-
-        <button
-          type="button"
-          className="save-button"
-          onClick={handleSaveLaunch}
-        >
-          Salvar lançamento
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+                    {modal_block}
                   </>
                 ) : (
         <>
@@ -2362,13 +2249,6 @@ const hora = lancamento.created_at
                   alt="Space Finance"
                   className="dashboard-logo-center"
                 />
-                <button
-                  type="button"
-                  className="logout-button"
-                  onClick={() => setLoggedIn(false)}
-                >
-                  🚪 Sair
-                </button>
                </div>
 
                <section className="dashboard-content">
@@ -2391,6 +2271,13 @@ const hora = lancamento.created_at
                     + Novo lançamento
                   </button>
 
+                  <button
+                  type="button"
+                  className="logout-button"
+                    onClick={() => setLoggedIn(false)}
+                >
+  🚪 Sair
+</button>
                 </div>
 
                 <div className="dashboard-cards">
@@ -2660,10 +2547,9 @@ onClick={async () => {
                 </div>
                 </section>
 
-
               </>
                 )}
-</main>
+           </main>
       </div>
     );
   }
@@ -2828,20 +2714,151 @@ onClick={async () => {
 
         {/* CADASTRO */}
         <div className="register">
-
-          <p>
-            Ainda não possui uma conta?
-          </p>
+          <p>Ainda não possui uma conta?</p>
 
           <button
             type="button"
-            onClick={handleCreateAccount}
+            onClick={() => setShowRegister(true)}
             disabled={loading}
           >
             Criar minha conta
           </button>
-
         </div>
+
+        {/* MODAL DE CADASTRO */}
+        {showRegister && (
+          <div
+            className="register-modal-overlay"
+            onMouseDown={(event) => {
+              if (event.target === event.currentTarget && !loading) {
+                setShowRegister(false)
+              }
+            }}
+          >
+            <section
+              className="register-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="register-title"
+            >
+              <button
+                type="button"
+                className="register-modal-close"
+                onClick={() => setShowRegister(false)}
+                disabled={loading}
+                aria-label="Fechar cadastro"
+              >
+                ×
+              </button>
+
+              <div className="register-modal-header">
+                <img
+                  src={spaceFinanceIcon}
+                  alt="Space Finance"
+                  className="register-modal-logo"
+                />
+                <h2 id="register-title">Criar minha conta</h2>
+                <p>Cadastre seu e-mail e crie uma senha.</p>
+              </div>
+
+              <form className="register-form" onSubmit={handleCreateAccount}>
+                <div className="field-group">
+                  <label htmlFor="register-email">E-mail</label>
+                  <div className="input-wrapper">
+                    <Mail size={20} />
+                    <input
+                      id="register-email"
+                      type="email"
+                      placeholder="seu@email.com"
+                      value={registerEmail}
+                      onChange={(event) => setRegisterEmail(event.target.value)}
+                      autoComplete="email"
+                      disabled={loading}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="field-group">
+                  <label htmlFor="register-password">Senha</label>
+                  <div className="input-wrapper">
+                    <LockKeyhole size={20} />
+                    <input
+                      id="register-password"
+                      type={showRegisterPassword ? 'text' : 'password'}
+                      placeholder="Mínimo de 6 caracteres"
+                      value={registerPassword}
+                      onChange={(event) => setRegisterPassword(event.target.value)}
+                      autoComplete="new-password"
+                      disabled={loading}
+                      minLength={6}
+                      required
+                    />
+                    <button
+                      type="button"
+                      className="password-button"
+                      onClick={() => setShowRegisterPassword(!showRegisterPassword)}
+                      disabled={loading}
+                      aria-label={
+                        showRegisterPassword ? 'Ocultar senha' : 'Mostrar senha'
+                      }
+                    >
+                      {showRegisterPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                    </button>
+                  </div>
+                </div>
+
+                <div className="field-group">
+                  <label htmlFor="register-confirm-password">
+                    Confirmar senha
+                  </label>
+                  <div className="input-wrapper">
+                    <LockKeyhole size={20} />
+                    <input
+                      id="register-confirm-password"
+                      type={showRegisterConfirmPassword ? 'text' : 'password'}
+                      placeholder="Digite a senha novamente"
+                      value={registerConfirmPassword}
+                      onChange={(event) => setRegisterConfirmPassword(event.target.value)}
+                      autoComplete="new-password"
+                      disabled={loading}
+                      minLength={6}
+                      required
+                    />
+                    <button
+                      type="button"
+                      className="password-button"
+                      onClick={() =>
+                        setShowRegisterConfirmPassword(!showRegisterConfirmPassword)
+                      }
+                      disabled={loading}
+                      aria-label={
+                        showRegisterConfirmPassword
+                          ? 'Ocultar confirmação'
+                          : 'Mostrar confirmação'
+                      }
+                    >
+                      {showRegisterConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                    </button>
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  className="login-button register-submit"
+                  disabled={loading}
+                >
+                  {loading ? 'Criando conta...' : 'Criar conta'}
+                </button>
+
+                <p className="register-confirmation-info">
+                  Após o cadastro, verifique sua caixa de entrada e clique no
+                  link de confirmação enviado pelo Space Finance.
+                </p>
+              </form>
+            </section>
+          </div>
+        )}
 
         {/* RODAPÉ */}
         <footer>
