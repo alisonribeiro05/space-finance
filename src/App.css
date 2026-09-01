@@ -4481,7 +4481,7 @@ body {
   box-sizing: border-box;
   border: 1px solid rgba(80, 255, 110, 0.35);
   border-radius: 22px;
-  background: #07150f;
+  background: hsl(160, 60%, 99%);
   color: #fff;
   box-shadow: 0 25px 80px rgba(0, 0, 0, 0.55);
 }
@@ -4494,7 +4494,7 @@ body {
   height: 36px;
   border: 0;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
+  background: #ffffff;
   color: #fff;
   font-size: 26px;
   line-height: 1;
