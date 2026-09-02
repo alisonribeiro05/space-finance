@@ -2236,9 +2236,139 @@ const hora = lancamento.created_at
                </div>
                 </div>
                 ) : pagina === "novo-lancamento" ? (
-                  <>
-                    {modal_block}
-                  </>
+                  <div className="new-launch-page">
+                    <div className="new-launch-card">
+                      <div className="new-launch-header">
+                        <div>
+                          <span className="new-launch-icon">➕</span>
+                          <div>
+                            <h1>Novo lançamento</h1>
+                            <p>Registre uma nova entrada ou despesa.</p>
+                          </div>
+                        </div>
+                        <button
+                          type="button"
+                          className="new-launch-back"
+                          onClick={() => setPagina("inicio")}
+                        >
+                          ← Voltar
+                        </button>
+                      </div>
+
+                      <div className="new-launch-form">
+                        <div className="launch-field">
+                          <label>Tipo</label>
+                          <div className="launch-type">
+                            <button
+                              type="button"
+                              className={launchType === 'entrada' ? 'selected' : ''}
+                              onClick={() => setLaunchType('entrada')}
+                            >
+                              ↑ Entrada
+                            </button>
+                            <button
+                              type="button"
+                              className={launchType === 'despesa' ? 'selected expense' : ''}
+                              onClick={() => setLaunchType('despesa')}
+                            >
+                              ↓ Despesa
+                            </button>
+                          </div>
+                        </div>
+
+                        <div className="launch-field">
+                          <label>Descrição</label>
+                          <input
+                            type="text"
+                            placeholder="Ex.: Venda de produto ou pagamento de conta"
+                            value={launchDescription}
+                            onChange={(e) => setLaunchDescription(e.target.value)}
+                          />
+                        </div>
+
+                        <div className="launch-field">
+                          <label>Valor</label>
+                          <input
+                            type="number"
+                            placeholder="0,00"
+                            step="0.01"
+                            value={launchValue}
+                            onChange={(e) => setLaunchValue(e.target.value)}
+                          />
+                        </div>
+
+                        <div className="launch-field">
+                          <label>Categoria</label>
+                          <select
+                            value={launchCategory}
+                            onChange={(e) => setLaunchCategory(e.target.value)}
+                          >
+                            <option value="">Selecione uma categoria</option>
+                            {launchType === 'entrada' ? (
+                              <>
+                                <option value="Vendas">🛒 Vendas</option>
+                                <option value="Serviços">🔧 Serviços</option>
+                                <option value="Salário">💰 Salário</option>
+                                <option value="Outros">📦 Outros</option>
+                              </>
+                            ) : (
+                              <>
+                                <option value="Alimentação">🍔 Alimentação</option>
+                                <option value="Aluguel">🏠 Aluguel</option>
+                                <option value="Energia">💡 Energia</option>
+                                <option value="Água">💧 Água</option>
+                                <option value="Internet">🌐 Internet</option>
+                                <option value="Funcionário">👨‍💼 Funcionário</option>
+                                <option value="Fornecedores">📦 Fornecedores</option>
+                                <option value="Impostos">🧾 Impostos</option>
+                                <option value="Transporte">🚗 Transporte</option>
+                                <option value="Outros">📋 Outros</option>
+                              </>
+                            )}
+                          </select>
+                        </div>
+
+                        <div className="launch-field">
+                          <label>Data</label>
+                          <input
+                            type="date"
+                            value={launchDate}
+                            onChange={(e) => setLaunchDate(e.target.value)}
+                          />
+                        </div>
+
+                        <div className="launch-field">
+                          <label>Forma de pagamento</label>
+                          <select
+                            value={launchPayment}
+                            onChange={(e) => setLaunchPayment(e.target.value)}
+                          >
+                            <option value="Dinheiro">💵 Dinheiro</option>
+                            <option value="Cartão">💳 Cartão</option>
+                            <option value="PIX">📱 PIX</option>
+                            <option value="boleto">🧾 Boleto</option>
+                          </select>
+                        </div>
+
+                        <div className="new-launch-actions">
+                          <button
+                            type="button"
+                            className="cancel-button"
+                            onClick={() => setPagina("inicio")}
+                          >
+                            Cancelar
+                          </button>
+                          <button
+                            type="button"
+                            className="save-button"
+                            onClick={handleSaveLaunch}
+                          >
+                            Salvar lançamento
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 ) : (
         <>
               
@@ -2882,4 +3012,4 @@ onClick={async () => {
   );
 }
  
-export default App;
+export default App; 

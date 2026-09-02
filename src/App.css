@@ -1027,22 +1027,10 @@ footer {
 
 .main-content {
   flex: 1;
-  min-height: 100vh;
   min-width: 0;
   overflow-x: hidden;
   padding: 25px;
   position: relative;
-  margin-left: 75px;
-  width: calc(100% - 75px);
-  background:
-    radial-gradient(circle at 15% 10%, rgba(77, 255, 114, 0.08), transparent 28%),
-    #07110d;
-  transition: margin-left 0.3s ease, width 0.3s ease;
-}
-
-.main-content.sidebar-open {
-  margin-left: 250px;
-  width: calc(100% - 250px);
 }
 
 .welcome-icon {
@@ -3190,1375 +3178,1795 @@ body {
 .support-button:hover {
   transform: translateY(-2px);
   opacity: 0.9;
-}
+}/* =================================
+   AJUSTES PARA CELULAR
+================================= */
 
-/* =========================================================
-   RESPONSIVIDADE MOBILE — BLOCO ÚNICO E LIMPO
-   ========================================================= */
+@media (max-width: 768px) {
 
-@media screen and (max-width: 768px) {
-
-  html,
-  body,
-  #root {
+  /* Conteúdo principal */
+  .dashboard-content {
     width: 100%;
-    min-width: 0;
     max-width: 100%;
     margin: 0;
-    overflow-x: auto;
+    padding: 20px 15px;
+    box-sizing: border-box;
   }
 
-  .app-layout {
-    width: 100%;
-    min-width: 0;
-    display: flex;
-    overflow-x: auto;
-  }
-
-  /* =========================
-     BARRA LATERAL
-     ========================= */
-
-  .sidebar {
-    position: fixed !important;
-    left: 0 !important;
-    top: 0 !important;
-    bottom: 0 !important;
-    width: 70px !important;
-    min-width: 70px !important;
-    max-width: 70px !important;
-    z-index: 1000 !important;
-  }
-
-  .sidebar.closed {
-    width: 70px !important;
-    min-width: 70px !important;
-    max-width: 70px !important;
-  }
-
-  /* Quando a barra estiver aberta */
-  .sidebar:not(.closed) {
-    width: 220px !important;
-    min-width: 220px !important;
-    max-width: 220px !important;
-  }
-
-  .sidebar-logo {
-    height: 105px !important;
-    padding: 8px 4px !important;
-  }
-
-  .sidebar-logo img {
-    width: 52px !important;
-    height: 52px !important;
-    max-width: 52px !important;
-    object-fit: contain !important;
-  }
-
-  .sidebar-brand {
-    display: none !important;
-  }
-
-  .sidebar-menu {
-    padding: 12px 8px !important;
-    gap: 8px !important;
-    align-items: center !important;
-  }
-
-  .sidebar-item,
-  .sidebar-logout {
-    width: 50px !important;
-    min-width: 50px !important;
-    max-width: 50px !important;
-    height: 50px !important;
-    padding: 0 !important;
-    justify-content: center !important;
-  }
-
-  /* Barra fechada: somente os ícones */
-  .sidebar.closed .sidebar-item strong,
-  .sidebar.closed .sidebar-logout strong {
-    display: none !important;
-  }
-
-  /* Barra aberta: ícones + descrições */
-  .sidebar:not(.closed) .sidebar-item strong,
-  .sidebar:not(.closed) .sidebar-logout strong {
-    display: inline !important;
-    white-space: nowrap !important;
-  }
-
-  /* Botões quando a barra estiver fechada */
-  .sidebar.closed .sidebar-item,
-  .sidebar.closed .sidebar-logout {
-    width: 50px !important;
-    min-width: 50px !important;
-    max-width: 50px !important;
-    justify-content: center !important;
-    padding: 0 !important;
-  }
-
-  /* Botões quando a barra estiver aberta */
-  .sidebar:not(.closed) .sidebar-item,
-  .sidebar:not(.closed) .sidebar-logout {
-    width: 100% !important;
-    max-width: 100% !important;
-    justify-content: flex-start !important;
-    padding: 0 15px !important;
-    gap: 12px !important;
-    box-sizing: border-box !important;
-  }
-
-  .sidebar:not(.closed) .sidebar-item span,
-  .sidebar:not(.closed) .sidebar-logout span {
-    flex-shrink: 0 !important;
-  }
-
-  .sidebar-toggle {
-    right: -13px !important;
-    top: 24px !important;
-    z-index: 1100 !important;
-  }
-
-  /* =========================
-     ÁREA PRINCIPAL
-     ========================= */
-
-  .dashboard {
-    width: calc(100% - 70px) !important;
-    max-width: calc(100% - 70px) !important;
-    min-width: 0 !important;
-    margin-left: 70px !important;
-    padding: 10px !important;
-    box-sizing: border-box !important;
-    overflow: visible !important;
-  }
-
-  .app-layout:not(.sidebar-closed) .dashboard {
-    width: calc(100% - 220px) !important;
-    max-width: calc(100% - 220px) !important;
-    margin-left: 220px !important;
-  }
-
-  .main-content,
-  .dashboard .main-content {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    box-sizing: border-box !important;
-    overflow: visible !important;
-  }
-
-  /* =========================
-     LOGO + BOTÃO SAIR
-     ========================= */
-
-  .dashboard-brand {
-    position: relative !important;
-    width: 100% !important;
-    height: 100px !important;
-    min-height: 100px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    box-sizing: border-box !important;
-    overflow: visible !important;
-  }
-
-  .dashboard-logo-center {
-    width: 175px !important;
-    max-width: 60% !important;
-    max-height: 95px !important;
-    height: auto !important;
-    object-fit: contain !important;
-    display: block !important;
-    margin: 0 auto !important;
-  }
-
-  /* Sair fica no lado direito da logo */
-  .logout-button {
-    position: absolute !important;
-    top: 50% !important;
-    right: 0 !important;
-    transform: translateY(-50%) !important;
-    margin: 0 !important;
-    height: 42px !important;
-    min-width: 82px !important;
-    padding: 0 12px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-size: 14px !important;
-    z-index: 20 !important;
-  }
-
-  .logout-button:hover {
-    transform: translateY(-50%) !important;
-  }
-
-  /* =========================
-     CONTEÚDO / NOME / BEM-VINDO
-     ========================= */
-
-  .dashboard-content {
-    position: relative !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    margin: 0 auto !important;
-    padding: 5px 0 30px !important;
-    text-align: center !important;
-    box-sizing: border-box !important;
-  }
-
-  .dashboard-profile {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 auto 10px !important;
-    padding: 0 !important;
-    box-sizing: border-box !important;
-    background: transparent !important;
-    border: 0 !important;
-  }
-
+  /* Nome da empresa/usuário */
   .dashboard-profile-name {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 auto !important;
-    padding: 0 !important;
-    text-align: center !important;
-    font-size: 22px !important;
-    line-height: 1.2 !important;
-    white-space: normal !important;
-    overflow-wrap: anywhere !important;
-    word-break: break-word !important;
-    box-sizing: border-box !important;
+    font-size: 25px;
+    line-height: 1.15;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: normal;
+    margin-bottom: 8px;
   }
 
+  /* Bem-vindo */
   .dashboard-title {
-    position: relative !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    margin: 0 auto 18px !important;
-    padding: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 10px !important;
-    text-align: center !important;
-    box-sizing: border-box !important;
-  }
-
-  .dashboard-title > div {
-    width: 100% !important;
-    max-width: 100% !important;
-    text-align: center !important;
-  }
-
-  .dashboard-title h2 {
-    width: 100% !important;
-    margin: 0 !important;
-    font-size: 22px !important;
-    line-height: 1.2 !important;
-    text-align: center !important;
-    overflow-wrap: anywhere !important;
+    width: 100%;
   }
 
   .dashboard-title p {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 auto !important;
-    padding: 0 !important;
-    font-size: 15px !important;
-    line-height: 1.35 !important;
-    text-align: center !important;
-    white-space: normal !important;
-    overflow-wrap: anywhere !important;
+    font-size: 17px;
+    line-height: 1.3;
   }
 
-  /* Novo lançamento centralizado */
-  .dashboard-title .add-button,
-  .add-button {
-    position: static !important;
-    align-self: center !important;
-    width: auto !important;
-    max-width: 95% !important;
-    height: 42px !important;
-    margin: 4px auto 0 !important;
-    padding: 0 15px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-size: 14px !important;
-    white-space: nowrap !important;
-    box-sizing: border-box !important;
+  /* Logo do Space Finance */
+  .dashboard-title img,
+  .dashboard-logo,
+  .annual-logo {
+    max-width: 180px;
+    width: 180px;
+    height: auto;
   }
 
-  /* =========================
-     CARDS FINANCEIROS
-     ========================= */
-
+  /* Área dos cards */
   .dashboard-cards {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 12px !important;
-    margin: 0 auto 18px !important;
-    box-sizing: border-box !important;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    width: 100%;
   }
 
+  /* Cards financeiros */
   .dashboard-card,
   .finance-card {
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-    min-height: 120px !important;
-    height: auto !important;
-    padding: 16px 12px !important;
-    margin: 0 !important;
-    box-sizing: border-box !important;
-    text-align: center !important;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
   }
 
-  .finance-card strong {
-    font-size: 22px !important;
-    line-height: 1.15 !important;
-    white-space: nowrap !important;
-  }
-
-  /* =========================
-     GRÁFICO / RESUMO / LANÇAMENTOS
-     ========================= */
-
-  .dashboard-grid {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 12px !important;
-    margin: 0 auto !important;
-    box-sizing: border-box !important;
-  }
-
-  .chart-card,
-  .summary-card,
-  .transactions-card,
-  .dashboard-chart {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    padding: 15px !important;
-    box-sizing: border-box !important;
-  }
-
-  .card-header {
-    width: 100% !important;
-    text-align: center !important;
-  }
-
-  .card-header h3,
-  .summary-card h3 {
-    text-align: center !important;
-  }
-
-  .card-header p {
-    text-align: center !important;
-  }
-
-  .card-header select {
-    max-width: 100% !important;
-  }
-
-  .chart {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    gap: 3px !important;
-    overflow-x: auto !important;
-    box-sizing: border-box !important;
-  }
-
-  .chart-column {
-    min-width: 0 !important;
-  }
-
-  .bar {
-    width: 8px !important;
-    max-width: 8px !important;
-  }
-
-  .chart-legend {
-    justify-content: center !important;
-    flex-wrap: wrap !important;
-    gap: 10px !important;
-  }
-
-  .summary-item {
-    width: 100% !important;
-    min-width: 0 !important;
-  }
-
-  .transaction-item,
-  .entry-item {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    box-sizing: border-box !important;
-  }
-
-  /* =========================
-     MODAL
-     ========================= */
-
-  .launch-modal {
-    width: calc(100% - 24px) !important;
-    max-width: 500px !important;
-    max-height: 90vh !important;
-    overflow-y: auto !important;
-    box-sizing: border-box !important;
-  }
-}
-
-
-/* Celulares pequenos */
-@media screen and (max-width: 400px) {
-
-  .sidebar,
-  .sidebar.closed {
-    width: 64px !important;
-    min-width: 64px !important;
-    max-width: 64px !important;
-  }
-
-  .sidebar:not(.closed) {
-    width: 210px !important;
-    min-width: 210px !important;
-    max-width: 210px !important;
-  }
-
-  .dashboard {
-    width: calc(100% - 64px) !important;
-    max-width: calc(100% - 64px) !important;
-    margin-left: 64px !important;
-    padding: 8px !important;
-  }
-
-  .app-layout:not(.sidebar-closed) .dashboard {
-    width: calc(100% - 210px) !important;
-    max-width: calc(100% - 210px) !important;
-    margin-left: 210px !important;
-  }
-
-  .dashboard-brand {
-    height: 90px !important;
-    min-height: 90px !important;
-  }
-
-  .dashboard-logo-center {
-    width: 150px !important;
-    max-width: 58% !important;
-    max-height: 85px !important;
-  }
-
-  .logout-button {
-    min-width: 76px !important;
-    height: 38px !important;
-    padding: 0 9px !important;
-    font-size: 13px !important;
-  }
-
-  .dashboard-profile-name {
-    font-size: 20px !important;
-  }
-
-  .dashboard-title h2 {
-    font-size: 20px !important;
-  }
-
-  .dashboard-title p {
-    font-size: 14px !important;
-  }
-
+  /* Botão novo lançamento */
   .add-button {
-    height: 40px !important;
-    font-size: 13px !important;
-    padding: 0 12px !important;
+    width: 100%;
+    max-width: 280px;
+    font-size: 16px;
+    box-sizing: border-box;
   }
 
-  .finance-card {
-    min-height: 110px !important;
-    padding: 14px 10px !important;
-  }
-
-  .finance-card strong {
-    font-size: 21px !important;
-  }
-}@media screen and (max-width: 768px) {
-
-  /* Permite rolagem horizontal no painel */
-  .dashboard {
-    overflow-x: auto !important;
-    overflow-y: visible !important;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .dashboard-content {
-    overflow-x: auto !important;
-    overflow-y: visible !important;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  /* Mantém os contêineres com uma largura mínima */
-  .dashboard-cards,
-  .dashboard-grid,
+  /* Gráfico */
   .chart-card,
-  .summary-card,
-  .transactions-card {
-    min-width: 320px !important;
+  .dashboard-chart {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    box-sizing: border-box;
   }
 
-  /* Gráfico pode ultrapassar a largura e ser arrastado */
-  .chart-card {
-    overflow-x: auto !important;
-  }
+}@media (max-width: 768px) {
 
-}/* =========================================================
-   ROLAGEM HORIZONTAL — GRÁFICO / RESUMO / RESULTADO ANUAL
-   ========================================================= */
-
-@media screen and (max-width: 768px) {
-
-  
-
-  /* Gráfico + Resumo ficam dentro da área rolável */
-  .dashboard-grid {
-    width: 900px !important;
-    min-width: 900px !important;
-    max-width: none !important;
-
-    display: grid !important;
-    grid-template-columns: 2fr 1fr !important;
-    gap: 20px !important;
-
-    overflow: visible !important;
-  }
-
-  .chart-card,
-  .summary-card {
-    min-width: 0 !important;
-    width: 100% !important;
-    overflow: visible !important;
-  }
-
-  /* Gráfico não será cortado */
-  .chart {
-    min-width: 0 !important;
-    width: 100% !important;
-    overflow: visible !important;
-  }
-
-  /* Resumo financeiro inteiro */
-  .summary-card {
-    min-width: 280px !important;
-  }
-
-  /* Resultado anual não será escondido */
-  .annual-button {
-    min-width: 100% !important;
-    white-space: nowrap !important;
-  }
-}/* =========================================================
-   ROLAGEM HORIZONTAL — GRÁFICO / RESUMO / RESULTADO ANUAL
-   ========================================================= */
-
-@media screen and (max-width: 768px) {
-
-  .dashboard {
-    overflow-x: auto !important;
-    overflow-y: visible !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
-
-  .dashboard-content {
-    width: 900px !important;
-    min-width: 900px !important;
-    max-width: none !important;
-    margin: 0 !important;
-  }
-
-  /* Gráfico + Resumo ficam dentro da área rolável */
-  .dashboard-grid {
-    width: 900px !important;
-    min-width: 900px !important;
-    max-width: none !important;
-
-    display: grid !important;
-    grid-template-columns: 2fr 1fr !important;
-    gap: 20px !important;
-
-    overflow: visible !important;
-  }
-
-  .chart-card,
-  .summary-card {
-    min-width: 0 !important;
-    width: 100% !important;
-    overflow: visible !important;
-  }
-
-  /* Gráfico não será cortado */
-  .chart {
-    min-width: 0 !important;
-    width: 100% !important;
-    overflow: visible !important;
-  }
-
-  /* Resumo financeiro inteiro */
-  .summary-card {
-    min-width: 280px !important;
-  }
-
-  /* Resultado anual não será escondido */
-  .annual-button {
-    min-width: 100% !important;
-    white-space: nowrap !important;
-  }
-}/* =====================================================
-   ROLAGEM HORIZONTAL - ENTRADAS E DESPESAS
-   ===================================================== */
-
-@media screen and (max-width: 768px) {
-
-  /* Área principal */
-  .main-content {
-    overflow-x: auto !important;
-    overflow-y: visible !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
-
-  /* Páginas de Entradas e Despesas */
-  .entries-page {
-    width: 900px !important;
-    min-width: 900px !important;
-    max-width: none !important;
-
-    margin: 0 !important;
-    box-sizing: border-box !important;
-  }
-
-  /* Cabeçalho */
-  .entries-header {
-    width: 100% !important;
-    min-width: 900px !important;
-  }
-
-  /* Área dos meses */
-  .entries-section-header {
-    width: 100% !important;
-    min-width: 900px !important;
-  }
-
-  /* Lista de lançamentos */
-  .entries-list {
-    width: 100% !important;
-    min-width: 700px !important;
-    overflow: visible !important;
-  }
-
-  /* Itens das entradas/despesas */
-  .entry-item {
-    min-width: 650px !important;
-  }
-
-  /* Área de relatório */
-  .entries-export-section {
-    min-width: 700px !important;
-  }
-
-  .entries-report-preview {
-    min-width: 700px !important;
-  }
-
-  /* Evita que textos sejam cortados */
-  .entry-info {
-    min-width: 300px !important;
-  }
-
-  /* Seletores */
-  .entries-selectors {
-    flex-shrink: 0 !important;
-  }
-
-  .entries-month-select {
-    flex-shrink: 0 !important;
-  }
-}@media screen and (max-width: 768px) {
-
-  html {
-    touch-action: pinch-zoom !important;
-    overflow-x: auto !important;
-    overflow-y: auto !important;
-  }
-
-  body {
-    touch-action: pan-x pan-y pinch-zoom !important;
-    overflow-x: auto !important;
-    overflow-y: auto !important;
-  }
-
-  #root {
-    touch-action: pan-x pan-y pinch-zoom !important;
-  }
-
-  .app-layout {
-    touch-action: pan-x pan-y pinch-zoom !important;
+  .sidebar {
+    width: 70px;
+    min-width: 70px;
   }
 
   .main-content {
-    touch-action: pan-x pan-y pinch-zoom !important;
-    overflow-x: auto !important;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch !important;
+    margin-left: 70px;
+    width: calc(100% - 70px);
   }
-}.conteudo-com-zoom {
-  min-height: 100%;
-  transition: transform 0.08s ease;
-  transform-origin: top left;
-}
 
-@media screen and (max-width: 768px) {
+}@media (max-width: 768px) {
 
-  .main-content {
-    overflow-x: auto !important;
-    overflow-y: auto !important;
-    touch-action: pan-x pan-y pinch-zoom !important;
-    -webkit-overflow-scrolling: touch;
+  .sidebar {
+    width: 70px !important;
+    min-width: 70px !important;
   }
+
+  .sidebar button,
+  .sidebar a {
+    width: 50px;
+    height: 50px;
+  }
+
 }
 
 /* =========================================================
-   CORREÇÃO FINAL RESPONSIVA - PAINEL / ENTRADAS / DESPESAS
+   SPACE FINANCE — LANDING / PÁGINA DE VENDAS
+   CORREÇÃO FINAL
    ========================================================= */
 
-@media screen and (max-width: 768px) {
-  html,
-  body {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
-    touch-action: pan-x pan-y pinch-zoom !important;
-  }
-
-  #root,
-  .app-layout {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    min-height: 100svh !important;
-    overflow-x: hidden !important;
-  }
-
-  /* Área principal: somente o conteúdo interno poderá rolar quando necessário */
-  .app-layout .main-content {
-    width: calc(100% - 64px) !important;
-    min-width: 0 !important;
-    max-width: none !important;
-    margin-left: 64px !important;
-    padding: 12px !important;
-    box-sizing: border-box !important;
-    overflow-x: auto !important;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
-
-  .app-layout .main-content.sidebar-open {
-    width: calc(100% - 220px) !important;
-    margin-left: 220px !important;
-  }
-
-  /* =========================
-     LOGO + SAIR
-     ========================= */
-  .dashboard-brand {
-    width: 100% !important;
-    height: 96px !important;
-    min-height: 96px !important;
-    position: relative !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: visible !important;
-  }
-
-  .dashboard-logo-center {
-    width: 165px !important;
-    max-width: 55% !important;
-    max-height: 88px !important;
-    height: auto !important;
-    object-fit: contain !important;
-    margin: 0 auto !important;
-  }
-
-  .dashboard-brand .logout-button {
-    position: absolute !important;
-    top: 10px !important;
-    right: 4px !important;
-    transform: none !important;
-    min-width: 68px !important;
-    height: 36px !important;
-    padding: 0 9px !important;
-    font-size: 12px !important;
-    z-index: 100 !important;
-  }
-
-  .dashboard-brand .logout-button:hover {
-    transform: none !important;
-  }
-
-  /* =========================
-     CONTEÚDO
-     ========================= */
-  .dashboard-content {
-    width: 100% !important;
-    max-width: 1200px !important;
-    min-width: 0 !important;
-    margin: 0 auto !important;
-    padding: 8px 0 30px !important;
-    box-sizing: border-box !important;
-    text-align: center !important;
-    overflow-x: visible !important;
-  }
-
-  .dashboard-profile,
-  .dashboard-profile-name {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    box-sizing: border-box !important;
-  }
-
-  .dashboard-profile-name {
-    margin: 0 0 8px !important;
-    font-size: 21px !important;
-    line-height: 1.2 !important;
-    white-space: normal !important;
-    overflow-wrap: anywhere !important;
-    word-break: break-word !important;
-    text-align: center !important;
-  }
-
-  .dashboard-title {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 10px !important;
-    margin: 0 auto 18px !important;
-    padding: 0 !important;
-    text-align: center !important;
-  }
-
-  .dashboard-title > div,
-  .dashboard-title h2,
-  .dashboard-title p {
-    width: 100% !important;
-    max-width: 100% !important;
-    text-align: center !important;
-  }
-
-  .dashboard-title h2 {
-    margin: 0 !important;
-    font-size: 20px !important;
-    line-height: 1.2 !important;
-  }
-
-  .dashboard-title p {
-    margin: 0 auto !important;
-    font-size: 14px !important;
-    line-height: 1.4 !important;
-    white-space: normal !important;
-    overflow-wrap: anywhere !important;
-  }
-
-  /* Novo lançamento continua disponível e alinhado */
-  .dashboard-title .add-button,
-  .add-button {
-    position: static !important;
-    align-self: center !important;
-    width: auto !important;
-    max-width: 95% !important;
-    height: 42px !important;
-    margin: 4px auto 0 !important;
-    padding: 0 15px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-size: 13px !important;
-    white-space: nowrap !important;
-    box-sizing: border-box !important;
-  }
-
-  /* =========================
-     CARDS FINANCEIROS
-     ========================= */
-  .dashboard-cards {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 9px !important;
-    margin: 0 auto 18px !important;
-    box-sizing: border-box !important;
-    overflow: visible !important;
-  }
-
-  .dashboard-card,
-  .finance-card {
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-    min-height: 104px !important;
-    height: auto !important;
-    padding: 12px 8px !important;
-    margin: 0 !important;
-    box-sizing: border-box !important;
-    text-align: center !important;
-    overflow: hidden !important;
-  }
-
-  .finance-card span,
-  .finance-card small {
-    font-size: 11px !important;
-  }
-
-  .finance-card strong {
-    margin: 6px 0 !important;
-    font-size: 17px !important;
-    line-height: 1.15 !important;
-    white-space: nowrap !important;
-  }
-
-  /* =========================
-     GRÁFICO x RESUMO
-     ========================= */
-  .dashboard-grid {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 12px !important;
-    margin: 0 auto 18px !important;
-    box-sizing: border-box !important;
-    overflow: visible !important;
-  }
-
-  .chart-card,
-  .summary-card,
-  .transactions-card {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    padding: 14px !important;
-    box-sizing: border-box !important;
-  }
-
-  .chart-card {
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
-
-  /* Só o gráfico tem largura interna para rolagem horizontal. */
-  .chart {
-    width: 560px !important;
-    min-width: 560px !important;
-    max-width: none !important;
-    overflow: visible !important;
-  }
-
-  .chart-column {
-    min-width: 0 !important;
-  }
-
-  .summary-card {
-    overflow-x: auto !important;
-    overflow-y: visible !important;
-  }
-
-  .summary-item {
-    width: 100% !important;
-    min-width: 0 !important;
-  }
-
-  .annual-button {
-    width: 100% !important;
-    min-width: 0 !important;
-    white-space: nowrap !important;
-  }
-
-  .transactions-card {
-    overflow-x: auto !important;
-  }
-
-  .transaction-item {
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-    flex-wrap: wrap !important;
-  }
-
-  /* =========================
-     ENTRADAS E DESPESAS
-     ========================= */
-  .entries-page {
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-    margin: 0 auto !important;
-    padding: 16px 0 35px !important;
-    box-sizing: border-box !important;
-    overflow-x: visible !important;
-  }
-
-  .entries-header,
-  .entries-section-header,
-  .entries-month-card,
-  .entries-export-section {
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-  }
-
-  .entries-header {
-    min-height: 0 !important;
-    margin-bottom: 18px !important;
-    padding: 0 !important;
-  }
-
-  .entries-brand {
-    width: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    text-align: center !important;
-  }
-
-  .entries-logo {
-    width: 125px !important;
-    max-width: 55% !important;
-    height: auto !important;
-  }
-
-  .entries-icon {
-    display: none !important;
-  }
-
-  .entries-brand h1 {
-    font-size: 24px !important;
-    text-align: center !important;
-  }
-
-  .entries-brand p {
-    font-size: 13px !important;
-    text-align: center !important;
-  }
-
-  .entries-back-button {
-    position: absolute !important;
-    top: 0 !important;
-    right: 0 !important;
-    padding: 8px 11px !important;
-    font-size: 12px !important;
-  }
-
-  .entries-total-card {
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 8px !important;
-    box-sizing: border-box !important;
-  }
-
-  .entries-total-card strong {
-    font-size: 25px !important;
-  }
-
-  .entries-section-header {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    gap: 12px !important;
-  }
-
-  .entries-month-select {
-    width: 100% !important;
-    min-width: 0 !important;
-    flex-shrink: 1 !important;
-    box-sizing: border-box !important;
-  }
-
-  .entries-list,
-  .entry-item,
-  .entry-info,
-  .entries-export-section,
-  .entries-report-preview {
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-  }
-
-  .entry-item {
-    flex-wrap: wrap !important;
-    gap: 8px !important;
-  }
-
-  .entry-info {
-    overflow-wrap: anywhere !important;
-    word-break: break-word !important;
-  }
-
-  .entries-export-header {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 10px !important;
-  }
-
-  .entries-report-preview {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-  }
-
-  .entries-export-buttons {
-    width: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 10px !important;
-  }
-
-  .entries-export-buttons button {
-    width: 100% !important;
-  }
-
-  /* Modal de novo lançamento */
-  .modal-overlay {
-    padding: 12px !important;
-    box-sizing: border-box !important;
-  }
-
-  .launch-modal {
-    width: 100% !important;
-    max-width: 500px !important;
-    max-height: calc(100vh - 24px) !important;
-    overflow-y: auto !important;
-    box-sizing: border-box !important;
-  }
+.landing-page {
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(40, 255, 130, 0.12), transparent 30%),
+    radial-gradient(circle at 85% 25%, rgba(40, 255, 130, 0.08), transparent 30%),
+    #07110d;
+  color: #ffffff !important;
 }
 
-/* Celulares muito pequenos */
-@media screen and (max-width: 400px) {
-  .sidebar,
-  .sidebar.closed {
-    width: 64px !important;
-    min-width: 64px !important;
-    max-width: 64px !important;
-  }
+/* =========================
+   CABEÇALHO
+   ========================= */
 
-  .sidebar:not(.closed) {
-    width: 210px !important;
-    min-width: 210px !important;
-    max-width: 210px !important;
-  }
+.landing-header {
+  position: relative;
+  width: 100%;
+  max-width: 1250px;
+  min-height: 170px;
+  margin: 0 auto;
+  padding: 15px 30px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  box-sizing: border-box;
+}
 
-  .app-layout .main-content {
-    width: calc(100% - 64px) !important;
-    margin-left: 64px !important;
-    padding: 10px 8px !important;
-  }
+/* LOGO GRANDE, SOZINHA E CENTRALIZADA NO TOPO */
+.landing-logo {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
 
-  .app-layout .main-content.sidebar-open {
-    width: calc(100% - 210px) !important;
-    margin-left: 210px !important;
-  }
+  width: 180px;
+  margin: 0;
+  padding: 0;
 
-  .dashboard-brand {
-    height: 90px !important;
-    min-height: 90px !important;
-  }
-
-  .dashboard-logo-center {
-    width: 140px !important;
-    max-width: 52% !important;
-    max-height: 80px !important;
-  }
-
-  .dashboard-brand .logout-button {
-    right: 2px !important;
-    min-width: 64px !important;
-    height: 34px !important;
-    padding: 0 7px !important;
-    font-size: 11px !important;
-  }
-
-  .dashboard-profile-name {
-    font-size: 19px !important;
-  }
-
-  .dashboard-title h2 {
-    font-size: 19px !important;
-  }
-
-  .dashboard-title p {
-    font-size: 13px !important;
-  }
-
-  .dashboard-cards {
-    grid-template-columns: 1fr !important;
-  }
-
-  .finance-card {
-    min-height: 96px !important;
-  }
-
-  .finance-card strong {
-    font-size: 19px !important;
-  }
-
-  .chart {
-    width: 520px !important;
-    min-width: 520px !important;
-  }
-}/* =========================================================
-   MODAL DE CADASTRO - SPACE FINANCE
-   ========================================================= */
-
-.register-modal-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  box-sizing: border-box;
-  background: rgba(0, 0, 0, 0.72);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-}
 
-.register-modal {
-  position: relative;
-  width: min(100%, 430px);
-  max-height: 90vh;
-  overflow-y: auto;
-  padding: 28px 24px 22px;
-  box-sizing: border-box;
-  border: 1px solid rgba(80, 255, 110, 0.35);
-  border-radius: 22px;
-  background: #07150f;
-  color: #fff;
-  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.55);
-}
-
-.register-modal-close {
-  position: absolute;
-  top: 10px;
-  right: 12px;
-  width: 36px;
-  height: 36px;
-  border: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-  font-size: 26px;
-  line-height: 1;
-  cursor: pointer;
-}
-
-.register-modal-header {
   text-align: center;
-  margin-bottom: 22px;
 }
 
-.register-modal-logo {
+/* Logo */
+.landing-logo img {
   display: block;
-  width: 145px;
-  max-width: 60%;
-  height: auto;
-  margin: 0 auto 12px;
+  width: 150px;
+  height: 150px;
+  max-width: none;
+  object-fit: contain;
+  margin: 0 auto;
 }
 
-.register-modal-header h2 {
-  margin: 0 0 6px;
-  font-size: 24px;
+/* NÃO MOSTRA NENHUM ESCRITO JUNTO DA LOGO */
+.landing-logo strong,
+.landing-logo span,
+.landing-logo div {
+  display: none !important;
 }
 
-.register-modal-header p {
+/* Botão de login */
+.landing-login-button {
+  position: absolute;
+  top: 28px;
+  right: 30px;
+
+  padding: 11px 20px;
+  border: 1px solid rgba(80, 255, 150, 0.35);
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff !important;
+
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.landing-login-button:hover {
+  background: rgba(80, 255, 150, 0.10);
+  border-color: rgba(80, 255, 150, 0.7);
+}
+
+/* =========================
+   HERO
+   ========================= */
+
+.landing-hero {
+  width: 100%;
+  max-width: 1250px;
+  min-height: 620px;
+  margin: 0 auto;
+  padding: 55px 30px 80px;
+
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  align-items: center;
+  gap: 70px;
+
+  box-sizing: border-box;
+}
+
+.landing-hero-content {
+  max-width: 650px;
+}
+
+.landing-badge {
+  display: inline-block;
+  padding: 8px 14px;
+  margin-bottom: 22px;
+
+  border: 1px solid rgba(80, 255, 150, 0.25);
+  border-radius: 30px;
+
+  background: rgba(80, 255, 150, 0.06);
+  color: #52f58d !important;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.landing-hero h1 {
   margin: 0;
-  color: rgba(255, 255, 255, 0.68);
+  color: #ffffff !important;
+
+  font-size: clamp(42px, 5vw, 68px);
+  line-height: 1.05;
+  letter-spacing: -2px;
+  font-weight: 800;
+}
+
+.landing-hero h1 span {
+  color: #52f58d !important;
+}
+
+.landing-hero-content > p {
+  max-width: 570px;
+  margin: 25px 0 30px;
+
+  color: rgba(255, 255, 255, 0.82) !important;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+/* =========================
+   BOTÕES
+   ========================= */
+
+.landing-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.landing-primary-button,
+.landing-secondary-button {
+  min-height: 50px;
+  padding: 0 24px;
+  border-radius: 11px;
+
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.landing-primary-button {
+  border: none;
+  background: #51ef8b;
+  color: #06110b !important;
+  box-shadow: 0 10px 30px rgba(50, 255, 130, 0.18);
+}
+
+.landing-primary-button:hover {
+  transform: translateY(-2px);
+}
+
+.landing-secondary-button {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff !important;
+}
+
+.landing-secondary-button:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.landing-hero-content > small {
+  display: block;
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.68) !important;
+  font-size: 12px;
+}
+
+/* =========================
+   PREVIEW DO SISTEMA
+   ========================= */
+
+.landing-preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.preview-window {
+  width: 100%;
+  max-width: 500px;
+  overflow: hidden;
+
+  border: 1px solid rgba(100, 255, 160, 0.16);
+  border-radius: 18px;
+
+  background: rgba(12, 27, 20, 0.92);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.45),
+    0 0 60px rgba(40, 255, 130, 0.06);
+
+  transform: perspective(1000px) rotateY(-3deg);
+}
+
+.preview-top {
+  padding: 15px 18px;
+
+  display: flex;
+  justify-content: space-between;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: #ffffff !important;
+  font-size: 12px;
+}
+
+.preview-content {
+  padding: 25px;
+  color: #ffffff !important;
+}
+
+.preview-content > p {
+  margin: 0 0 20px;
+  color: #ffffff !important;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.preview-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.preview-cards div {
+  padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.preview-cards small {
+  display: block;
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.72) !important;
+  font-size: 10px;
+}
+
+.preview-cards strong {
+  color: #52f58d !important;
   font-size: 14px;
 }
 
-.register-form {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+.preview-chart {
+  margin-top: 20px;
+  padding: 20px;
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.025);
 }
 
-.register-submit {
-  width: 100%;
-  margin-top: 4px;
-}
-
-.register-confirmation-info {
-  margin: 2px 0 0;
-  color: rgba(255, 255, 255, 0.58);
+.preview-chart > span {
+  color: #ffffff !important;
   font-size: 12px;
-  line-height: 1.45;
+}
+
+.chart-bars {
+  height: 140px;
+  margin-top: 20px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  gap: 12px;
+}
+
+.chart-bars i {
+  display: block;
+  width: 35px;
+  border-radius: 6px 6px 0 0;
+  background: linear-gradient(to top, #1c9e59, #62f797);
+}
+
+.chart-bars i:nth-child(1) { height: 45%; }
+.chart-bars i:nth-child(2) { height: 70%; }
+.chart-bars i:nth-child(3) { height: 55%; }
+.chart-bars i:nth-child(4) { height: 85%; }
+.chart-bars i:nth-child(5) { height: 65%; }
+.chart-bars i:nth-child(6) { height: 95%; }
+
+/* =========================
+   BENEFÍCIOS
+   ========================= */
+
+.landing-benefits {
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 80px 30px;
+  box-sizing: border-box;
+}
+
+.landing-section-title {
+  max-width: 700px;
+  margin: 0 auto 50px;
   text-align: center;
 }
 
-@media screen and (max-width: 480px) {
-  .register-modal-overlay {
-    padding: 12px;
+.landing-section-title span {
+  color: #52f58d !important;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.landing-section-title h2 {
+  margin: 12px 0 0;
+  color: #ffffff !important;
+  font-size: clamp(30px, 4vw, 45px);
+  line-height: 1.15;
+}
+
+.landing-benefit-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.landing-benefit-card {
+  padding: 28px 22px;
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.025);
+
+  transition: 0.25s ease;
+}
+
+.landing-benefit-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(80, 255, 150, 0.25);
+}
+
+.landing-benefit-card > div {
+  font-size: 30px;
+  margin-bottom: 18px;
+}
+
+.landing-benefit-card h3 {
+  margin: 0 0 10px;
+  color: #ffffff !important;
+  font-size: 17px;
+}
+
+.landing-benefit-card p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.76) !important;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* =========================
+   CTA FINAL
+   ========================= */
+
+.landing-final-cta {
+  width: calc(100% - 60px);
+  max-width: 1000px;
+
+  margin: 30px auto 80px;
+  padding: 70px 30px;
+  box-sizing: border-box;
+
+  text-align: center;
+
+  border: 1px solid rgba(80, 255, 150, 0.14);
+  border-radius: 22px;
+
+  background:
+    radial-gradient(circle at center, rgba(60, 255, 140, 0.08), transparent 60%),
+    rgba(255, 255, 255, 0.025);
+}
+
+.landing-final-cta h2 {
+  margin: 0;
+  color: #ffffff !important;
+  font-size: clamp(30px, 4vw, 45px);
+}
+
+.landing-final-cta p {
+  max-width: 600px;
+  margin: 18px auto 28px;
+  color: rgba(255, 255, 255, 0.78) !important;
+  line-height: 1.7;
+}
+
+.landing-final-cta button {
+  border: none;
+  padding: 14px 28px;
+  border-radius: 10px;
+
+  background: #51ef8b;
+  color: #06110b !important;
+
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.landing-final-cta button:hover {
+  transform: translateY(-2px);
+}
+
+/* =========================
+   RODAPÉ
+   ========================= */
+
+.landing-footer {
+  padding: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+  text-align: center;
+  color: rgba(255, 255, 255, 0.62) !important;
+  font-size: 12px;
+}
+
+/* =========================
+   RESPONSIVO
+   ========================= */
+
+@media (max-width: 900px) {
+
+  .landing-hero {
+    grid-template-columns: 1fr;
+    gap: 50px;
+    padding-top: 35px;
   }
 
-  .register-modal {
-    padding: 24px 16px 18px;
+  .landing-hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .landing-hero-content > p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .landing-actions {
+    justify-content: center;
+  }
+
+  .landing-preview {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .preview-window {
+    transform: none;
+  }
+
+  .landing-benefit-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+
+  .landing-header {
+    min-height: 130px;
+    padding: 8px 16px;
+  }
+
+  .landing-logo {
+    top: 3px;
+    width: 145px;
+  }
+
+  .landing-logo img {
+    width: 110px;
+    height: 110px;
+  }
+
+  .landing-login-button {
+    top: 16px;
+    right: 14px;
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .landing-hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 35px 18px 55px;
+    gap: 35px;
+  }
+
+  .landing-hero-content {
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .landing-hero h1 {
+    font-size: 38px;
+    letter-spacing: -1px;
+  }
+
+  .landing-hero-content > p {
+    font-size: 15px;
+  }
+
+  .landing-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .landing-primary-button,
+  .landing-secondary-button {
+    width: 100%;
+  }
+
+  .landing-preview {
+    width: 100%;
+  }
+
+  .preview-window {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .preview-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-benefits {
+    padding: 55px 18px;
+  }
+
+  .landing-benefit-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-final-cta {
+    width: calc(100% - 36px);
+    margin: 20px auto 50px;
+    padding: 45px 20px;
+  }
+
+  .landing-footer {
+    padding: 25px 16px;
+  }
+}
+
+@media (max-width: 380px) {
+
+  .landing-header {
+    min-height: 120px;
+  }
+
+  .landing-logo img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .landing-hero h1 {
+    font-size: 34px;
+  }
+
+  .landing-login-button {
+    font-size: 10px;
+    padding: 7px 8px;
+  }
+}
+
+/* =========================================================
+   CORREÇÃO FINAL DE TEXTOS PRETOS NA LANDING
+   ========================================================= */
+
+.landing-page h1,
+.landing-page h2,
+.landing-page h3,
+.landing-page h4,
+.landing-page p,
+.landing-page small,
+.landing-page label {
+  color: #ffffff;
+}
+
+.landing-page .landing-hero h1 span,
+.landing-page .landing-badge,
+.landing-page .landing-section-title span {
+  color: #52f58d;
+}
+
+
+/* =========================================================
+   SPACE FINANCE — AJUSTE FINAL VISUAL
+   IMPORTANTE: este bloco fica por ÚLTIMO para sobrescrever
+   regras antigas do arquivo.
+   ========================================================= */
+
+/* ---------- RESET DA PÁGINA DE LOGIN ---------- */
+.login-page {
+  min-height: 100vh !important;
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 30px 20px !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+.login-card {
+  width: min(100%, 430px) !important;
+  max-width: 430px !important;
+  margin: 0 auto !important;
+  padding: 30px 30px 24px !important;
+  box-sizing: border-box !important;
+}
+
+/* Logo do LOGIN: pequena/média, centralizada e sem texto ao lado */
+.login-card .brand {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  margin: 0 0 20px !important;
+  text-align: center !important;
+}
+
+.login-card .brand-icon {
+  display: block !important;
+  width: 150px !important;
+  height: 105px !important;
+  max-width: 150px !important;
+  object-fit: contain !important;
+  flex: 0 0 auto !important;
+  margin: 0 auto !important;
+}
+
+.login-card .brand p {
+  margin: 0 !important;
+  color: #ffffff !important;
+  font-size: 13px !important;
+  line-height: 1.3 !important;
+}
+
+/* Todos os textos do login ficam brancos */
+.login-card h1,
+.login-card h2,
+.login-card h3,
+.login-card p,
+.login-card label,
+.login-card span,
+.login-card small {
+  color: #ffffff !important;
+}
+
+/* Mantém os textos de destaque verdes */
+.login-card .welcome h2,
+.login-card .register button,
+.login-card .forgot-password {
+  color: #00e6a0 !important;
+}
+
+.login-card .welcome {
+  margin-bottom: 22px !important;
+}
+
+.login-card .login-form {
+  width: 100% !important;
+}
+
+.login-card .field-group,
+.login-card .input-wrapper,
+.login-card .login-button {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* ---------- LANDING / PÁGINA DE VENDAS ---------- */
+
+.landing-page {
+  width: 100% !important;
+  min-height: 100vh !important;
+  overflow-x: hidden !important;
+  color: #ffffff !important;
+}
+
+.landing-header {
+  position: relative !important;
+  width: 100% !important;
+  min-height: 210px !important;
+  max-width: 1250px !important;
+  margin: 0 auto !important;
+  padding: 10px 30px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+}
+
+/* LOGO GRANDE, SOZINHA E CENTRALIZADA NO TOPO */
+.landing-logo {
+  position: absolute !important;
+  top: 5px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 260px !important;
+  height: 190px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  text-align: center !important;
+  z-index: 5 !important;
+}
+
+.landing-logo img {
+  display: block !important;
+  width: 230px !important;
+  height: 180px !important;
+  max-width: 230px !important;
+  max-height: 180px !important;
+  object-fit: contain !important;
+  margin: 0 auto !important;
+}
+
+/* Esconde somente os textos que estiverem dentro do bloco da logo */
+.landing-logo strong,
+.landing-logo span,
+.landing-logo div {
+  display: none !important;
+}
+
+/* Botão entrar fica no canto superior direito */
+.landing-login-button {
+  position: absolute !important;
+  top: 22px !important;
+  right: 30px !important;
+  z-index: 10 !important;
+  color: #ffffff !important;
+}
+
+/* ---------- LANDING: TEXTOS BRANCOS ---------- */
+.landing-page h1,
+.landing-page h2,
+.landing-page h3,
+.landing-page h4,
+.landing-page p,
+.landing-page small,
+.landing-page label {
+  color: #ffffff !important;
+}
+
+.landing-page .landing-hero h1 span,
+.landing-page .landing-badge,
+.landing-page .landing-section-title span {
+  color: #52f58d !important;
+}
+
+/* ---------- RESPONSIVO CELULAR ---------- */
+@media (max-width: 600px) {
+
+  .login-page {
+    min-height: 100dvh !important;
+    padding: 16px 12px !important;
+    align-items: center !important;
+  }
+
+  .login-card {
+    width: min(100%, 390px) !important;
+    max-width: 390px !important;
+    padding: 24px 20px 20px !important;
+    border-radius: 22px !important;
+  }
+
+  .login-card .brand-icon {
+    width: 125px !important;
+    height: 90px !important;
+    max-width: 125px !important;
+  }
+
+  .login-card .brand {
+    margin-bottom: 15px !important;
+  }
+
+  .login-card .welcome h2 {
+    font-size: 24px !important;
+  }
+
+  .login-card .welcome p {
+    font-size: 12px !important;
+  }
+
+  .login-card .input-wrapper {
+    min-height: 50px !important;
+  }
+
+  .login-card .input-wrapper input {
+    height: 48px !important;
+    font-size: 14px !important;
+  }
+
+  /* Landing no celular */
+  .landing-header {
+    min-height: 155px !important;
+    padding: 5px 12px !important;
+  }
+
+  .landing-logo {
+    top: 0 !important;
+    width: 180px !important;
+    height: 145px !important;
+  }
+
+  .landing-logo img {
+    width: 165px !important;
+    height: 140px !important;
+    max-width: 165px !important;
+    max-height: 140px !important;
+  }
+
+  .landing-login-button {
+    top: 14px !important;
+    right: 12px !important;
+    padding: 8px 11px !important;
+    font-size: 11px !important;
+  }
+
+  .landing-hero {
+    width: 100% !important;
+    padding: 25px 16px 45px !important;
+    gap: 30px !important;
+  }
+
+  .landing-hero-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    text-align: center !important;
+  }
+
+  .landing-hero h1 {
+    font-size: clamp(32px, 9vw, 40px) !important;
+    line-height: 1.08 !important;
+  }
+
+  .landing-hero-content > p {
+    font-size: 14px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .landing-actions {
+    width: 100% !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .landing-primary-button,
+  .landing-secondary-button {
+    width: 100% !important;
+    max-width: 360px !important;
+  }
+}
+
+@media (max-width: 380px) {
+
+  .login-card {
+    padding: 22px 16px 18px !important;
+  }
+
+  .login-card .brand-icon {
+    width: 115px !important;
+    height: 82px !important;
+  }
+
+  .landing-header {
+    min-height: 145px !important;
+  }
+
+  .landing-logo img {
+    width: 145px !important;
+    height: 125px !important;
+  }
+}
+
+/* =========================================================
+   AJUSTE DEFINITIVO — LOGIN PROPORCIONAL
+   ========================================================= */
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.login-page {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 30px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.login-card {
+  width: 100% !important;
+  max-width: 440px !important;
+  min-width: 0 !important;
+  margin: 0 auto !important;
+  padding: 30px 34px 26px !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+/* Logo SOMENTE no centro, sem texto ao lado */
+.login-card .brand {
+  width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 0 18px !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  text-align: center !important;
+}
+
+.login-card .brand-icon {
+  display: block !important;
+  width: 205px !important;
+  height: 125px !important;
+  max-width: 205px !important;
+  max-height: 125px !important;
+  min-width: 0 !important;
+  object-fit: contain !important;
+  margin: 0 auto !important;
+  flex: none !important;
+}
+
+/* Remove completamente o texto que fica ao lado/embaixo da logo */
+.login-card .brand > div,
+.login-card .brand > p {
+  display: none !important;
+}
+
+.login-card .welcome {
+  width: 100% !important;
+  margin: 0 0 24px !important;
+  text-align: center !important;
+}
+
+.login-card .welcome h2 {
+  margin: 0 0 7px !important;
+  font-size: 27px !important;
+  line-height: 1.15 !important;
+}
+
+.login-card .welcome p {
+  width: 100% !important;
+  max-width: 340px !important;
+  margin: 0 auto !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+}
+
+.login-card .login-form {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+}
+
+.login-card .field-group {
+  width: 100% !important;
+  min-width: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 7px !important;
+}
+
+.login-card .field-group label {
+  width: 100% !important;
+  font-size: 13px !important;
+  text-align: left !important;
+}
+
+.login-card .input-wrapper {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 52px !important;
+  min-height: 52px !important;
+  max-width: none !important;
+  padding: 0 13px !important;
+  border-radius: 12px !important;
+  box-sizing: border-box !important;
+}
+
+.login-card .input-wrapper input {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 50px !important;
+  font-size: 14px !important;
+  box-sizing: border-box !important;
+}
+
+.login-card .form-options {
+  width: 100% !important;
+  min-width: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+}
+
+.login-card .login-button {
+  width: 100% !important;
+  max-width: none !important;
+  height: 52px !important;
+  min-height: 52px !important;
+  margin: 0 !important;
+}
+
+.login-card .divider {
+  width: 100% !important;
+  margin: 22px 0 18px !important;
+}
+
+.login-card .register {
+  width: 100% !important;
+  text-align: center !important;
+}
+
+.login-card .register p {
+  margin: 0 0 7px !important;
+}
+
+.login-card footer {
+  width: 100% !important;
+}
+
+/* =========================================================
+   CELULAR — MESMA PROPORÇÃO
+   ========================================================= */
+@media (max-width: 600px) {
+  .login-page {
+    padding: 18px 12px !important;
+  }
+
+  .login-card {
+    width: 100% !important;
+    max-width: 390px !important;
+    padding: 24px 20px 20px !important;
+    border-radius: 22px !important;
+  }
+
+  .login-card .brand-icon {
+    width: 175px !important;
+    height: 105px !important;
+    max-width: 175px !important;
+    max-height: 105px !important;
+  }
+
+  .login-card .welcome h2 {
+    font-size: 24px !important;
+  }
+
+  .login-card .welcome p {
+    font-size: 12px !important;
+  }
+
+  .login-card .form-options {
+    align-items: center !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .login-card {
+    padding: 22px 16px 18px !important;
+  }
+
+  .login-card .brand-icon {
+    width: 155px !important;
+    height: 95px !important;
+    max-width: 155px !important;
+    max-height: 95px !important;
+  }
+}
+
+/* =========================================================
+   SPACE FINANCE — AJUSTE FINAL DO APP.CSS
+   Este bloco fica por último para vencer regras anteriores.
+   ========================================================= */
+
+/* LOGIN: proporção fixa e centralizada */
+.login-page {
+  min-height: 100vh !important;
+  width: 100% !important;
+  padding: 24px 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  overflow-x: hidden !important;
+}
+
+.login-card {
+  width: 100% !important;
+  max-width: 430px !important;
+  margin: 0 auto !important;
+  padding: 28px 30px 24px !important;
+  box-sizing: border-box !important;
+}
+
+.login-card .brand {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  margin: 0 0 18px !important;
+}
+
+.login-card .brand-icon {
+  display: block !important;
+  width: 175px !important;
+  height: 120px !important;
+  max-width: 175px !important;
+  max-height: 120px !important;
+  object-fit: contain !important;
+  margin: 0 auto !important;
+  flex: 0 0 auto !important;
+}
+
+.login-card .brand p,
+.login-card .brand strong,
+.login-card .brand span {
+  margin: 0 !important;
+  text-align: center !important;
+}
+
+.login-card .welcome {
+  width: 100% !important;
+  text-align: center !important;
+  margin: 0 0 22px !important;
+}
+
+.login-card .welcome h2 {
+  margin: 0 0 7px !important;
+  font-size: 25px !important;
+  line-height: 1.2 !important;
+}
+
+.login-card .welcome p {
+  margin: 0 !important;
+  font-size: 13px !important;
+  line-height: 1.45 !important;
+}
+
+.login-card .login-form,
+.login-card form {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.login-card .field-group,
+.login-card .input-wrapper,
+.login-card .login-button,
+.login-card .form-options,
+.login-card .divider,
+.login-card .register,
+.login-card footer {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.login-card .input-wrapper {
+  min-height: 52px !important;
+  height: 52px !important;
+}
+
+.login-card .input-wrapper input {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 50px !important;
+  box-sizing: border-box !important;
+}
+
+.login-card .login-button {
+  height: 52px !important;
+  min-height: 52px !important;
+  margin-top: 2px !important;
+}
+
+/* CADASTRO EM PÁGINA PRÓPRIA */
+.register-page {
+  min-height: 100vh !important;
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 24px 16px !important;
+  box-sizing: border-box !important;
+  overflow-x: hidden !important;
+}
+
+.register-page-card {
+  width: 100% !important;
+  max-width: 430px !important;
+  margin: 0 auto !important;
+  padding: 28px 30px 24px !important;
+  box-sizing: border-box !important;
+}
+
+.register-page-logo {
+  display: block !important;
+  width: 175px !important;
+  height: 120px !important;
+  max-width: 175px !important;
+  max-height: 120px !important;
+  object-fit: contain !important;
+  margin: 0 auto 12px !important;
+}
+
+/* LANDING: logo grande, centralizada e SEM texto ao lado */
+.landing-page {
+  min-height: 100vh !important;
+  width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+.landing-header {
+  width: 100% !important;
+  min-height: 190px !important;
+  padding: 18px 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  box-sizing: border-box !important;
+}
+
+.landing-logo {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 auto !important;
+}
+
+.landing-logo img {
+  display: block !important;
+  width: 210px !important;
+  height: 160px !important;
+  max-width: 210px !important;
+  max-height: 160px !important;
+  object-fit: contain !important;
+  margin: 0 auto !important;
+}
+
+.landing-logo strong,
+.landing-logo span,
+.landing-logo p,
+.landing-logo div:not(:has(img)) {
+  display: none !important;
+}
+
+.landing-header .landing-cta,
+.landing-header button {
+  position: absolute !important;
+  right: 32px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+/* Todos os textos da landing em branco; destaques continuam verdes */
+.landing-page h1,
+.landing-page h2,
+.landing-page h3,
+.landing-page h4,
+.landing-page p,
+.landing-page li,
+.landing-page label,
+.landing-page span,
+.landing-page strong {
+  color: #fff !important;
+}
+
+.landing-page .highlight,
+.landing-page .green,
+.landing-page .accent,
+.landing-page .landing-highlight {
+  color: #39ff14 !important;
+}
+
+@media (max-width: 600px) {
+  .login-page,
+  .register-page {
+    min-height: 100dvh !important;
+    padding: 16px 12px !important;
+    align-items: center !important;
+  }
+
+  .login-card,
+  .register-page-card {
+    max-width: 390px !important;
+    padding: 24px 20px 20px !important;
+    border-radius: 22px !important;
+  }
+
+  .login-card .brand-icon,
+  .register-page-logo {
+    width: 155px !important;
+    height: 105px !important;
+    max-width: 155px !important;
+    max-height: 105px !important;
+  }
+
+  .landing-header {
+    min-height: 145px !important;
+    padding: 12px 16px !important;
+  }
+
+  .landing-logo img {
+    width: 155px !important;
+    height: 115px !important;
+    max-width: 155px !important;
+    max-height: 115px !important;
+  }
+
+  .landing-header .landing-cta,
+  .landing-header button {
+    right: 12px !important;
+    font-size: 12px !important;
+    padding: 9px 13px !important;
+  }
+}
+
+
+/* ==========================================================
+   SPACE FINANCE — NOVO LANÇAMENTO
+   Correção final de layout
+   ========================================================== */
+.new-launch-page {
+  width: 100%;
+  min-height: calc(100vh - 40px);
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 24px 60px;
+  color: #fff;
+}
+
+.new-launch-card {
+  width: min(100%, 760px);
+  box-sizing: border-box;
+  padding: 32px 36px 36px;
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(18, 38, 29, .96), rgba(7, 18, 14, .98));
+  border: 1px solid rgba(57, 255, 20, .18);
+  box-shadow: 0 18px 55px rgba(0,0,0,.35), 0 0 35px rgba(57,255,20,.06);
+}
+
+.new-launch-header {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 30px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.new-launch-header > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.new-launch-icon {
+  width: 52px;
+  height: 52px;
+  flex: 0 0 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  background: rgba(57,255,20,.10);
+  border: 1px solid rgba(57,255,20,.22);
+  color: #39ff14;
+  font-size: 25px;
+}
+
+.new-launch-header h1 {
+  margin: 0 0 5px;
+  color: #fff;
+  font-size: clamp(24px, 3vw, 32px);
+  line-height: 1.15;
+  font-weight: 800;
+}
+
+.new-launch-header p {
+  margin: 0;
+  color: rgba(255,255,255,.72);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.new-launch-back {
+  flex: 0 0 auto;
+  min-height: 42px;
+  padding: 10px 17px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.06);
+  color: #fff !important;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.new-launch-back:hover {
+  background: rgba(255,255,255,.12);
+  border-color: rgba(57,255,20,.35);
+  transform: translateY(-1px);
+}
+
+.new-launch-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.launch-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-sizing: border-box;
+}
+
+.launch-field > label {
+  display: block;
+  margin: 0;
+  color: #fff !important;
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.launch-field input,
+.launch-field select {
+  width: 100% !important;
+  min-width: 0;
+  height: 50px;
+  box-sizing: border-box;
+  padding: 0 15px;
+  border-radius: 11px;
+  border: 1px solid rgba(255,255,255,.18);
+  outline: none;
+  background: rgba(255,255,255,.055) !important;
+  color: #fff !important;
+  font-size: 15px;
+  font-family: inherit;
+  transition: .2s ease;
+}
+
+.launch-field input::placeholder {
+  color: rgba(255,255,255,.42);
+}
+
+.launch-field input:focus,
+.launch-field select:focus {
+  border-color: #39ff14;
+  box-shadow: 0 0 0 3px rgba(57,255,20,.08);
+}
+
+.launch-field select option {
+  background: #10271e;
+  color: #fff;
+}
+
+.launch-type {
+  width: 100%;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px !important;
+}
+
+.launch-type button {
+  width: 100%;
+  min-height: 50px;
+  margin: 0;
+  box-sizing: border-box;
+  border-radius: 11px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.055);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.launch-type button:hover {
+  border-color: rgba(57,255,20,.35);
+  background: rgba(57,255,20,.08);
+}
+
+.launch-type button.selected {
+  background: #39ff14 !important;
+  border-color: #39ff14 !important;
+  color: #061006 !important;
+  box-shadow: 0 0 18px rgba(57,255,20,.15);
+}
+
+.launch-type button.selected.expense {
+  background: #ff4545 !important;
+  border-color: #ff4545 !important;
+  color: #fff !important;
+  box-shadow: 0 0 18px rgba(255,69,69,.12);
+}
+
+.new-launch-form .launch-field:last-child {
+  margin-top: 2px;
+}
+
+.new-launch-actions,
+.launch-actions,
+.new-launch-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.new-launch-actions button,
+.launch-actions button,
+.new-launch-buttons button {
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 11px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.new-launch-actions button[type="button"],
+.new-launch-buttons button[type="button"] {
+  border: 1px solid rgba(255,255,255,.18);
+  background: transparent;
+  color: #fff;
+}
+
+.new-launch-actions button[type="submit"],
+.new-launch-buttons button[type="submit"] {
+  border: 0;
+  background: #39ff14;
+  color: #061006;
+}
+
+@media (max-width: 700px) {
+  .new-launch-page {
+    min-height: 100vh;
+    padding: 18px 12px 35px;
+    align-items: flex-start;
+  }
+
+  .new-launch-card {
+    width: 100%;
+    padding: 22px 18px 24px;
     border-radius: 18px;
   }
 
-  .register-modal-header h2 {
+  .new-launch-header {
+    gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+  }
+
+  .new-launch-header > div:first-child {
+    gap: 11px;
+  }
+
+  .new-launch-icon {
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
     font-size: 21px;
   }
 
-  .register-modal-logo {
-    width: 125px;
+  .new-launch-header h1 {
+    font-size: 23px;
+  }
+
+  .new-launch-header p {
+    font-size: 13px;
+  }
+
+  .new-launch-back {
+    min-height: 40px;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .new-launch-form {
+    gap: 17px;
+  }
+
+  .launch-type {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .launch-field input,
+  .launch-field select,
+  .launch-type button {
+    height: 48px;
+    min-height: 48px;
+  }
+
+  .new-launch-actions,
+  .launch-actions,
+  .new-launch-buttons {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .new-launch-actions button,
+  .launch-actions button,
+  .new-launch-buttons button {
+    width: 100%;
   }
 }
