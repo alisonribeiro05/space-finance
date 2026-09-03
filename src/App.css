@@ -4970,3 +4970,516 @@ body,
     width: 100%;
   }
 }
+
+/* =========================================================
+   RESULTADO DO MÊS — AJUSTE MOBILE FINAL
+   ========================================================= */
+
+.annual-page {
+  width: 100% !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 24px 28px 40px !important;
+  box-sizing: border-box !important;
+}
+
+.annual-page-header {
+  width: 100% !important;
+  margin-bottom: 24px !important;
+}
+
+.annual-page-top {
+  position: relative !important;
+  width: 100% !important;
+  min-height: 150px !important;
+  padding: 22px 24px !important;
+  box-sizing: border-box !important;
+  border-radius: 20px !important;
+  background: linear-gradient(145deg, rgba(42, 104, 67, 0.95), rgba(20, 55, 37, 0.96)) !important;
+  border: 1px solid rgba(124, 255, 79, 0.28) !important;
+  box-shadow: 0 12px 30px rgba(0,0,0,.20) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.annual-brand-row {
+  position: absolute !important;
+  left: 24px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.annual-logo {
+  width: 150px !important;
+  max-width: 150px !important;
+  height: auto !important;
+}
+
+.annual-chart-icon {
+  display: none !important;
+}
+
+.annual-title {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  text-align: center !important;
+  color: #fff !important;
+  padding: 0 160px !important;
+  box-sizing: border-box !important;
+}
+
+.annual-title-icon {
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 12px !important;
+  background: rgba(124,255,79,.14) !important;
+}
+
+.annual-title h1,
+.annual-title h2 {
+  margin: 0 !important;
+  color: #fff !important;
+  font-size: 24px !important;
+  line-height: 1.15 !important;
+}
+
+.annual-title p {
+  margin: 5px 0 0 !important;
+  color: rgba(255,255,255,.78) !important;
+  font-size: 13px !important;
+}
+
+.annual-back-button {
+  position: absolute !important;
+  right: 24px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  margin: 0 !important;
+  padding: 10px 15px !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+  background: rgba(0,0,0,.18) !important;
+  color: #fff !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+}
+
+.annual-summary-cards {
+  width: 100% !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+  margin: 0 0 24px !important;
+}
+
+.annual-card {
+  min-width: 0 !important;
+  min-height: 115px !important;
+  padding: 20px !important;
+  box-sizing: border-box !important;
+}
+
+.annual-card span {
+  color: #fff !important;
+}
+
+.annual-card strong {
+  color: #fff !important;
+  font-size: 25px !important;
+}
+
+@media (max-width: 700px) {
+  .annual-page {
+    padding: 14px 12px 30px !important;
+  }
+
+  .annual-page-top {
+    min-height: 205px !important;
+    padding: 18px 12px 20px !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    gap: 10px !important;
+  }
+
+  .annual-brand-row {
+    position: static !important;
+    transform: none !important;
+    margin: 0 auto !important;
+  }
+
+  .annual-logo {
+    width: 165px !important;
+    max-width: 165px !important;
+  }
+
+  .annual-title {
+    padding: 0 !important;
+    flex-direction: column !important;
+    gap: 7px !important;
+    width: 100% !important;
+  }
+
+  .annual-title-icon {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+  }
+
+  .annual-title h1 {
+    font-size: 21px !important;
+  }
+
+  .annual-title p {
+    font-size: 12px !important;
+  }
+
+  .annual-back-button {
+    top: 14px !important;
+    right: 12px !important;
+    transform: none !important;
+    padding: 7px 11px !important;
+    font-size: 12px !important;
+  }
+
+  .annual-summary-cards {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    margin-top: 14px !important;
+  }
+
+  .annual-card {
+    width: 100% !important;
+    min-height: 100px !important;
+    padding: 18px !important;
+    border-radius: 15px !important;
+  }
+
+  .annual-card strong {
+    font-size: 23px !important;
+  }
+
+  .mes-detalhamento {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .annual-page-top {
+    min-height: 190px !important;
+  }
+
+  .annual-logo {
+    width: 145px !important;
+    max-width: 145px !important;
+  }
+
+  .annual-title h1 {
+    font-size: 19px !important;
+  }
+
+  .annual-back-button {
+    font-size: 11px !important;
+    padding: 6px 9px !important;
+  }
+}
+
+/* =========================================================
+   AJUSTE FINAL — RESULTADO DO MÊS / MOBILE
+   ========================================================= */
+.annual-page-header,
+.annual-page-top {
+  position: relative !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.annual-page-top {
+  max-width: 760px !important;
+  margin: 0 auto !important;
+}
+
+.annual-brand-row {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.annual-logo {
+  width: 210px !important;
+  max-width: 210px !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+.annual-back-button {
+  position: absolute !important;
+  top: 18px !important;
+  right: 18px !important;
+  transform: none !important;
+  z-index: 10 !important;
+  padding: 9px 14px !important;
+  font-size: 14px !important;
+  border-radius: 10px !important;
+  white-space: nowrap !important;
+}
+
+@media (max-width: 700px) {
+  .annual-page {
+    width: 100% !important;
+    max-width: none !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .annual-page-top {
+    min-height: 190px !important;
+    padding: 16px 12px 18px !important;
+  }
+
+  .annual-logo {
+    width: 185px !important;
+    max-width: 185px !important;
+  }
+
+  /* Voltar fica no topo direito, mas dentro do cabeçalho */
+  .annual-back-button {
+    top: 16px !important;
+    right: 16px !important;
+    padding: 8px 12px !important;
+    font-size: 13px !important;
+  }
+
+  /* Entradas / Despesas / Resultado: rolagem horizontal */
+  .annual-summary-cards {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    gap: 14px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding: 4px 14px 14px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    scroll-snap-type: x proximity !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: thin !important;
+  }
+
+  .annual-summary-cards::-webkit-scrollbar {
+    height: 6px !important;
+  }
+
+  .annual-card {
+    flex: 0 0 250px !important;
+    width: 250px !important;
+    min-width: 250px !important;
+    max-width: 250px !important;
+    min-height: 145px !important;
+    scroll-snap-align: start !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Contêiner de detalhamento fica abaixo dos cards */
+  .mes-detalhamento {
+    width: calc(100% - 28px) !important;
+    max-width: 620px !important;
+    margin: 8px auto 24px !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+  }
+
+  .mes-detalhamento-header {
+    position: relative !important;
+  }
+
+  .mes-detalhamento-titulo {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Seletor de ano dentro do contêiner */
+  .mes-detalhamento-ano {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    margin-top: 14px !important;
+  }
+
+  .mes-detalhamento-ano label {
+    color: #fff !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+  }
+
+  .mes-detalhamento-ano select {
+    min-width: 115px !important;
+    padding: 9px 12px !important;
+    border-radius: 10px !important;
+    border: 1px solid rgba(124,255,79,.45) !important;
+    background: #10271d !important;
+    color: #fff !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    outline: none !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .annual-logo {
+    width: 165px !important;
+    max-width: 165px !important;
+  }
+
+  .annual-back-button {
+    top: 14px !important;
+    right: 12px !important;
+    padding: 7px 10px !important;
+    font-size: 12px !important;
+  }
+
+  .annual-card {
+    flex-basis: 235px !important;
+    width: 235px !important;
+    min-width: 235px !important;
+    max-width: 235px !important;
+  }
+}
+
+/* =========================================================
+   CORREÇÃO FINAL — SELETOR DE ANO NO DETALHAMENTO DO MÊS
+   Desktop + celular
+========================================================= */
+.mes-detalhamento {
+  overflow: visible !important;
+  position: relative !important;
+}
+
+.mes-detalhamento-header {
+  overflow: visible !important;
+}
+
+.mes-detalhamento-titulo {
+  align-items: flex-start !important;
+}
+
+.mes-detalhamento-titulo > div {
+  min-width: 0 !important;
+  flex: 1 1 auto !important;
+}
+
+.mes-detalhamento-ano {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: static !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 10px !important;
+  width: auto !important;
+  margin: 14px 0 0 !important;
+  padding: 0 !important;
+  z-index: 20 !important;
+}
+
+.mes-detalhamento-ano label {
+  display: inline-block !important;
+  color: #ffffff !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important;
+}
+
+.mes-detalhamento-ano select {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  appearance: auto !important;
+  -webkit-appearance: auto !important;
+  width: 125px !important;
+  min-width: 125px !important;
+  height: 40px !important;
+  padding: 7px 10px !important;
+  margin: 0 !important;
+  border: 1px solid rgba(57,255,20,.65) !important;
+  border-radius: 10px !important;
+  background: #10271d !important;
+  color: #ffffff !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+}
+
+.mes-detalhamento-ano select option {
+  background: #10271d !important;
+  color: #ffffff !important;
+}
+
+@media (max-width: 700px) {
+  .mes-detalhamento {
+    overflow: visible !important;
+  }
+
+  .mes-detalhamento-header {
+    overflow: visible !important;
+    padding: 20px 18px 22px !important;
+  }
+
+  .mes-detalhamento-titulo {
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  .mes-detalhamento-titulo > span {
+    flex: 0 0 auto !important;
+  }
+
+  .mes-detalhamento-titulo h2 {
+    font-size: 22px !important;
+    line-height: 1.15 !important;
+  }
+
+  .mes-detalhamento-titulo p {
+    font-size: 16px !important;
+    margin-top: 7px !important;
+  }
+
+  .mes-detalhamento-ano {
+    justify-content: flex-start !important;
+    margin-top: 12px !important;
+    gap: 8px !important;
+  }
+
+  .mes-detalhamento-ano label {
+    font-size: 14px !important;
+  }
+
+  .mes-detalhamento-ano select {
+    width: 120px !important;
+    min-width: 120px !important;
+    height: 38px !important;
+    font-size: 14px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .mes-detalhamento-ano select {
+    width: 110px !important;
+    min-width: 110px !important;
+  }
+}
