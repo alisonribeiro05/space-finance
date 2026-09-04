@@ -4414,753 +4414,346 @@ body,
 }
 
 /* =========================================================
-   SPACE FINANCE — AJUSTE FINAL DO APP.CSS
-   Este bloco fica por último para vencer regras anteriores.
+   SPACE FINANCE — AJUSTE FINAL: SIDEBAR + RESULTADO DO MÊS
    ========================================================= */
 
-/* LOGIN: proporção fixa e centralizada */
-.login-page {
-  min-height: 100vh !important;
-  width: 100% !important;
-  padding: 24px 16px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  box-sizing: border-box !important;
-  overflow-x: hidden !important;
+/* ---------- SIDEBAR ---------- */
+.sidebar {
+  width: 250px !important;
+  min-width: 250px !important;
+  z-index: 1000 !important;
 }
 
-.login-card {
-  width: 100% !important;
-  max-width: 430px !important;
-  margin: 0 auto !important;
-  padding: 28px 30px 24px !important;
-  box-sizing: border-box !important;
+.sidebar.open {
+  width: 250px !important;
+  min-width: 250px !important;
 }
 
-.login-card .brand {
-  width: 100% !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 4px !important;
-  margin: 0 0 18px !important;
+.sidebar.closed {
+  width: 75px !important;
+  min-width: 75px !important;
 }
 
-.login-card .brand-icon {
+/* Quando aberta, mostra todos os textos */
+.sidebar.open .sidebar-brand,
+.sidebar.open .sidebar-item strong,
+.sidebar.open .sidebar-logout strong {
   display: block !important;
-  width: 175px !important;
-  height: 120px !important;
-  max-width: 175px !important;
-  max-height: 120px !important;
-  object-fit: contain !important;
-  margin: 0 auto !important;
-  flex: 0 0 auto !important;
 }
 
-.login-card .brand p,
-.login-card .brand strong,
-.login-card .brand span {
-  margin: 0 !important;
-  text-align: center !important;
+.sidebar.open .sidebar-logo {
+  display: flex !important;
 }
 
-.login-card .welcome {
-  width: 100% !important;
-  text-align: center !important;
-  margin: 0 0 22px !important;
+.sidebar.open .sidebar-item,
+.sidebar.open .sidebar-logout {
+  justify-content: flex-start !important;
+  padding-left: 15px !important;
 }
 
-.login-card .welcome h2 {
-  margin: 0 0 7px !important;
-  font-size: 25px !important;
-  line-height: 1.2 !important;
-}
-
-.login-card .welcome p {
-  margin: 0 !important;
-  font-size: 13px !important;
-  line-height: 1.45 !important;
-}
-
-.login-card .login-form,
-.login-card form {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 !important;
+/* Conteúdo acompanha a sidebar no desktop */
+.main-content {
+  margin-left: 250px !important;
+  width: calc(100% - 250px) !important;
   box-sizing: border-box !important;
+  min-width: 0 !important;
 }
 
-.login-card .field-group,
-.login-card .input-wrapper,
-.login-card .login-button,
-.login-card .form-options,
-.login-card .divider,
-.login-card .register,
-.login-card footer {
-  width: 100% !important;
-  max-width: 100% !important;
-  box-sizing: border-box !important;
-}
-
-.login-card .input-wrapper {
-  min-height: 52px !important;
-  height: 52px !important;
-}
-
-.login-card .input-wrapper input {
+/* ---------- RESULTADO DO MÊS ---------- */
+.annual-page {
+  position: relative !important;
   width: 100% !important;
   min-width: 0 !important;
-  height: 50px !important;
   box-sizing: border-box !important;
-}
-
-.login-card .login-button {
-  height: 52px !important;
-  min-height: 52px !important;
-  margin-top: 2px !important;
-}
-
-/* CADASTRO EM PÁGINA PRÓPRIA */
-.register-page {
-  min-height: 100vh !important;
-  width: 100% !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 24px 16px !important;
-  box-sizing: border-box !important;
-  overflow-x: hidden !important;
-}
-
-.register-page-card {
-  width: 100% !important;
-  max-width: 430px !important;
-  margin: 0 auto !important;
-  padding: 28px 30px 24px !important;
-  box-sizing: border-box !important;
-}
-
-.register-page-logo {
-  display: block !important;
-  width: 175px !important;
-  height: 120px !important;
-  max-width: 175px !important;
-  max-height: 120px !important;
-  object-fit: contain !important;
-  margin: 0 auto 12px !important;
-}
-
-/* LANDING: logo grande, centralizada e SEM texto ao lado */
-.landing-page {
-  min-height: 100vh !important;
-  width: 100% !important;
-  overflow-x: hidden !important;
-}
-
-.landing-header {
-  width: 100% !important;
-  min-height: 190px !important;
-  padding: 18px 32px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  position: relative !important;
-  box-sizing: border-box !important;
-}
-
-.landing-logo {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: auto !important;
-  height: auto !important;
-  margin: 0 auto !important;
-}
-
-.landing-logo img {
-  display: block !important;
-  width: 210px !important;
-  height: 160px !important;
-  max-width: 210px !important;
-  max-height: 160px !important;
-  object-fit: contain !important;
-  margin: 0 auto !important;
-}
-
-.landing-logo strong,
-.landing-logo span,
-.landing-logo p,
-.landing-logo div:not(:has(img)) {
-  display: none !important;
-}
-
-.landing-header .landing-cta,
-.landing-header button {
-  position: absolute !important;
-  right: 32px !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-}
-
-/* Todos os textos da landing em branco; destaques continuam verdes */
-.landing-page h1,
-.landing-page h2,
-.landing-page h3,
-.landing-page h4,
-.landing-page p,
-.landing-page li,
-.landing-page label,
-.landing-page span,
-.landing-page strong {
-  color: #fff !important;
-}
-
-.landing-page .highlight,
-.landing-page .green,
-.landing-page .accent,
-.landing-page .landing-highlight {
-  color: #39ff14 !important;
-}
-
-@media (max-width: 600px) {
-  .login-page,
-  .register-page {
-    min-height: 100dvh !important;
-    padding: 16px 12px !important;
-    align-items: center !important;
-  }
-
-  .login-card,
-  .register-page-card {
-    max-width: 390px !important;
-    padding: 24px 20px 20px !important;
-    border-radius: 22px !important;
-  }
-
-  .login-card .brand-icon,
-  .register-page-logo {
-    width: 155px !important;
-    height: 105px !important;
-    max-width: 155px !important;
-    max-height: 105px !important;
-  }
-
-  .landing-header {
-    min-height: 145px !important;
-    padding: 12px 16px !important;
-  }
-
-  .landing-logo img {
-    width: 155px !important;
-    height: 115px !important;
-    max-width: 155px !important;
-    max-height: 115px !important;
-  }
-
-  .landing-header .landing-cta,
-  .landing-header button {
-    right: 12px !important;
-    font-size: 12px !important;
-    padding: 9px 13px !important;
-  }
-}
-
-
-/* ==========================================================
-   SPACE FINANCE — NOVO LANÇAMENTO
-   Correção final de layout
-   ========================================================== */
-.new-launch-page {
-  width: 100%;
-  min-height: calc(100vh - 40px);
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 40px 24px 60px;
-  color: #fff;
-}
-
-.new-launch-card {
-  width: min(100%, 760px);
-  box-sizing: border-box;
-  padding: 32px 36px 36px;
-  border-radius: 22px;
-  background: linear-gradient(145deg, rgba(18, 38, 29, .96), rgba(7, 18, 14, .98));
-  border: 1px solid rgba(57, 255, 20, .18);
-  box-shadow: 0 18px 55px rgba(0,0,0,.35), 0 0 35px rgba(57,255,20,.06);
-}
-
-.new-launch-header {
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 24px;
-  margin-bottom: 30px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid rgba(255,255,255,.08);
-}
-
-.new-launch-header > div:first-child {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  min-width: 0;
-}
-
-.new-launch-icon {
-  width: 52px;
-  height: 52px;
-  flex: 0 0 52px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 15px;
-  background: rgba(57,255,20,.10);
-  border: 1px solid rgba(57,255,20,.22);
-  color: #39ff14;
-  font-size: 25px;
-}
-
-.new-launch-header h1 {
-  margin: 0 0 5px;
-  color: #fff;
-  font-size: clamp(24px, 3vw, 32px);
-  line-height: 1.15;
-  font-weight: 800;
-}
-
-.new-launch-header p {
-  margin: 0;
-  color: rgba(255,255,255,.72);
-  font-size: 15px;
-  line-height: 1.4;
-}
-
-.new-launch-back {
-  flex: 0 0 auto;
-  min-height: 42px;
-  padding: 10px 17px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,.18);
-  background: rgba(255,255,255,.06);
-  color: #fff !important;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: .2s ease;
-}
-
-.new-launch-back:hover {
-  background: rgba(255,255,255,.12);
-  border-color: rgba(57,255,20,.35);
-  transform: translateY(-1px);
-}
-
-.new-launch-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.launch-field {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  box-sizing: border-box;
-}
-
-.launch-field > label {
-  display: block;
-  margin: 0;
-  color: #fff !important;
-  font-size: 14px;
-  line-height: 1.2;
-  font-weight: 700;
-}
-
-.launch-field input,
-.launch-field select {
-  width: 100% !important;
-  min-width: 0;
-  height: 50px;
-  box-sizing: border-box;
-  padding: 0 15px;
-  border-radius: 11px;
-  border: 1px solid rgba(255,255,255,.18);
-  outline: none;
-  background: rgba(255,255,255,.055) !important;
-  color: #fff !important;
-  font-size: 15px;
-  font-family: inherit;
-  transition: .2s ease;
-}
-
-.launch-field input::placeholder {
-  color: rgba(255,255,255,.42);
-}
-
-.launch-field input:focus,
-.launch-field select:focus {
-  border-color: #39ff14;
-  box-shadow: 0 0 0 3px rgba(57,255,20,.08);
-}
-
-.launch-field select option {
-  background: #10271e;
-  color: #fff;
-}
-
-.launch-type {
-  width: 100%;
-  display: grid !important;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px !important;
-}
-
-.launch-type button {
-  width: 100%;
-  min-height: 50px;
-  margin: 0;
-  box-sizing: border-box;
-  border-radius: 11px;
-  border: 1px solid rgba(255,255,255,.16);
-  background: rgba(255,255,255,.055);
-  color: #fff;
-  font-size: 15px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: .2s ease;
-}
-
-.launch-type button:hover {
-  border-color: rgba(57,255,20,.35);
-  background: rgba(57,255,20,.08);
-}
-
-.launch-type button.selected {
-  background: #39ff14 !important;
-  border-color: #39ff14 !important;
-  color: #061006 !important;
-  box-shadow: 0 0 18px rgba(57,255,20,.15);
-}
-
-.launch-type button.selected.expense {
-  background: #ff4545 !important;
-  border-color: #ff4545 !important;
-  color: #fff !important;
-  box-shadow: 0 0 18px rgba(255,69,69,.12);
-}
-
-.new-launch-form .launch-field:last-child {
-  margin-top: 2px;
-}
-
-.new-launch-actions,
-.launch-actions,
-.new-launch-buttons {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 12px;
-  margin-top: 4px;
-}
-
-.new-launch-actions button,
-.launch-actions button,
-.new-launch-buttons button {
-  min-height: 48px;
-  padding: 0 22px;
-  border-radius: 11px;
-  font-family: inherit;
-  font-size: 15px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.new-launch-actions button[type="button"],
-.new-launch-buttons button[type="button"] {
-  border: 1px solid rgba(255,255,255,.18);
-  background: transparent;
-  color: #fff;
-}
-
-.new-launch-actions button[type="submit"],
-.new-launch-buttons button[type="submit"] {
-  border: 0;
-  background: #39ff14;
-  color: #061006;
-}
-
-@media (max-width: 700px) {
-  .new-launch-page {
-    min-height: 100vh;
-    padding: 18px 12px 35px;
-    align-items: flex-start;
-  }
-
-  .new-launch-card {
-    width: 100%;
-    padding: 22px 18px 24px;
-    border-radius: 18px;
-  }
-
-  .new-launch-header {
-    gap: 14px;
-    margin-bottom: 24px;
-    padding-bottom: 20px;
-  }
-
-  .new-launch-header > div:first-child {
-    gap: 11px;
-  }
-
-  .new-launch-icon {
-    width: 44px;
-    height: 44px;
-    flex-basis: 44px;
-    font-size: 21px;
-  }
-
-  .new-launch-header h1 {
-    font-size: 23px;
-  }
-
-  .new-launch-header p {
-    font-size: 13px;
-  }
-
-  .new-launch-back {
-    min-height: 40px;
-    padding: 8px 12px;
-    font-size: 13px;
-  }
-
-  .new-launch-form {
-    gap: 17px;
-  }
-
-  .launch-type {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .launch-field input,
-  .launch-field select,
-  .launch-type button {
-    height: 48px;
-    min-height: 48px;
-  }
-
-  .new-launch-actions,
-  .launch-actions,
-  .new-launch-buttons {
-    flex-direction: column-reverse;
-    align-items: stretch;
-  }
-
-  .new-launch-actions button,
-  .launch-actions button,
-  .new-launch-buttons button {
-    width: 100%;
-  }
-}
-
-/* =========================================================
-   RESULTADO DO MÊS — AJUSTE MOBILE FINAL
-   ========================================================= */
-
-.annual-page {
-  width: 100% !important;
-  max-width: 1200px !important;
-  margin: 0 auto !important;
-  padding: 24px 28px 40px !important;
-  box-sizing: border-box !important;
+  padding: 24px 30px 50px !important;
 }
 
 .annual-page-header {
   width: 100% !important;
-  margin-bottom: 24px !important;
+  margin: 0 0 25px !important;
+  display: block !important;
 }
 
+/* Cabeçalho inteiro ocupa a largura e permite centralização real */
 .annual-page-top {
   position: relative !important;
   width: 100% !important;
-  min-height: 150px !important;
-  padding: 22px 24px !important;
+  min-height: 220px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
   box-sizing: border-box !important;
-  border-radius: 20px !important;
-  background: linear-gradient(145deg, rgba(42, 104, 67, 0.95), rgba(20, 55, 37, 0.96)) !important;
-  border: 1px solid rgba(124, 255, 79, 0.28) !important;
-  box-shadow: 0 12px 30px rgba(0,0,0,.20) !important;
+}
+
+/* Logo exatamente no centro */
+.annual-brand-row {
+  width: 100% !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-}
-
-.annual-brand-row {
-  position: absolute !important;
-  left: 24px !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  display: flex !important;
-  align-items: center !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
 }
 
 .annual-logo {
-  width: 150px !important;
-  max-width: 150px !important;
-  height: auto !important;
+  display: block !important;
+  width: 260px !important;
+  height: 150px !important;
+  max-width: 260px !important;
+  object-fit: contain !important;
+  margin: 0 auto !important;
 }
 
+/* Ícone ao lado da logo não desloca mais o centro */
 .annual-chart-icon {
   display: none !important;
 }
 
+/* Título abaixo da logo */
 .annual-title {
+  width: 100% !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 12px !important;
   text-align: center !important;
-  color: #fff !important;
-  padding: 0 160px !important;
-  box-sizing: border-box !important;
+  gap: 10px !important;
+  margin: 0 auto !important;
+}
+
+.annual-title > div {
+  text-align: center !important;
 }
 
 .annual-title-icon {
-  width: 42px !important;
-  height: 42px !important;
-  min-width: 42px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  border-radius: 12px !important;
-  background: rgba(124,255,79,.14) !important;
+  font-size: 30px !important;
 }
 
-.annual-title h1,
-.annual-title h2 {
-  margin: 0 !important;
+.annual-title h1 {
   color: #fff !important;
-  font-size: 24px !important;
-  line-height: 1.15 !important;
+  text-align: center !important;
 }
 
 .annual-title p {
-  margin: 5px 0 0 !important;
-  color: rgba(255,255,255,.78) !important;
-  font-size: 13px !important;
+  color: #fff !important;
+  text-align: center !important;
 }
 
+/* VOLTAR: FORA DO CONTEÚDO, NO TOPO À DIREITA */
 .annual-back-button {
   position: absolute !important;
-  right: 24px !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
+  top: 5px !important;
+  right: 5px !important;
+  z-index: 20 !important;
   margin: 0 !important;
-  padding: 10px 15px !important;
-  border-radius: 10px !important;
-  border: 1px solid rgba(255,255,255,.18) !important;
-  background: rgba(0,0,0,.18) !important;
+  padding: 9px 15px !important;
+  border: 1px solid rgba(255,255,255,.20) !important;
+  border-radius: 9px !important;
+  background: rgba(255,255,255,.06) !important;
   color: #fff !important;
-  white-space: nowrap !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
   cursor: pointer !important;
 }
 
+.annual-back-button:hover {
+  background: rgba(57,255,20,.14) !important;
+  color: #39ff14 !important;
+  border-color: rgba(57,255,20,.35) !important;
+}
+
+/* Cards do resultado */
 .annual-summary-cards {
   width: 100% !important;
-  display: grid !important;
+  box-sizing: border-box !important;
   grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 16px !important;
-  margin: 0 0 24px !important;
 }
 
 .annual-card {
   min-width: 0 !important;
-  min-height: 115px !important;
-  padding: 20px !important;
   box-sizing: border-box !important;
 }
 
-.annual-card span {
-  color: #fff !important;
+/* Detalhamento como um único contêiner */
+.mes-detalhamento {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  background: rgba(255,255,255,.045) !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
+  border-radius: 18px !important;
 }
 
-.annual-card strong {
-  color: #fff !important;
-  font-size: 25px !important;
-}
+/* ---------- TABLET ---------- */
+@media (max-width: 900px) {
+  .sidebar {
+    width: 75px !important;
+    min-width: 75px !important;
+  }
 
-@media (max-width: 700px) {
+  .sidebar.open {
+    width: 250px !important;
+    min-width: 250px !important;
+    box-shadow: 10px 0 30px rgba(0,0,0,.35) !important;
+  }
+
+  .sidebar.closed {
+    width: 75px !important;
+    min-width: 75px !important;
+  }
+
+  .main-content {
+    margin-left: 75px !important;
+    width: calc(100% - 75px) !important;
+  }
+
+  .sidebar.open ~ .main-content {
+    margin-left: 250px !important;
+    width: calc(100% - 250px) !important;
+  }
+
   .annual-page {
-    padding: 14px 12px 30px !important;
+    padding: 20px 18px 40px !important;
   }
 
   .annual-page-top {
     min-height: 205px !important;
-    padding: 18px 12px 20px !important;
-    flex-direction: column !important;
-    justify-content: flex-end !important;
-    gap: 10px !important;
-  }
-
-  .annual-brand-row {
-    position: static !important;
-    transform: none !important;
-    margin: 0 auto !important;
   }
 
   .annual-logo {
+    width: 235px !important;
+    height: 135px !important;
+    max-width: 235px !important;
+  }
+}
+
+/* ---------- CELULAR ---------- */
+@media (max-width: 600px) {
+  /* Sidebar fechada fica compacta; aberta mostra o menu completo por cima */
+  .sidebar,
+  .sidebar.closed {
+    width: 64px !important;
+    min-width: 64px !important;
+    max-width: 64px !important;
+  }
+
+  .sidebar.open {
+    width: 250px !important;
+    min-width: 250px !important;
+    max-width: 250px !important;
+    box-shadow: 12px 0 35px rgba(0,0,0,.45) !important;
+  }
+
+  .sidebar.closed .sidebar-logo {
+    display: none !important;
+  }
+
+  .sidebar.closed .sidebar-item,
+  .sidebar.closed .sidebar-logout {
+    width: 48px !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .sidebar.closed .sidebar-item strong,
+  .sidebar.closed .sidebar-logout strong {
+    display: none !important;
+  }
+
+  .sidebar.open .sidebar-logo {
+    display: flex !important;
+    height: 125px !important;
+  }
+
+  .sidebar.open .sidebar-logo img {
     width: 165px !important;
-    max-width: 165px !important;
+    height: 105px !important;
+  }
+
+  .sidebar.open .sidebar-item strong,
+  .sidebar.open .sidebar-logout strong {
+    display: block !important;
+  }
+
+  .sidebar.open .sidebar-item,
+  .sidebar.open .sidebar-logout {
+    width: 100% !important;
+    justify-content: flex-start !important;
+    padding: 0 15px !important;
+  }
+
+  .main-content {
+    margin-left: 64px !important;
+    width: calc(100% - 64px) !important;
+    padding: 14px !important;
+  }
+
+  .sidebar.open ~ .main-content {
+    margin-left: 64px !important;
+    width: calc(100% - 64px) !important;
+  }
+
+  /* Resultado do mês */
+  .annual-page {
+    width: 100% !important;
+    padding: 10px 10px 35px !important;
+  }
+
+  .annual-page-top {
+    min-height: 185px !important;
+    padding-top: 0 !important;
+  }
+
+  .annual-brand-row {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .annual-logo {
+    width: 190px !important;
+    height: 115px !important;
+    max-width: 190px !important;
   }
 
   .annual-title {
-    padding: 0 !important;
-    flex-direction: column !important;
     gap: 7px !important;
-    width: 100% !important;
   }
 
   .annual-title-icon {
-    width: 38px !important;
-    height: 38px !important;
-    min-width: 38px !important;
+    font-size: 25px !important;
   }
 
   .annual-title h1 {
-    font-size: 21px !important;
+    font-size: 22px !important;
   }
 
   .annual-title p {
     font-size: 12px !important;
   }
 
+  /* Botão bem no canto superior direito, fora dos cards */
   .annual-back-button {
-    top: 14px !important;
-    right: 12px !important;
-    transform: none !important;
-    padding: 7px 11px !important;
+    top: 0 !important;
+    right: 0 !important;
+    padding: 7px 10px !important;
     font-size: 12px !important;
   }
 
   .annual-summary-cards {
     grid-template-columns: 1fr !important;
     gap: 12px !important;
-    margin-top: 14px !important;
+    margin: 18px 0 22px !important;
   }
 
   .annual-card {
     width: 100% !important;
-    min-height: 100px !important;
-    padding: 18px !important;
-    border-radius: 15px !important;
+    min-height: 95px !important;
+    padding: 17px !important;
+  }
+
+  .annual-card span {
+    font-size: 14px !important;
   }
 
   .annual-card strong {
@@ -5168,318 +4761,26 @@ body,
   }
 
   .mes-detalhamento {
-    width: 100% !important;
-    box-sizing: border-box !important;
-    overflow: hidden !important;
-  }
-}
-
-@media (max-width: 400px) {
-  .annual-page-top {
-    min-height: 190px !important;
+    margin-top: 18px !important;
+    border-radius: 14px !important;
   }
 
-  .annual-logo {
-    width: 145px !important;
-    max-width: 145px !important;
+  .mes-detalhamento-header {
+    padding: 17px 15px !important;
   }
 
-  .annual-title h1 {
-    font-size: 19px !important;
-  }
-
-  .annual-back-button {
-    font-size: 11px !important;
-    padding: 6px 9px !important;
-  }
-}
-
-/* =========================================================
-   AJUSTE FINAL — RESULTADO DO MÊS / MOBILE
-   ========================================================= */
-.annual-page-header,
-.annual-page-top {
-  position: relative !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-}
-
-.annual-page-top {
-  max-width: 760px !important;
-  margin: 0 auto !important;
-}
-
-.annual-brand-row {
-  position: relative !important;
-  z-index: 2 !important;
-}
-
-.annual-logo {
-  width: 210px !important;
-  max-width: 210px !important;
-  height: auto !important;
-  object-fit: contain !important;
-}
-
-.annual-back-button {
-  position: absolute !important;
-  top: 18px !important;
-  right: 18px !important;
-  transform: none !important;
-  z-index: 10 !important;
-  padding: 9px 14px !important;
-  font-size: 14px !important;
-  border-radius: 10px !important;
-  white-space: nowrap !important;
-}
-
-@media (max-width: 700px) {
-  .annual-page {
-    width: 100% !important;
-    max-width: none !important;
-    overflow-x: hidden !important;
-    box-sizing: border-box !important;
-  }
-
-  .annual-page-top {
-    min-height: 190px !important;
-    padding: 16px 12px 18px !important;
-  }
-
-  .annual-logo {
-    width: 185px !important;
-    max-width: 185px !important;
-  }
-
-  /* Voltar fica no topo direito, mas dentro do cabeçalho */
-  .annual-back-button {
-    top: 16px !important;
-    right: 16px !important;
-    padding: 8px 12px !important;
-    font-size: 13px !important;
-  }
-
-  /* Entradas / Despesas / Resultado: rolagem horizontal */
-  .annual-summary-cards {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    justify-content: flex-start !important;
-    align-items: stretch !important;
-    gap: 14px !important;
-    width: 100% !important;
-    max-width: 100% !important;
+  .mes-tabela {
     overflow-x: auto !important;
-    overflow-y: hidden !important;
-    padding: 4px 14px 14px !important;
-    margin: 0 !important;
-    box-sizing: border-box !important;
-    scroll-snap-type: x proximity !important;
     -webkit-overflow-scrolling: touch !important;
-    scrollbar-width: thin !important;
   }
 
-  .annual-summary-cards::-webkit-scrollbar {
-    height: 6px !important;
+  .mes-tabela-header,
+  .mes-tabela-linha {
+    min-width: 650px !important;
   }
 
-  .annual-card {
-    flex: 0 0 250px !important;
-    width: 250px !important;
-    min-width: 250px !important;
-    max-width: 250px !important;
-    min-height: 145px !important;
-    scroll-snap-align: start !important;
-    box-sizing: border-box !important;
-  }
-
-  /* Contêiner de detalhamento fica abaixo dos cards */
-  .mes-detalhamento {
-    width: calc(100% - 28px) !important;
-    max-width: 620px !important;
-    margin: 8px auto 24px !important;
-    box-sizing: border-box !important;
-    overflow: visible !important;
-  }
-
-  .mes-detalhamento-header {
-    position: relative !important;
-  }
-
-  .mes-detalhamento-titulo {
-    width: 100% !important;
-    box-sizing: border-box !important;
-  }
-
-  /* Seletor de ano dentro do contêiner */
-  .mes-detalhamento-ano {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    width: 100% !important;
-    margin-top: 14px !important;
-  }
-
-  .mes-detalhamento-ano label {
-    color: #fff !important;
-    font-size: 14px !important;
-    font-weight: 700 !important;
-  }
-
-  .mes-detalhamento-ano select {
-    min-width: 115px !important;
-    padding: 9px 12px !important;
-    border-radius: 10px !important;
-    border: 1px solid rgba(124,255,79,.45) !important;
-    background: #10271d !important;
-    color: #fff !important;
-    font-size: 14px !important;
-    font-weight: 700 !important;
-    outline: none !important;
-  }
-}
-
-@media (max-width: 400px) {
-  .annual-logo {
-    width: 165px !important;
-    max-width: 165px !important;
-  }
-
-  .annual-back-button {
-    top: 14px !important;
-    right: 12px !important;
-    padding: 7px 10px !important;
-    font-size: 12px !important;
-  }
-
-  .annual-card {
-    flex-basis: 235px !important;
-    width: 235px !important;
-    min-width: 235px !important;
-    max-width: 235px !important;
-  }
-}
-
-/* =========================================================
-   CORREÇÃO FINAL — SELETOR DE ANO NO DETALHAMENTO DO MÊS
-   Desktop + celular
-========================================================= */
-.mes-detalhamento {
-  overflow: visible !important;
-  position: relative !important;
-}
-
-.mes-detalhamento-header {
-  overflow: visible !important;
-}
-
-.mes-detalhamento-titulo {
-  align-items: flex-start !important;
-}
-
-.mes-detalhamento-titulo > div {
-  min-width: 0 !important;
-  flex: 1 1 auto !important;
-}
-
-.mes-detalhamento-ano {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  position: static !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  gap: 10px !important;
-  width: auto !important;
-  margin: 14px 0 0 !important;
-  padding: 0 !important;
-  z-index: 20 !important;
-}
-
-.mes-detalhamento-ano label {
-  display: inline-block !important;
-  color: #ffffff !important;
-  font-size: 14px !important;
-  font-weight: 700 !important;
-  white-space: nowrap !important;
-}
-
-.mes-detalhamento-ano select {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  appearance: auto !important;
-  -webkit-appearance: auto !important;
-  width: 125px !important;
-  min-width: 125px !important;
-  height: 40px !important;
-  padding: 7px 10px !important;
-  margin: 0 !important;
-  border: 1px solid rgba(57,255,20,.65) !important;
-  border-radius: 10px !important;
-  background: #10271d !important;
-  color: #ffffff !important;
-  font-size: 15px !important;
-  font-weight: 700 !important;
-  cursor: pointer !important;
-  box-sizing: border-box !important;
-}
-
-.mes-detalhamento-ano select option {
-  background: #10271d !important;
-  color: #ffffff !important;
-}
-
-@media (max-width: 700px) {
-  .mes-detalhamento {
-    overflow: visible !important;
-  }
-
-  .mes-detalhamento-header {
-    overflow: visible !important;
-    padding: 20px 18px 22px !important;
-  }
-
-  .mes-detalhamento-titulo {
-    align-items: flex-start !important;
-    gap: 12px !important;
-  }
-
-  .mes-detalhamento-titulo > span {
-    flex: 0 0 auto !important;
-  }
-
-  .mes-detalhamento-titulo h2 {
-    font-size: 22px !important;
-    line-height: 1.15 !important;
-  }
-
-  .mes-detalhamento-titulo p {
-    font-size: 16px !important;
-    margin-top: 7px !important;
-  }
-
-  .mes-detalhamento-ano {
-    justify-content: flex-start !important;
-    margin-top: 12px !important;
-    gap: 8px !important;
-  }
-
-  .mes-detalhamento-ano label {
-    font-size: 14px !important;
-  }
-
-  .mes-detalhamento-ano select {
-    width: 120px !important;
-    min-width: 120px !important;
-    height: 38px !important;
-    font-size: 14px !important;
-  }
-}
-
-@media (max-width: 400px) {
-  .mes-detalhamento-ano select {
-    width: 110px !important;
-    min-width: 110px !important;
+  .annual-actions {
+    flex-wrap: wrap !important;
+    margin-top: 22px !important;
   }
 }
