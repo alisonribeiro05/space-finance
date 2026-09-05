@@ -512,6 +512,24 @@ const dataComHora = new Date(
   if (loggedIn) {
     return (
       <div className="app-layout">
+        {sidebarOpen && (
+          <div
+            className="sidebar-overlay"
+            onClick={() => setSidebarOpen(false)}
+            aria-hidden="true"
+          />
+        )}
+
+        <button
+          type="button"
+          className="sidebar-toggle"
+          onClick={() => setSidebarOpen((open) => !open)}
+          aria-label={sidebarOpen ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={sidebarOpen}
+        >
+          ☰
+        </button>
+
         <aside className={`sidebar ${sidebarOpen ? "open" : "closed"}`}>
           {sidebarOpen && (
             <div className="sidebar-logo">
@@ -521,13 +539,6 @@ const dataComHora = new Date(
               />
             </div>
           )}
-
-          <button
-            className="sidebar-toggle"
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-          >
-            ☰
-          </button>
 
           <nav className="sidebar-menu">
 
@@ -2554,207 +2565,371 @@ onClick={async () => {
       </div>
     );
   }
-  if (showLanding) {
-  return (
-    <main className="landing-page">
-
-      <header className="landing-header">
-        <div className="landing-logo">
-          <img
-            src={spaceFinanceIcon}
-            alt="Space Finance"
-          />
-
-          <div>
-            <strong>Space Finance</strong>
-            <span>Seu dinheiro no controle</span>
-          </div>
+  /* =========================================================
+     PÁGINA DE CADASTRO
+     Ao clicar em "Começar agora", mostra SOMENTE o cadastro.
+     O login não fica atrás da tela de cadastro.
+     ========================================================= */
+  if (showRegister) {
+    return (
+      <main className="register-page">
+        <div className="register-page-background">
+          <div className="glow glow-one"></div>
+          <div className="glow glow-two"></div>
+          <div className="glow glow-three"></div>
         </div>
 
-        <button
-          className="landing-login-button"
-          onClick={() => setShowLanding(false)}
-        >
-          Já tenho uma conta
-        </button>
-      </header>
+        <section className="register-page-card">
 
-      <section className="landing-hero">
+          <button
+            type="button"
+            className="register-page-back"
+            onClick={() => {
+              if (!loading) {
+                setShowRegister(false)
+                setShowLanding(true)
+              }
+            }}
+            disabled={loading}
+          >
+            ← Voltar
+          </button>
 
-        <div className="landing-hero-content">
+          <div className="register-page-header">
+            <img
+              src={spaceFinanceIcon}
+              alt="Space Finance"
+              className="register-page-logo"
+            />
 
-          <span className="landing-badge">
-            ✨ Controle financeiro inteligente
-          </span>
+            <h1>Criar sua conta</h1>
 
-          <h1>
-            Tenha o controle das suas
-            <span> finanças em um só lugar.</span>
-          </h1>
+            <p>
+              Comece agora a organizar suas finanças.
+            </p>
+          </div>
 
-          <p>
-            Organize suas entradas, despesas e resultados
-            de forma simples, rápida e profissional.
-          </p>
+          <form
+            className="register-form"
+            onSubmit={handleCreateAccount}
+          >
 
-          <div className="landing-actions">
+            <div className="field-group">
+              <label htmlFor="register-page-email">
+                E-mail
+              </label>
+
+              <div className="input-wrapper">
+                <Mail size={20} />
+
+                <input
+                  id="register-page-email"
+                  type="email"
+                  placeholder="seu@email.com"
+                  value={registerEmail}
+                  onChange={(event) =>
+                    setRegisterEmail(event.target.value)
+                  }
+                  autoComplete="email"
+                  disabled={loading}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="field-group">
+              <label htmlFor="register-page-password">
+                Senha
+              </label>
+
+              <div className="input-wrapper">
+                <LockKeyhole size={20} />
+
+                <input
+                  id="register-page-password"
+                  type={
+                    showRegisterPassword
+                      ? 'text'
+                      : 'password'
+                  }
+                  placeholder="Mínimo de 6 caracteres"
+                  value={registerPassword}
+                  onChange={(event) =>
+                    setRegisterPassword(event.target.value)
+                  }
+                  autoComplete="new-password"
+                  minLength={6}
+                  disabled={loading}
+                  required
+                />
+
+                <button
+                  type="button"
+                  className="password-button"
+                  onClick={() =>
+                    setShowRegisterPassword(
+                      !showRegisterPassword
+                    )
+                  }
+                  disabled={loading}
+                  aria-label={
+                    showRegisterPassword
+                      ? 'Ocultar senha'
+                      : 'Mostrar senha'
+                  }
+                >
+                  {showRegisterPassword ? (
+                    <EyeOff size={20} />
+                  ) : (
+                    <Eye size={20} />
+                  )}
+                </button>
+              </div>
+            </div>
+
+            <div className="field-group">
+              <label htmlFor="register-page-confirm-password">
+                Confirmar senha
+              </label>
+
+              <div className="input-wrapper">
+                <LockKeyhole size={20} />
+
+                <input
+                  id="register-page-confirm-password"
+                  type={
+                    showRegisterConfirmPassword
+                      ? 'text'
+                      : 'password'
+                  }
+                  placeholder="Digite a senha novamente"
+                  value={registerConfirmPassword}
+                  onChange={(event) =>
+                    setRegisterConfirmPassword(
+                      event.target.value
+                    )
+                  }
+                  autoComplete="new-password"
+                  minLength={6}
+                  disabled={loading}
+                  required
+                />
+
+                <button
+                  type="button"
+                  className="password-button"
+                  onClick={() =>
+                    setShowRegisterConfirmPassword(
+                      !showRegisterConfirmPassword
+                    )
+                  }
+                  disabled={loading}
+                  aria-label={
+                    showRegisterConfirmPassword
+                      ? 'Ocultar confirmação'
+                      : 'Mostrar confirmação'
+                  }
+                >
+                  {showRegisterConfirmPassword ? (
+                    <EyeOff size={20} />
+                  ) : (
+                    <Eye size={20} />
+                  )}
+                </button>
+              </div>
+            </div>
 
             <button
-              className="landing-primary-button"
+              type="submit"
+              className="login-button register-submit"
+              disabled={loading}
+            >
+              {loading
+                ? 'Criando conta...'
+                : 'Criar minha conta'}
+            </button>
+
+            <p className="register-confirmation-info">
+              Após o cadastro, você receberá um e-mail de
+              confirmação. Confirme seu e-mail para entrar
+              no Space Finance.
+            </p>
+          </form>
+
+          <div className="register-page-login">
+            <span>Já possui uma conta?</span>
+
+            <button
+              type="button"
               onClick={() => {
-                setShowLanding(false)
-                setShowRegister(true)
+                if (!loading) {
+                  setShowRegister(false)
+                  setShowLanding(false)
+                }
               }}
+              disabled={loading}
             >
-              Começar agora →
+              Entrar
             </button>
-
-            <button
-              className="landing-secondary-button"
-              onClick={() => setShowLanding(false)}
-            >
-              Entrar na minha conta
-            </button>
-
           </div>
 
-          <small>
-            🔒 Seus dados ficam protegidos e separados por usuário.
-          </small>
+          <footer className="register-page-footer">
+            © 2026 Space Finance • Finanças mais simples
+          </footer>
 
-        </div>
+        </section>
+      </main>
+    )
+  }
 
-        <div className="landing-preview">
+  if (showLanding) {
+    return (
+      <main className="landing-page">
+        <header className="landing-header">
+          <div className="landing-logo">
+            <img src={spaceFinanceIcon} alt="Space Finance" />
+            <div>
+              <strong>Space Finance</strong>
+              <span>Seu dinheiro no controle</span>
+            </div>
+          </div>
 
-          <div className="preview-window">
+          <button
+            type="button"
+            className="landing-login-button"
+            onClick={() => setShowLanding(false)}
+          >
+            Já tenho uma conta
+          </button>
+        </header>
 
-            <div className="preview-top">
-              <span>Space Finance</span>
-              <span>● ● ●</span>
+        <section className="landing-hero">
+          <div className="landing-hero-content">
+            <span className="landing-badge">✨ Controle financeiro inteligente</span>
+
+            <h1>
+              Tenha o controle das suas
+              <span> finanças em um só lugar.</span>
+            </h1>
+
+            <p>
+              Organize suas entradas, despesas e resultados de forma simples,
+              rápida e profissional.
+            </p>
+
+            <div className="landing-actions">
+              <button
+                type="button"
+                className="landing-primary-button"
+                onClick={() => {
+                  setShowLanding(false)
+                  setShowRegister(true)
+                }}
+              >
+                Começar agora →
+              </button>
+
+              <button
+                type="button"
+                className="landing-secondary-button"
+                onClick={() => setShowLanding(false)}
+              >
+                Entrar na minha conta
+              </button>
             </div>
 
-            <div className="preview-content">
+            <small>🔒 Seus dados ficam protegidos e separados por usuário.</small>
+          </div>
 
-              <p>Visão geral</p>
-
-              <div className="preview-cards">
-
-                <div>
-                  <small>Entradas</small>
-                  <strong>R$ 8.450,00</strong>
-                </div>
-
-                <div>
-                  <small>Despesas</small>
-                  <strong>R$ 3.280,00</strong>
-                </div>
-
-                <div>
-                  <small>Saldo</small>
-                  <strong>R$ 5.170,00</strong>
-                </div>
-
+          <div className="landing-preview">
+            <div className="preview-window">
+              <div className="preview-top">
+                <span>Space Finance</span>
+                <span>● ● ●</span>
               </div>
 
-              <div className="preview-chart">
-                <span>Entradas × Despesas</span>
+              <div className="preview-content">
+                <p>Visão geral</p>
 
-                <div className="chart-bars">
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
+                <div className="preview-cards">
+                  <div>
+                    <small>Entradas</small>
+                    <strong>R$ 8.450,00</strong>
+                  </div>
+                  <div>
+                    <small>Despesas</small>
+                    <strong>R$ 3.280,00</strong>
+                  </div>
+                  <div>
+                    <small>Saldo</small>
+                    <strong>R$ 5.170,00</strong>
+                  </div>
+                </div>
+
+                <div className="preview-chart">
+                  <span>Entradas × Despesas</span>
+                  <div className="chart-bars">
+                    <i></i><i></i><i></i><i></i><i></i><i></i>
+                  </div>
                 </div>
               </div>
-
             </div>
+          </div>
+        </section>
 
+        <section className="landing-benefits">
+          <div className="landing-section-title">
+            <span>POR QUE USAR O SPACE FINANCE?</span>
+            <h2>Tudo que você precisa para organizar seu dinheiro.</h2>
           </div>
 
-        </div>
-
-      </section>
-
-      <section className="landing-benefits">
-
-        <div className="landing-section-title">
-          <span>POR QUE USAR O SPACE FINANCE?</span>
-
-          <h2>
-            Tudo que você precisa para organizar seu dinheiro.
-          </h2>
-        </div>
-
-        <div className="landing-benefit-grid">
-
-          <div className="landing-benefit-card">
-            <div>💰</div>
-            <h3>Controle de entradas</h3>
-            <p>
-              Registre vendas, recebimentos e qualquer valor
-              que entrar no seu caixa.
-            </p>
+          <div className="landing-benefit-grid">
+            <div className="landing-benefit-card">
+              <div>💰</div>
+              <h3>Controle de entradas</h3>
+              <p>Registre vendas, recebimentos e qualquer valor que entrar no seu caixa.</p>
+            </div>
+            <div className="landing-benefit-card">
+              <div>📉</div>
+              <h3>Controle de despesas</h3>
+              <p>Saiba exatamente para onde seu dinheiro está indo.</p>
+            </div>
+            <div className="landing-benefit-card">
+              <div>📊</div>
+              <h3>Relatórios completos</h3>
+              <p>Acompanhe seus resultados por mês e por ano.</p>
+            </div>
+            <div className="landing-benefit-card">
+              <div>🔐</div>
+              <h3>Conta individual</h3>
+              <p>Cada usuário possui seus próprios dados financeiros.</p>
+            </div>
           </div>
+        </section>
 
-          <div className="landing-benefit-card">
-            <div>📉</div>
-            <h3>Controle de despesas</h3>
-            <p>
-              Saiba exatamente para onde seu dinheiro está indo.
-            </p>
-          </div>
+        <section className="landing-final-cta">
+          <h2>Comece a organizar suas finanças hoje.</h2>
+          <p>
+            Crie sua conta e tenha uma visão muito mais clara do seu dinheiro.
+          </p>
+          <button
+            type="button"
+            onClick={() => {
+              setShowLanding(false)
+              setShowRegister(true)
+            }}
+          >
+            Criar minha conta →
+          </button>
+        </section>
 
-          <div className="landing-benefit-card">
-            <div>📊</div>
-            <h3>Relatórios completos</h3>
-            <p>
-              Acompanhe seus resultados por mês e por ano.
-            </p>
-          </div>
+        <footer className="landing-footer">
+          © 2026 Space Finance • Finanças mais simples
+        </footer>
+      </main>
+    )
+  }
 
-          <div className="landing-benefit-card">
-            <div>🔐</div>
-            <h3>Conta individual</h3>
-            <p>
-              Cada usuário possui seus próprios dados financeiros.
-            </p>
-          </div>
-
-        </div>
-
-      </section>
-
-      <section className="landing-final-cta">
-
-        <h2>
-          Comece a organizar suas finanças hoje.
-        </h2>
-
-        <p>
-          Crie sua conta gratuitamente e tenha uma visão
-          muito mais clara do seu dinheiro.
-        </p>
-
-        <button
-          onClick={() => {
-            setShowLanding(false)
-            setShowRegister(true)
-          }}
-        >
-          Criar minha conta →
-        </button>
-
-      </section>
-
-      <footer className="landing-footer">
-        © 2026 Space Finance • Finanças mais simples
-      </footer>
-
-    </main>
-  )
-}
   return (
     <main className="login-page">
 
@@ -2927,142 +3102,6 @@ onClick={async () => {
           </button>
         </div>
 
-        {/* MODAL DE CADASTRO */}
-        {showRegister && (
-          <div
-            className="register-modal-overlay"
-            onMouseDown={(event) => {
-              if (event.target === event.currentTarget && !loading) {
-                setShowRegister(false)
-              }
-            }}
-          >
-            <section
-              className="register-modal"
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="register-title"
-            >
-              <button
-                type="button"
-                className="register-modal-close"
-                onClick={() => setShowRegister(false)}
-                disabled={loading}
-                aria-label="Fechar cadastro"
-              >
-                ×
-              </button>
-
-              <div className="register-modal-header">
-                <img
-                  src={spaceFinanceIcon}
-                  alt="Space Finance"
-                  className="register-modal-logo"
-                />
-                <h2 id="register-title">Criar minha conta</h2>
-                <p>Cadastre seu e-mail e crie uma senha.</p>
-              </div>
-
-              <form className="register-form" onSubmit={handleCreateAccount}>
-                <div className="field-group">
-                  <label htmlFor="register-email">E-mail</label>
-                  <div className="input-wrapper">
-                    <Mail size={20} />
-                    <input
-                      id="register-email"
-                      type="email"
-                      placeholder="seu@email.com"
-                      value={registerEmail}
-                      onChange={(event) => setRegisterEmail(event.target.value)}
-                      autoComplete="email"
-                      disabled={loading}
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="field-group">
-                  <label htmlFor="register-password">Senha</label>
-                  <div className="input-wrapper">
-                    <LockKeyhole size={20} />
-                    <input
-                      id="register-password"
-                      type={showRegisterPassword ? 'text' : 'password'}
-                      placeholder="Mínimo de 6 caracteres"
-                      value={registerPassword}
-                      onChange={(event) => setRegisterPassword(event.target.value)}
-                      autoComplete="new-password"
-                      disabled={loading}
-                      minLength={6}
-                      required
-                    />
-                    <button
-                      type="button"
-                      className="password-button"
-                      onClick={() => setShowRegisterPassword(!showRegisterPassword)}
-                      disabled={loading}
-                      aria-label={
-                        showRegisterPassword ? 'Ocultar senha' : 'Mostrar senha'
-                      }
-                    >
-                      {showRegisterPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                    </button>
-                  </div>
-                </div>
-
-                <div className="field-group">
-                  <label htmlFor="register-confirm-password">
-                    Confirmar senha
-                  </label>
-                  <div className="input-wrapper">
-                    <LockKeyhole size={20} />
-                    <input
-                      id="register-confirm-password"
-                      type={showRegisterConfirmPassword ? 'text' : 'password'}
-                      placeholder="Digite a senha novamente"
-                      value={registerConfirmPassword}
-                      onChange={(event) => setRegisterConfirmPassword(event.target.value)}
-                      autoComplete="new-password"
-                      disabled={loading}
-                      minLength={6}
-                      required
-                    />
-                    <button
-                      type="button"
-                      className="password-button"
-                      onClick={() =>
-                        setShowRegisterConfirmPassword(!showRegisterConfirmPassword)
-                      }
-                      disabled={loading}
-                      aria-label={
-                        showRegisterConfirmPassword
-                          ? 'Ocultar confirmação'
-                          : 'Mostrar confirmação'
-                      }
-                    >
-                      {showRegisterConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                    </button>
-                  </div>
-                </div>
-
-                <button
-                  type="submit"
-                  className="login-button register-submit"
-                  disabled={loading}
-                >
-                  {loading ? 'Criando conta...' : 'Criar conta'}
-                </button>
-
-                <p className="register-confirmation-info">
-                  Após o cadastro, verifique sua caixa de entrada e clique no
-                  link de confirmação enviado pelo Space Finance.
-                </p>
-              </form>
-            </section>
-          </div>
-        )}
-
-        {/* RODAPÉ */}
         <footer>
 
           <span>
