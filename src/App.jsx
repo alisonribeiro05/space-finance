@@ -18,6 +18,7 @@ function App() {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [loggedIn, setLoggedIn] = useState(false)
+  const [showLanding, setShowLanding] = useState(true)
 
   // Cadastro de novos usuários
   const [showRegister, setShowRegister] = useState(false)
@@ -2236,139 +2237,9 @@ const hora = lancamento.created_at
                </div>
                 </div>
                 ) : pagina === "novo-lancamento" ? (
-                  <div className="new-launch-page">
-                    <div className="new-launch-card">
-                      <div className="new-launch-header">
-                        <div>
-                          <span className="new-launch-icon">➕</span>
-                          <div>
-                            <h1>Novo lançamento</h1>
-                            <p>Registre uma nova entrada ou despesa.</p>
-                          </div>
-                        </div>
-                        <button
-                          type="button"
-                          className="new-launch-back"
-                          onClick={() => setPagina("inicio")}
-                        >
-                          ← Voltar
-                        </button>
-                      </div>
-
-                      <div className="new-launch-form">
-                        <div className="launch-field">
-                          <label>Tipo</label>
-                          <div className="launch-type">
-                            <button
-                              type="button"
-                              className={launchType === 'entrada' ? 'selected' : ''}
-                              onClick={() => setLaunchType('entrada')}
-                            >
-                              ↑ Entrada
-                            </button>
-                            <button
-                              type="button"
-                              className={launchType === 'despesa' ? 'selected expense' : ''}
-                              onClick={() => setLaunchType('despesa')}
-                            >
-                              ↓ Despesa
-                            </button>
-                          </div>
-                        </div>
-
-                        <div className="launch-field">
-                          <label>Descrição</label>
-                          <input
-                            type="text"
-                            placeholder="Ex.: Venda de produto ou pagamento de conta"
-                            value={launchDescription}
-                            onChange={(e) => setLaunchDescription(e.target.value)}
-                          />
-                        </div>
-
-                        <div className="launch-field">
-                          <label>Valor</label>
-                          <input
-                            type="number"
-                            placeholder="0,00"
-                            step="0.01"
-                            value={launchValue}
-                            onChange={(e) => setLaunchValue(e.target.value)}
-                          />
-                        </div>
-
-                        <div className="launch-field">
-                          <label>Categoria</label>
-                          <select
-                            value={launchCategory}
-                            onChange={(e) => setLaunchCategory(e.target.value)}
-                          >
-                            <option value="">Selecione uma categoria</option>
-                            {launchType === 'entrada' ? (
-                              <>
-                                <option value="Vendas">🛒 Vendas</option>
-                                <option value="Serviços">🔧 Serviços</option>
-                                <option value="Salário">💰 Salário</option>
-                                <option value="Outros">📦 Outros</option>
-                              </>
-                            ) : (
-                              <>
-                                <option value="Alimentação">🍔 Alimentação</option>
-                                <option value="Aluguel">🏠 Aluguel</option>
-                                <option value="Energia">💡 Energia</option>
-                                <option value="Água">💧 Água</option>
-                                <option value="Internet">🌐 Internet</option>
-                                <option value="Funcionário">👨‍💼 Funcionário</option>
-                                <option value="Fornecedores">📦 Fornecedores</option>
-                                <option value="Impostos">🧾 Impostos</option>
-                                <option value="Transporte">🚗 Transporte</option>
-                                <option value="Outros">📋 Outros</option>
-                              </>
-                            )}
-                          </select>
-                        </div>
-
-                        <div className="launch-field">
-                          <label>Data</label>
-                          <input
-                            type="date"
-                            value={launchDate}
-                            onChange={(e) => setLaunchDate(e.target.value)}
-                          />
-                        </div>
-
-                        <div className="launch-field">
-                          <label>Forma de pagamento</label>
-                          <select
-                            value={launchPayment}
-                            onChange={(e) => setLaunchPayment(e.target.value)}
-                          >
-                            <option value="Dinheiro">💵 Dinheiro</option>
-                            <option value="Cartão">💳 Cartão</option>
-                            <option value="PIX">📱 PIX</option>
-                            <option value="boleto">🧾 Boleto</option>
-                          </select>
-                        </div>
-
-                        <div className="new-launch-actions">
-                          <button
-                            type="button"
-                            className="cancel-button"
-                            onClick={() => setPagina("inicio")}
-                          >
-                            Cancelar
-                          </button>
-                          <button
-                            type="button"
-                            className="save-button"
-                            onClick={handleSaveLaunch}
-                          >
-                            Salvar lançamento
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <>
+                    {modal_block}
+                  </>
                 ) : (
         <>
               
@@ -2683,6 +2554,206 @@ onClick={async () => {
       </div>
     );
   }
+  if (showLanding) {
+  return (
+    <main className="landing-page">
+
+      <header className="landing-header">
+        <div className="landing-logo">
+          <img
+            src={spaceFinanceIcon}
+            alt="Space Finance"
+          />
+
+          <div>
+            <span>Seu dinheiro no controle</span>
+          </div>
+        </div>
+
+        <button
+          className="landing-login-button"
+          onClick={() => setShowLanding(false)}
+        >
+          Já tenho uma conta
+        </button>
+      </header>
+
+      <section className="landing-hero">
+
+        <div className="landing-hero-content">
+
+          <span className="landing-badge">
+            ✨ Controle financeiro inteligente
+          </span>
+
+          <h1>
+            Tenha o controle das suas
+            <span> finanças em um só lugar.</span>
+          </h1>
+
+          <p>
+            Organize suas entradas, despesas e resultados
+            de forma simples, rápida e profissional.
+          </p>
+
+          <div className="landing-actions">
+
+            <button
+              className="landing-primary-button"
+              onClick={() => {
+                setShowLanding(false)
+                setShowRegister(true)
+              }}
+            >
+              Começar agora →
+            </button>
+
+            <button
+              className="landing-secondary-button"
+              onClick={() => setShowLanding(false)}
+            >
+              Entrar na minha conta
+            </button>
+
+          </div>
+
+          <small>
+            🔒 Seus dados ficam protegidos e separados por usuário.
+          </small>
+
+        </div>
+
+        <div className="landing-preview">
+
+          <div className="preview-window">
+
+            <div className="preview-top">
+              <span>Space Finance</span>
+              <span>● ● ●</span>
+            </div>
+
+            <div className="preview-content">
+
+              <p>Visão geral</p>
+
+              <div className="preview-cards">
+
+                <div>
+                  <small>Entradas</small>
+                  <strong>R$ 8.450,00</strong>
+                </div>
+
+                <div>
+                  <small>Despesas</small>
+                  <strong>R$ 3.280,00</strong>
+                </div>
+
+                <div>
+                  <small>Saldo</small>
+                  <strong>R$ 5.170,00</strong>
+                </div>
+
+              </div>
+
+              <div className="preview-chart">
+                <span>Entradas × Despesas</span>
+
+                <div className="chart-bars">
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <section className="landing-benefits">
+
+        <div className="landing-section-title">
+          <span>POR QUE USAR O SPACE FINANCE?</span>
+
+          <h2>
+            Tudo que você precisa para organizar seu dinheiro.
+          </h2>
+        </div>
+
+        <div className="landing-benefit-grid">
+
+          <div className="landing-benefit-card">
+            <div>💰</div>
+            <h3>Controle de entradas</h3>
+            <p>
+              Registre vendas, recebimentos e qualquer valor
+              que entrar no seu caixa.
+            </p>
+          </div>
+
+          <div className="landing-benefit-card">
+            <div>📉</div>
+            <h3>Controle de despesas</h3>
+            <p>
+              Saiba exatamente para onde seu dinheiro está indo.
+            </p>
+          </div>
+
+          <div className="landing-benefit-card">
+            <div>📊</div>
+            <h3>Relatórios completos</h3>
+            <p>
+              Acompanhe seus resultados por mês e por ano.
+            </p>
+          </div>
+
+          <div className="landing-benefit-card">
+            <div>🔐</div>
+            <h3>Conta individual</h3>
+            <p>
+              Cada usuário possui seus próprios dados financeiros.
+            </p>
+          </div>
+
+        </div>
+
+      </section>
+
+      <section className="landing-final-cta">
+
+        <h2>
+          Comece a organizar suas finanças hoje.
+        </h2>
+
+        <p>
+          Crie sua conta gratuitamente e tenha uma visão
+          muito mais clara do seu dinheiro.
+        </p>
+
+        <button
+          onClick={() => {
+            setShowLanding(false)
+            setShowRegister(true)
+          }}
+        >
+          Criar minha conta →
+        </button>
+
+      </section>
+
+      <footer className="landing-footer">
+        © 2026 Space Finance • Finanças mais simples
+      </footer>
+
+    </main>
+  )
+}
   return (
     <main className="login-page">
 
@@ -3012,4 +3083,4 @@ onClick={async () => {
   );
 }
  
-export default App; 
+export default App;
