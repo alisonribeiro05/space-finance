@@ -2566,6 +2566,7 @@ onClick={async () => {
           />
 
           <div>
+            <strong>Space Finance</strong>
             <span>Seu dinheiro no controle</span>
           </div>
         </div>
