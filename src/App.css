@@ -4784,3 +4784,40 @@ body,
     margin-top: 22px !important;
   }
 }
+
+/* =========================================================
+   CORREÇÃO — BOTÃO DA SIDEBAR NÃO SOBREPOR O DASHBOARD
+   ========================================================= */
+.sidebar {
+  position: relative !important;
+}
+
+/* Reserva espaço para o botão ☰ antes do primeiro item */
+.sidebar-menu {
+  padding-top: 82px !important;
+}
+
+.sidebar-toggle {
+  top: 24px !important;
+  right: -15px !important;
+  z-index: 1200 !important;
+}
+
+@media (max-width: 600px) {
+  .sidebar-menu {
+    padding-top: 92px !important;
+  }
+
+  .sidebar-toggle {
+    top: 24px !important;
+    right: -16px !important;
+    width: 64px !important;
+    height: 64px !important;
+    border-radius: 50% !important;
+  }
+
+  /* O primeiro item começa abaixo do botão */
+  .sidebar-menu .sidebar-item:first-child {
+    margin-top: 4px !important;
+  }
+}
