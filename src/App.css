@@ -5611,3 +5611,202 @@ body,
     left: calc(min(285px,82vw) - 27px) !important;
   }
 }
+
+/* =========================================================
+   CORREÇÃO DEFINITIVA — SIDEBAR VISÍVEL NO CELULAR
+   A sidebar fechada continua visível com os ícones.
+   O conteúdo não é empurrado quando ela abre.
+   ========================================================= */
+@media (max-width: 900px) {
+  .app-layout {
+    position: relative !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Fechada: faixa lateral visível para os ícones. */
+  .app-layout .sidebar.closed {
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: 68px !important;
+    min-width: 68px !important;
+    max-width: 68px !important;
+    height: 100vh !important;
+    padding: 0 6px 20px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    background: #00140f !important;
+    border-right: 1px solid rgba(57,255,20,.14) !important;
+    box-shadow: 5px 0 18px rgba(0,0,0,.18) !important;
+    z-index: 10000 !important;
+  }
+
+  .app-layout .sidebar.closed .sidebar-logo {
+    display: none !important;
+  }
+
+  .app-layout .sidebar.closed .sidebar-menu {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 18px !important;
+    width: 100% !important;
+    margin: 105px 0 0 !important;
+    padding: 0 !important;
+  }
+
+  .app-layout .sidebar.closed .sidebar-item {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 56px !important;
+    min-width: 56px !important;
+    height: 56px !important;
+    min-height: 56px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 12px !important;
+    box-sizing: border-box !important;
+    background: transparent !important;
+  }
+
+  .app-layout .sidebar.closed .sidebar-item span {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    font-size: 25px !important;
+    line-height: 1 !important;
+  }
+
+  .app-layout .sidebar.closed .sidebar-item strong,
+  .app-layout .sidebar.closed .sidebar-logout strong {
+    display: none !important;
+  }
+
+  .app-layout .sidebar.closed .sidebar-item.active {
+    background: rgba(57,255,20,.12) !important;
+    border-left: 3px solid #39ff14 !important;
+  }
+
+  /* Botão preso à sidebar: acompanha a abertura e fica inteiro. */
+  .app-layout .sidebar-toggle {
+    position: fixed !important;
+    top: 10px !important;
+    left: 5px !important;
+    width: 54px !important;
+    height: 54px !important;
+    min-width: 54px !important;
+    min-height: 54px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+    box-sizing: border-box !important;
+    z-index: 10050 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transition: left .28s ease !important;
+  }
+
+  .app-layout .sidebar-toggle.is-closed {
+    left: 7px !important;
+  }
+
+  .app-layout .sidebar-toggle.is-open {
+    left: calc(min(285px,82vw) - 27px) !important;
+  }
+
+  /* Fechada: conteúdo usa a tela, mas não fica escondido pela faixa. */
+  .app-layout .sidebar.closed ~ .main-content {
+    margin-left: 68px !important;
+    width: calc(100% - 68px) !important;
+    max-width: calc(100% - 68px) !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Aberta: sidebar passa por cima, conteúdo volta à largura total. */
+  .app-layout .sidebar.open ~ .main-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .app-layout .sidebar.open {
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: min(285px,82vw) !important;
+    min-width: min(285px,82vw) !important;
+    max-width: min(285px,82vw) !important;
+    height: 100vh !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    overflow-x: visible !important;
+    overflow-y: auto !important;
+    z-index: 10000 !important;
+  }
+
+  /* Overlay transparente: fecha ao tocar fora sem escurecer a página. */
+  .app-layout .sidebar-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    background: transparent !important;
+    opacity: 1 !important;
+    z-index: 9990 !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .app-layout .sidebar.closed {
+    width: 64px !important;
+    min-width: 64px !important;
+    max-width: 64px !important;
+  }
+
+  .app-layout .sidebar.closed .sidebar-menu {
+    margin-top: 100px !important;
+    gap: 16px !important;
+  }
+
+  .app-layout .sidebar.closed .sidebar-item {
+    width: 52px !important;
+    min-width: 52px !important;
+    height: 52px !important;
+    min-height: 52px !important;
+  }
+
+  .app-layout .sidebar.closed ~ .main-content {
+    margin-left: 64px !important;
+    width: calc(100% - 64px) !important;
+    max-width: calc(100% - 64px) !important;
+  }
+
+  .app-layout .sidebar-toggle {
+    top: 8px !important;
+    left: 5px !important;
+    width: 54px !important;
+    height: 54px !important;
+  }
+
+  .app-layout .sidebar-toggle.is-closed {
+    left: 5px !important;
+  }
+
+  .app-layout .sidebar-toggle.is-open {
+    left: calc(min(285px,82vw) - 27px) !important;
+  }
+}
