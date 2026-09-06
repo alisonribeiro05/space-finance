@@ -5265,3 +5265,51 @@ body,
     right: 12px !important;
   }
 }
+
+/* =========================================================
+   CORREÇÃO FINAL — BOTÃO ☰ ACOMPANHA A SIDEBAR
+   O botão permanece fixo no topo, mas se move junto com
+   a borda da sidebar quando ela abre/fecha.
+   ========================================================= */
+@media (max-width: 900px) {
+  .sidebar-toggle {
+    position: fixed !important;
+    top: 140px !important;
+    left: 36px !important;
+    width: 64px !important;
+    height: 64px !important;
+    min-width: 64px !important;
+    min-height: 64px !important;
+    z-index: 10002 !important;
+    transition: left .25s ease, transform .25s ease !important;
+  }
+
+  /* Fechada: botão fica dentro da faixa lateral, sem cobrir o conteúdo. */
+  .sidebar-toggle.is-closed {
+    left: 24px !important;
+  }
+
+  /* Aberta: botão acompanha a borda direita da sidebar. */
+  .sidebar-toggle.is-open {
+    left: calc(min(285px, 82vw) - 32px) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .sidebar-toggle {
+    top: 140px !important;
+    width: 56px !important;
+    height: 56px !important;
+    min-width: 56px !important;
+    min-height: 56px !important;
+    transition: left .25s ease, transform .25s ease !important;
+  }
+
+  .sidebar-toggle.is-closed {
+    left: 16px !important;
+  }
+
+  .sidebar-toggle.is-open {
+    left: calc(min(285px, 82vw) - 28px) !important;
+  }
+}
