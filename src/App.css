@@ -5810,3 +5810,46 @@ body,
     left: calc(min(285px,82vw) - 27px) !important;
   }
 }
+
+/* =========================================================
+   AJUSTE FINAL — BOTÃO DA SIDEBAR NO TOPO NO CELULAR
+   O botão continua preso à sidebar e acompanha a abertura.
+   ========================================================= */
+@media (max-width: 768px) {
+  .app-layout > .sidebar-toggle,
+  .app-layout .sidebar-toggle {
+    position: fixed !important;
+    top: 12px !important;
+    bottom: auto !important;
+    transform: none !important;
+    z-index: 10060 !important;
+    width: 54px !important;
+    height: 54px !important;
+    min-width: 54px !important;
+    min-height: 54px !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Fechada: botão fica no topo da faixa lateral. */
+  .app-layout > .sidebar-toggle.is-closed,
+  .app-layout .sidebar-toggle.is-closed {
+    left: 8px !important;
+    right: auto !important;
+  }
+
+  /* Aberta: botão acompanha a borda direita da sidebar. */
+  .app-layout > .sidebar-toggle.is-open,
+  .app-layout .sidebar-toggle.is-open {
+    left: calc(min(285px, 82vw) - 27px) !important;
+    right: auto !important;
+  }
+
+  /* Garante que o primeiro ícone nunca fique embaixo do botão. */
+  .app-layout .sidebar.closed .sidebar-menu,
+  .app-layout .sidebar.open .sidebar-menu {
+    padding-top: 82px !important;
+  }
+}
