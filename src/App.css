@@ -5313,3 +5313,301 @@ body,
     left: calc(min(285px, 82vw) - 28px) !important;
   }
 }
+
+/* =========================================================
+   AJUSTE FINAL — BOTÃO DA SIDEBAR VISÍVEL + SEM ESCURECER
+   ========================================================= */
+@media (max-width: 900px) {
+  /* A camada continua existindo para fechar ao clicar fora,
+     mas fica totalmente transparente. */
+  .sidebar-overlay {
+    background: transparent !important;
+    opacity: 1 !important;
+    z-index: 9998 !important;
+  }
+
+  /* Sidebar acima do conteúdo, mas abaixo do botão. */
+  .sidebar.open {
+    z-index: 10000 !important;
+    overflow-x: visible !important;
+  }
+
+  /* Botão preso à borda da sidebar e sempre totalmente visível. */
+  .sidebar-toggle {
+    position: fixed !important;
+    top: 140px !important;
+    width: 64px !important;
+    height: 64px !important;
+    min-width: 64px !important;
+    min-height: 64px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    z-index: 10010 !important;
+    transition: left .28s ease !important;
+  }
+
+  /* Fechada: botão fica dentro da faixa da sidebar. */
+  .sidebar-toggle.is-closed {
+    left: 18px !important;
+  }
+
+  /* Aberta: botão acompanha a borda direita da sidebar.
+     Como ele está acima da sidebar, não fica cortado. */
+  .sidebar-toggle.is-open {
+    left: calc(min(285px, 82vw) - 32px) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .sidebar-overlay {
+    background: transparent !important;
+  }
+
+  .sidebar.open {
+    overflow-x: visible !important;
+  }
+
+  .sidebar-toggle {
+    top: 140px !important;
+    width: 56px !important;
+    height: 56px !important;
+    min-width: 56px !important;
+    min-height: 56px !important;
+    z-index: 10010 !important;
+  }
+
+  .sidebar-toggle.is-closed {
+    left: 16px !important;
+  }
+
+  .sidebar-toggle.is-open {
+    left: calc(min(285px, 82vw) - 28px) !important;
+  }
+}
+
+/* =========================================================
+   AJUSTE FINAL — BOTÃO ☰ MAIS ALTO
+   O botão continua preso à sidebar e acompanha sua abertura.
+   ========================================================= */
+@media (max-width: 900px) {
+  .sidebar-toggle {
+    top: 105px !important;
+    z-index: 10020 !important;
+  }
+
+  .sidebar-toggle.is-closed {
+    left: 16px !important;
+  }
+
+  .sidebar-toggle.is-open {
+    left: calc(min(285px, 82vw) - 32px) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .sidebar-toggle {
+    top: 105px !important;
+    width: 56px !important;
+    height: 56px !important;
+    min-width: 56px !important;
+    min-height: 56px !important;
+    z-index: 10020 !important;
+  }
+
+  .sidebar-toggle.is-closed {
+    left: 16px !important;
+  }
+
+  .sidebar-toggle.is-open {
+    left: calc(min(285px, 82vw) - 28px) !important;
+  }
+}
+
+/* =========================================================
+   CORREÇÃO DEFINITIVA — BOTÃO ☰ MAIS ACIMA
+   Última regra do arquivo para vencer as regras anteriores.
+   ========================================================= */
+@media (max-width: 900px) {
+  .app-layout .sidebar-toggle,
+  .sidebar-toggle {
+    position: fixed !important;
+    top: 58px !important;
+    z-index: 10050 !important;
+    transform: none !important;
+  }
+
+  /* Fechada: botão dentro da faixa lateral, sem cobrir o ícone inicial. */
+  .app-layout .sidebar-toggle.is-closed,
+  .sidebar-toggle.is-closed {
+    left: 12px !important;
+  }
+
+  /* Aberta: botão acompanha a borda da sidebar e fica inteiro visível. */
+  .app-layout .sidebar-toggle.is-open,
+  .sidebar-toggle.is-open {
+    left: calc(min(285px, 82vw) - 28px) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .app-layout .sidebar-toggle,
+  .sidebar-toggle {
+    top: 58px !important;
+    width: 56px !important;
+    height: 56px !important;
+    min-width: 56px !important;
+    min-height: 56px !important;
+  }
+
+  .app-layout .sidebar-toggle.is-closed,
+  .sidebar-toggle.is-closed {
+    left: 8px !important;
+  }
+
+  .app-layout .sidebar-toggle.is-open,
+  .sidebar-toggle.is-open {
+    left: calc(min(285px, 82vw) - 26px) !important;
+  }
+}
+
+/* =========================================================
+   CORREÇÃO REAL FINAL — SIDEBAR + CADASTRO
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .app-layout { position: relative !important; width: 100% !important; min-width: 0 !important; overflow-x: hidden !important; }
+
+  .app-layout .sidebar.closed {
+    position: fixed !important; left: 0 !important; top: 0 !important; bottom: 0 !important;
+    width: 72px !important; min-width: 72px !important; max-width: 72px !important;
+    height: 100dvh !important; z-index: 10000 !important; overflow: visible !important;
+  }
+
+  .app-layout .sidebar.open {
+    position: fixed !important; left: 0 !important; top: 0 !important; bottom: 0 !important;
+    width: min(285px,82vw) !important; min-width: min(285px,82vw) !important;
+    max-width: min(285px,82vw) !important; height: 100dvh !important;
+    z-index: 10002 !important; overflow-x: visible !important; overflow-y: auto !important;
+  }
+
+  .app-layout .sidebar.closed ~ .main-content {
+    margin-left: 72px !important; width: calc(100% - 72px) !important;
+    max-width: calc(100% - 72px) !important;
+  }
+
+  .app-layout .sidebar.open ~ .main-content {
+    margin-left: 0 !important; width: 100% !important; max-width: 100% !important;
+  }
+
+  .app-layout .sidebar-overlay {
+    position: fixed !important; inset: 0 !important; background: transparent !important;
+    z-index: 10001 !important; display: block !important;
+  }
+
+  .app-layout .sidebar-toggle {
+    position: fixed !important; top: 58px !important;
+    width: 58px !important; height: 58px !important;
+    min-width: 58px !important; min-height: 58px !important;
+    margin: 0 !important; padding: 0 !important;
+    display: flex !important; align-items: center !important; justify-content: center !important;
+    box-sizing: border-box !important; z-index: 10005 !important;
+    transition: left .28s ease !important;
+  }
+
+  .app-layout .sidebar-toggle.is-closed { left: 7px !important; }
+  .app-layout .sidebar-toggle.is-open { left: calc(min(285px,82vw) - 29px) !important; }
+}
+
+@media (max-width: 600px) {
+  .app-layout .sidebar.closed { width: 64px !important; min-width: 64px !important; max-width: 64px !important; }
+  .app-layout .sidebar.closed ~ .main-content {
+    margin-left: 64px !important; width: calc(100% - 64px) !important; max-width: calc(100% - 64px) !important;
+  }
+  .app-layout .sidebar-toggle { top: 52px !important; width: 54px !important; height: 54px !important; min-width: 54px !important; min-height: 54px !important; }
+  .app-layout .sidebar-toggle.is-closed { left: 5px !important; }
+  .app-layout .sidebar-toggle.is-open { left: calc(min(285px,82vw) - 27px) !important; }
+}
+
+/* ---------- CADASTRO: proporção correta ---------- */
+.register-modal-overlay {
+  position: fixed !important; inset: 0 !important; z-index: 20000 !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  padding: 24px !important; box-sizing: border-box !important;
+  background: rgba(0,0,0,.72) !important;
+}
+.register-modal {
+  position: relative !important; width: min(100%,440px) !important; max-width: 440px !important;
+  max-height: calc(100dvh - 48px) !important; overflow-y: auto !important;
+  margin: 0 auto !important; padding: 28px 30px 24px !important; box-sizing: border-box !important;
+  border-radius: 24px !important; background: #071411 !important;
+  border: 1px solid rgba(82,245,141,.28) !important; box-shadow: 0 25px 80px rgba(0,0,0,.55) !important;
+}
+.register-modal-header { width:100% !important; display:flex !important; flex-direction:column !important; align-items:center !important; text-align:center !important; }
+.register-modal-logo { display:block !important; width:180px !important; height:110px !important; max-width:180px !important; max-height:110px !important; object-fit:contain !important; margin:0 auto 8px !important; }
+.register-modal-header h2,.register-modal-header p,.register-modal label,.register-confirmation-info { color:#fff !important; }
+.register-modal-header h2 { margin:4px 0 6px !important; font-size:30px !important; line-height:1.15 !important; }
+.register-modal-header p { margin:0 0 22px !important; font-size:14px !important; }
+.register-form { width:100% !important; display:flex !important; flex-direction:column !important; gap:16px !important; }
+.register-form .field-group { width:100% !important; margin:0 !important; }
+.register-form .input-wrapper { width:100% !important; min-height:54px !important; box-sizing:border-box !important; }
+.register-form .input-wrapper input { width:100% !important; min-width:0 !important; height:52px !important; box-sizing:border-box !important; }
+.register-submit { width:100% !important; margin-top:2px !important; }
+.register-confirmation-info { margin:0 !important; text-align:center !important; font-size:12px !important; line-height:1.45 !important; }
+.register-modal-close { position:absolute !important; top:12px !important; right:12px !important; z-index:2 !important; }
+
+@media (max-width:600px) {
+  .register-modal-overlay { padding:14px !important; align-items:center !important; }
+  .register-modal { width:min(100%,390px) !important; max-width:390px !important; max-height:calc(100dvh - 28px) !important; padding:22px 18px 18px !important; border-radius:20px !important; }
+  .register-modal-logo { width:150px !important; height:92px !important; max-width:150px !important; max-height:92px !important; }
+  .register-modal-header h2 { font-size:25px !important; }
+  .register-modal-header p { font-size:13px !important; margin-bottom:17px !important; }
+  .register-form { gap:12px !important; }
+}
+
+/* =========================================================
+   AJUSTE FINAL DO BOTÃO DA SIDEBAR
+   ☰ fica acima do primeiro item, sem encostar no Página inicial.
+   Continua acompanhando a abertura da sidebar.
+   ========================================================= */
+@media (max-width: 900px) {
+  .app-layout .sidebar-toggle,
+  .sidebar-toggle {
+    top: 12px !important;
+    z-index: 10050 !important;
+  }
+
+  .app-layout .sidebar-toggle.is-closed,
+  .sidebar-toggle.is-closed {
+    left: 7px !important;
+  }
+
+  .app-layout .sidebar-toggle.is-open,
+  .sidebar-toggle.is-open {
+    left: calc(min(285px,82vw) - 27px) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .app-layout .sidebar-toggle,
+  .sidebar-toggle {
+    top: 10px !important;
+    width: 54px !important;
+    height: 54px !important;
+    min-width: 54px !important;
+    min-height: 54px !important;
+  }
+
+  .app-layout .sidebar-toggle.is-closed,
+  .sidebar-toggle.is-closed {
+    left: 5px !important;
+  }
+
+  .app-layout .sidebar-toggle.is-open,
+  .sidebar-toggle.is-open {
+    left: calc(min(285px,82vw) - 27px) !important;
+  }
+}
