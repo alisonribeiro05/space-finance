@@ -6053,4 +6053,34 @@ body,
   .app-layout .finance-card {
     padding: 15px 13px !important;
   }
+}/* Ajuste da barra lateral no celular */
+@media (max-width: 768px) {
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    max-height: 100dvh;
+  }
+
+  .sidebar-menu {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  .sidebar-footer {
+    margin-top: auto;
+    flex-shrink: 0;
+    width: 100%;
+    padding: 12px;
+  }
+
+  .sidebar-logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 13px;
+  }
 }
