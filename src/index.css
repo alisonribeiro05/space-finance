@@ -239,4 +239,55 @@ code {
 .delete-transaction-button:hover {
   background: rgba(255, 60, 60, 0.3);
   transform: scale(1.05);
+}/* Rodapé da barra lateral */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-menu {
+  flex: 1;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 15px;
+  width: 100%;
+}
+
+.sidebar-logout {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  width: 100%;
+  padding: 13px 15px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 70, 70, 0.10);
+  color: #ff6464;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.sidebar-logout:hover {
+  background: rgba(255, 70, 70, 0.20);
+}
+
+.sidebar-logout span {
+  font-size: 19px;
+}
+
+.sidebar-logout strong {
+  font-weight: 600;
+}
+
+.sidebar.closed .sidebar-footer {
+  padding: 10px 5px;
+}
+
+.sidebar.closed .sidebar-logout {
+  justify-content: center;
+  padding: 13px 5px;
 }

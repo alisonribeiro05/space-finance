@@ -659,7 +659,26 @@ const dataComHora = new Date(
   {sidebarOpen && <strong>Suporte</strong>}
 </button>
               </nav>
+<div className="sidebar-footer">
+<button
+    type="button"
+    className="sidebar-logout"
+    onClick={async () => {
+      const { error } = await supabase.auth.signOut();
 
+      if (error) {
+        alert("Não foi possível sair da conta.");
+        console.error(error);
+        return;
+      }
+
+      setLoggedIn(false);
+    }}
+>
+  <span>🚪</span>
+  {sidebarOpen && <strong>Sair</strong>}
+ </button>
+</div>
                </aside>
 
                {sidebarOpen && (
@@ -2393,13 +2412,7 @@ const hora = lancamento.created_at
                     + Novo lançamento
                   </button>
 
-                  <button
-                  type="button"
-                  className="logout-button"
-                    onClick={() => setLoggedIn(false)}
-                >
-  🚪 Sair
-</button>
+                 
                 </div>
 
                 <div className="dashboard-cards">
