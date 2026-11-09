@@ -297,6 +297,81 @@ const dataComHora = new Date(
 };
 
 
+  // Carrega os dados do perfil da conta autenticada.
+  // Os dados ficam no user_metadata do próprio usuário no Supabase Auth.
+  useEffect(() => {
+    if (!loggedIn) return
+
+    let ativo = true
+
+    const carregarPerfil = async () => {
+      try {
+        const { data, error } = await supabase.auth.getUser()
+
+        if (error) throw error
+        if (!data.user) return
+
+        const metadata = data.user.user_metadata || {}
+
+        if (ativo) {
+          setNomePerfil(metadata.nome_perfil || '')
+          setTipoPerfil(metadata.tipo_perfil || 'pessoa')
+          setTelefonePerfil(metadata.telefone_perfil || '')
+          setEmail(data.user.email || '')
+        }
+      } catch (error) {
+        console.error('Erro ao carregar perfil:', error)
+      }
+    }
+
+    carregarPerfil()
+
+    return () => {
+      ativo = false
+    }
+  }, [loggedIn])
+
+  // Salva os dados do perfil na conta do usuário autenticado.
+  const handleSaveProfile = async () => {
+    const nome = nomePerfil.trim()
+    const telefone = telefonePerfil.trim()
+
+    if (!nome) {
+      alert('Informe seu nome ou o nome da empresa.')
+      return
+    }
+
+    try {
+      setLoading(true)
+
+      const { data: userData, error: userError } = await supabase.auth.getUser()
+
+      if (userError) throw userError
+
+      if (!userData.user) {
+        alert('Usuário não autenticado. Entre novamente na sua conta.')
+        return
+      }
+
+      const { error } = await supabase.auth.updateUser({
+        data: {
+          nome_perfil: nome,
+          tipo_perfil: tipoPerfil,
+          telefone_perfil: telefone,
+        },
+      })
+
+      if (error) throw error
+
+      alert('Configurações salvas com sucesso!')
+    } catch (error) {
+      console.error('Erro ao salvar perfil:', error)
+      alert('Não foi possível salvar as configurações: ' + error.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   // Mantém a sessão do Supabase sincronizada com o aplicativo.
   // Isso faz o painel reconhecer a sessão depois da confirmação do e-mail.
   useEffect(() => {
@@ -1987,11 +2062,10 @@ const hora = lancamento.created_at
       <button
         type="button"
         className="config-save-button"
-        onClick={() => {
-          alert("Configurações salvas!");
-        }}
+        onClick={handleSaveProfile}
+        disabled={loading}
       >
-        💾 Salvar alterações
+        {loading ? 'Salvando...' : '💾 Salvar alterações'}
       </button>
 
     </div>

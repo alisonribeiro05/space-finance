@@ -5853,3 +5853,204 @@ body,
     padding-top: 82px !important;
   }
 }
+
+
+
+/* =========================================================
+   SPACE FINANCE — AJUSTE DE RESPONSIVIDADE DO PAINEL
+   Escopo: somente telas de celular.
+   Não altera componentes, autenticação ou regras financeiras.
+   ========================================================= */
+@media (max-width: 600px) {
+  /* Área principal: respeita a faixa lateral recolhida. */
+  .app-layout .main-content {
+    min-width: 0 !important;
+    padding: 14px 12px 30px !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Logo: impede que ocupe largura/altura excessivas no celular. */
+  .app-layout .dashboard-brand {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: 105px !important;
+    margin: 0 auto 8px !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+  }
+
+  .app-layout .dashboard-brand .dashboard-logo-center {
+    display: block !important;
+    width: min(100%, 260px) !important;
+    max-width: 260px !important;
+    height: 100px !important;
+    max-height: 100px !important;
+    object-fit: contain !important;
+    margin: 0 auto !important;
+  }
+
+  /* Conteúdo inicial mais próximo da logo e sem largura excedente. */
+  .app-layout .dashboard-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 4px 0 28px !important;
+    box-sizing: border-box !important;
+  }
+
+  .app-layout .dashboard-profile-name {
+    font-size: clamp(21px, 6vw, 27px) !important;
+    line-height: 1.15 !important;
+    margin: 0 0 8px !important;
+    text-align: left !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  /* Título e ações organizados em coluna. */
+  .app-layout .dashboard-title {
+    position: relative !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: 14px !important;
+    margin: 0 0 18px !important;
+  }
+
+  .app-layout .dashboard-title > div {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .app-layout .dashboard-title p {
+    font-size: 16px !important;
+    line-height: 1.35 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .app-layout .dashboard-title .add-button {
+    width: 100% !important;
+    min-height: 52px !important;
+    margin: 0 !important;
+    padding: 13px 16px !important;
+    box-sizing: border-box !important;
+    font-size: 16px !important;
+  }
+
+  /* O botão Sair deixa de ficar sobreposto à logo/cabeçalho. */
+  .app-layout .dashboard-title .logout-button {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    align-self: flex-end !important;
+    width: auto !important;
+    min-height: 40px !important;
+    margin: 0 !important;
+    padding: 8px 14px !important;
+    font-size: 13px !important;
+    z-index: 1 !important;
+  }
+
+  /* Cartões mais compactos, mantendo uma coluna para os valores caberem. */
+  .app-layout .dashboard-cards {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 12px !important;
+    width: 100% !important;
+    margin: 0 0 18px !important;
+  }
+
+  .app-layout .finance-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 116px !important;
+    padding: 17px 16px !important;
+    gap: 4px !important;
+    border-radius: 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  .app-layout .finance-card span {
+    font-size: 14px !important;
+    line-height: 1.3 !important;
+  }
+
+  .app-layout .finance-card strong {
+    margin: 5px 0 !important;
+    font-size: clamp(21px, 6vw, 26px) !important;
+    line-height: 1.2 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .app-layout .finance-card small {
+    font-size: 12px !important;
+  }
+
+  .app-layout .dashboard-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 14px !important;
+    width: 100% !important;
+  }
+
+  .app-layout .chart-card,
+  .app-layout .summary-card,
+  .app-layout .transactions-card {
+    min-width: 0 !important;
+    padding: 17px 14px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Menu lateral: botão no alto, sem sobrepor o primeiro item. */
+  .app-layout .sidebar-toggle,
+  .app-layout .sidebar-toggle.is-closed {
+    position: fixed !important;
+    top: 12px !important;
+    left: 5px !important;
+    right: auto !important;
+    width: 50px !important;
+    height: 50px !important;
+    min-width: 50px !important;
+    min-height: 50px !important;
+    z-index: 10060 !important;
+  }
+
+  .app-layout .sidebar.closed .sidebar-menu {
+    margin-top: 0 !important;
+    padding: 76px 0 12px !important;
+    gap: 12px !important;
+  }
+
+  .app-layout .sidebar.closed .sidebar-item {
+    width: 50px !important;
+    min-width: 50px !important;
+    height: 50px !important;
+    min-height: 50px !important;
+  }
+
+  .app-layout .sidebar.open .sidebar-menu {
+    padding-top: 76px !important;
+  }
+}
+
+/* Celulares muito estreitos. */
+@media (max-width: 380px) {
+  .app-layout .main-content {
+    padding-right: 9px !important;
+    padding-left: 9px !important;
+  }
+
+  .app-layout .dashboard-brand .dashboard-logo-center {
+    width: min(100%, 225px) !important;
+    height: 88px !important;
+    max-height: 88px !important;
+  }
+
+  .app-layout .finance-card {
+    padding: 15px 13px !important;
+  }
+}
